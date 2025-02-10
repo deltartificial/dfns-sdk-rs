@@ -55,6 +55,11 @@ dfns-rust-sdk/
 │ │ │ ├── client.rs  
 │ │ │ ├── delegated_client.rs  
 │ │ │ └── types.rs  
+│ │ ├── staking/
+│ │ │ ├── mod.rs
+│ │ │ ├── client.rs  
+│ │ │ ├── delegated_client.rs  
+│ │ │ └── types.rs  
 │ │ └── webhooks/
 │ │ ├── mod.rs
 │ │ ├── client.rs  
