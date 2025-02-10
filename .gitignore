@@ -15,3 +15,7 @@ Cargo.lock
 
 # Ignore all files in the ts/ directory
 out/
+
+# Added by cargo
+
+/target
