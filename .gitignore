@@ -17,5 +17,5 @@ Cargo.lock
 out/
 
 # Added by cargo
-
 /target
+.DS_Store
