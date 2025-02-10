@@ -1,12 +1,12 @@
 // @dfns-sdk-rs/src/api/mod.rs
 
-mod auth;
-mod exchanges;
-mod networks;
-mod permissions;
-mod policies;
-mod signers;
-mod staking;
-mod wallets;
-mod webhooks;
+pub mod auth;
+pub mod exchanges;
+pub mod networks;
+pub mod permissions;
+pub mod policies;
+pub mod signers;
+pub mod staking;
+pub mod wallets;
+pub mod webhooks;
 
