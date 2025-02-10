@@ -60,15 +60,17 @@
 ├── lib.rs
 ├── main.rs
 ├── models
-│   ├── auth.rs
-│   ├── exchanges.rs
-│   ├── mod.rs
-│   ├── networks.rs
-│   ├── permissions.rs
-│   ├── policies.rs
-│   ├── signers.rs
-│   ├── wallets.rs
-│   └── webhooks.rs
+│   ├── auth.rs ✅
+│   ├── exchanges.rs ✅
+│   ├── generic.rs ✅
+│   ├── mod.rs ✅
+│   ├── networks.rs ✅
+│   ├── permissions.rs ✅
+│   ├── policies.rs ✅
+│   ├── signers.rs ✅
+│   ├── staking.rs ✅
+│   ├── wallets.rs ✅
+│   └── webhooks.rs ✅
 ├── signer.rs ✅
 ├── store.rs ✅
 └── utils
