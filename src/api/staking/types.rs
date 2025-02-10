@@ -1,146 +1,485 @@
 // @dfns-sdk-rs/src/api/staking/types.rs
 
-use serde::{Deserialize, Serialize};
+use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CreateStakeBody {
+    pub amount: String,
+
+    pub duration: Option<f64>,
+
+    pub kind: CreateStakeBodyKind,
+
+    pub protocol: Protocol,
+
+    pub provider: Provider,
+
+    pub wallet_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub enum CreateStakeBodyKind {
+    Native,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub enum Protocol {
+    Babylon,
+
+    Ethereum,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Provider {
     Figment,
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
-pub enum Protocol {
-    Babylon,
-    Ethereum,
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CreateStakeResponse {
+    pub stake: CreateStakeResponseStake,
+
+    pub stake_action: CreateStakeResponseStakeAction,
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
-pub enum StakeStatus {
-    Creating,
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CreateStakeResponseStake {
+    pub date_created: String,
+
+    pub id: String,
+
+    pub protocol: Protocol,
+
+    pub provider: Provider,
+
+    pub provider_stake_id: String,
+
+    pub request_body: TentacledRequestBody,
+
+    pub requester: PurpleRequester,
+
+    pub status: Status,
+
+    pub wallet_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct TentacledRequestBody {
+    pub amount: String,
+
+    pub duration: Option<f64>,
+
+    pub kind: CreateStakeBodyKind,
+
+    pub protocol: Protocol,
+
+    pub provider: Provider,
+
+    pub wallet_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PurpleRequester {
+    pub app_id: Option<String>,
+
+    pub token_id: Option<String>,
+
+    pub user_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub enum Status {
     Active,
+
+    Creating,
+
     Withdrawing,
+
     Withdrawn,
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CreateStakeResponseStakeAction {
+    pub date_created: String,
+
+    pub id: String,
+
+    pub kind: StakeActionKind,
+
+    pub request_body: PurpleRequestBody,
+
+    pub requester: FluffyRequester,
+
+    pub stake_id: String,
+
+    pub transaction_id: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum StakeActionKind {
     Stake,
+
+    #[serde(rename = "StakeWithdrawal")]
+    StakeWithdrawal,
+
     Unbond,
+
+    #[serde(rename = "UnbondWithdrawal")]
     UnbondWithdrawal,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PurpleRequestBody {
+    pub amount: Option<String>,
+
+    pub duration: Option<f64>,
+
+    pub kind: PurpleKind,
+
+    pub protocol: Protocol,
+
+    pub provider: Option<Provider>,
+
+    pub wallet_id: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub enum PurpleKind {
+    Native,
+
+    #[serde(rename = "StakeWithdrawal")]
     StakeWithdrawal,
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct Requester {
-    pub user_id: String,
-    pub token_id: Option<String>,
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FluffyRequester {
     pub app_id: Option<String>,
+
+    pub token_id: Option<String>,
+
+    pub user_id: String,
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
-#[serde(tag = "kind")]
-pub enum StakeRequestBody {
-    Native {
-        amount: String,
-        wallet_id: String,
-        provider: Provider,
-        protocol: Protocol,
-        duration: Option<u64>,
-    },
-}
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
-#[serde(untagged)]
-pub enum StakeActionRequestBody {
-    Native(StakeRequestBody),
-    Withdrawal {
-        protocol: Protocol,
-        kind: StakeActionKind,
-    },
-}
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct Stake {
-    pub id: String,
-    pub provider: Provider,
-    pub provider_stake_id: String,
-    pub wallet_id: String,
-    pub protocol: Protocol,
-    pub status: StakeStatus,
-    pub requester: Requester,
-    pub request_body: StakeRequestBody,
-    pub date_created: String,
-}
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct StakeAction {
-    pub id: String,
-    pub stake_id: String,
-    pub transaction_id: Option<String>,
-    pub kind: StakeActionKind,
-    pub requester: Requester,
-    pub request_body: StakeActionRequestBody,
-    pub date_created: String,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateStakeRequest {
-    #[serde(flatten)]
-    pub body: StakeRequestBody,
+    pub body: Body,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct CreateStakeResponse {
-    pub stake: Stake,
-    pub stake_action: StakeAction,
-}
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Body {
+    pub amount: String,
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct CreateStakeActionRequest {
-    pub stake_id: String,
+    pub duration: Option<f64>,
+
+    pub kind: CreateStakeBodyKind,
+
     pub protocol: Protocol,
-    pub kind: StakeActionKind,
+
+    pub provider: Provider,
+
+    pub wallet_id: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CreateStakeActionParams {
+    pub stake_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct CreateStakeActionResponse {
-    pub stake: Stake,
-    pub stake_action: StakeAction,
+    pub stake: CreateStakeActionResponseStake,
+
+    pub stake_action: CreateStakeActionResponseStakeAction,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CreateStakeActionResponseStake {
+    pub date_created: String,
+
+    pub id: String,
+
+    pub protocol: Protocol,
+
+    pub provider: Provider,
+
+    pub provider_stake_id: String,
+
+    pub request_body: StickyRequestBody,
+
+    pub requester: TentacledRequester,
+
+    pub status: Status,
+
+    pub wallet_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct StickyRequestBody {
+    pub amount: String,
+
+    pub duration: Option<f64>,
+
+    pub kind: CreateStakeBodyKind,
+
+    pub protocol: Protocol,
+
+    pub provider: Provider,
+
+    pub wallet_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct TentacledRequester {
+    pub app_id: Option<String>,
+
+    pub token_id: Option<String>,
+
+    pub user_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CreateStakeActionResponseStakeAction {
+    pub date_created: String,
+
+    pub id: String,
+
+    pub kind: StakeActionKind,
+
+    pub request_body: FluffyRequestBody,
+
+    pub requester: StickyRequester,
+
+    pub stake_id: String,
+
+    pub transaction_id: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FluffyRequestBody {
+    pub amount: Option<String>,
+
+    pub duration: Option<f64>,
+
+    pub kind: PurpleKind,
+
+    pub protocol: Protocol,
+
+    pub provider: Option<Provider>,
+
+    pub wallet_id: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct StickyRequester {
+    pub app_id: Option<String>,
+
+    pub token_id: Option<String>,
+
+    pub user_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CreateStakeActionRequest {
+    pub body: CreateStakeActionBody,
+
+    pub stake_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct CreateStakeActionBody {
+    pub kind: CreateStakeActionBodyKind,
+
+    pub protocol: Protocol,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub enum CreateStakeActionBodyKind {
+    #[serde(rename = "StakeWithdrawal")]
+    StakeWithdrawal,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GetStakeRewardsParams {
+    pub stake_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct GetStakeRewardsResponse {
+    pub balance: String,
+
+    pub symbol: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct GetStakeRewardsRequest {
     pub stake_id: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct StakeRewards {
-    pub symbol: String,
-    pub balance: String,
-}
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ListStakeActionsQuery {
+    pub limit: Option<f64>,
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct GetStakeRewardsResponse(Option<StakeRewards>);
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct ListStakeActionsRequest {
-    pub limit: Option<u32>,
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ListStakeActionsResponse {
-    pub items: Vec<StakeAction>,
+    pub items: Vec<ListStakeActionsResponseItem>,
+
     pub next_page_token: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct ListStakesRequest {
-    pub limit: Option<u32>,
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ListStakeActionsResponseItem {
+    pub date_created: String,
+
+    pub id: String,
+
+    pub kind: StakeActionKind,
+
+    pub request_body: ItemRequestBody,
+
+    pub requester: IndigoRequester,
+
+    pub stake_id: String,
+
+    pub transaction_id: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ItemRequestBody {
+    pub amount: Option<String>,
+
+    pub duration: Option<f64>,
+
+    pub kind: PurpleKind,
+
+    pub protocol: Protocol,
+
+    pub provider: Option<Provider>,
+
+    pub wallet_id: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct IndigoRequester {
+    pub app_id: Option<String>,
+
+    pub token_id: Option<String>,
+
+    pub user_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ListStakeActionsRequest {
+    pub query: Option<ListStakeActionsRequestQuery>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ListStakeActionsRequestQuery {
+    pub limit: Option<f64>,
+
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ListStakesQuery {
+    pub limit: Option<f64>,
+
+    pub pagination_token: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ListStakesResponse {
-    pub items: Vec<Stake>,
+    pub items: Vec<ListStakesResponseItem>,
+
     pub next_page_token: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ListStakesResponseItem {
+    pub date_created: String,
+
+    pub id: String,
+
+    pub protocol: Protocol,
+
+    pub provider: Provider,
+
+    pub provider_stake_id: String,
+
+    pub request_body: ItemRequestBodyClass,
+
+    pub requester: IndecentRequester,
+
+    pub status: Status,
+
+    pub wallet_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ItemRequestBodyClass {
+    pub amount: String,
+
+    pub duration: Option<f64>,
+
+    pub kind: CreateStakeBodyKind,
+
+    pub protocol: Protocol,
+
+    pub provider: Provider,
+
+    pub wallet_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct IndecentRequester {
+    pub app_id: Option<String>,
+
+    pub token_id: Option<String>,
+
+    pub user_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ListStakesRequest {
+    pub query: Option<ListStakesRequestQuery>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ListStakesRequestQuery {
+    pub limit: Option<f64>,
+
+    pub pagination_token: Option<String>,
 }

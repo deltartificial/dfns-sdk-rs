@@ -1,20 +1,24 @@
 // @dfns-sdk-rs/src/api/signers/types.rs
 
-use serde::{Deserialize, Serialize};
+use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct Signer {
-    pub signer_id: String,
-    pub encryption_key: String,
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ListSignersResponse {
+    pub clusters: Vec<Cluster>,
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct SignerCluster {
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Cluster {
     pub cluster_id: String,
+
     pub signers: Vec<Signer>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct ListSignersResponse {
-    pub clusters: Vec<SignerCluster>,
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Signer {
+    pub encryption_key: String,
+
+    pub signer_id: String,
 }
