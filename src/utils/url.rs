@@ -9,7 +9,7 @@ pub struct PathAndQueryParams {
 
 pub fn build_path_and_query(pattern: &str, params: &PathAndQueryParams) -> String {
     let mut path = pattern.to_string();
-    
+
     let param_regex = regex::Regex::new(r":[a-zA-Z]+").expect("Invalid regex pattern");
     let params_to_replace: Vec<String> = param_regex
         .find_iter(pattern)
@@ -23,7 +23,8 @@ pub fn build_path_and_query(pattern: &str, params: &PathAndQueryParams) -> Strin
         }
     }
 
-    let query_string: String = params.query
+    let query_string: String = params
+        .query
         .iter()
         .filter(|(_, value)| !value.is_empty())
         .map(|(key, value)| format!("{}={}", key, urlencoding::encode(value)))

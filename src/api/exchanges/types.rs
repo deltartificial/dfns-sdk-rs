@@ -1,6 +1,6 @@
 // @dfns-sdk-rs/src/api/exchanges/types.rs
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 pub type ListAssetWithdrawalNetworksResponse = Vec<ListAssetWithdrawalNetworksResponseElement>;
 

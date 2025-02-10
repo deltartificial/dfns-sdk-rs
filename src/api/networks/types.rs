@@ -1,6 +1,6 @@
 // @dfns-sdk-rs/src/api/networks/types.rs
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct GetFeesQuery {

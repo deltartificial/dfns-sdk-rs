@@ -1,6 +1,6 @@
 // @dfns-sdk-rs/src/api/auth/types.rs
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -955,11 +955,13 @@ pub struct CreateCredentialChallengeWithCodeResponse {
 
     pub attestation: Option<Attestation>,
 
-    pub authenticator_selection: Option<CreateCredentialChallengeWithCodeResponseAuthenticatorSelection>,
+    pub authenticator_selection:
+        Option<CreateCredentialChallengeWithCodeResponseAuthenticatorSelection>,
 
     pub challenge: Option<String>,
 
-    pub exclude_credentials: Option<Vec<CreateCredentialChallengeWithCodeResponseExcludeCredential>>,
+    pub exclude_credentials:
+        Option<Vec<CreateCredentialChallengeWithCodeResponseExcludeCredential>>,
 
     pub pub_key_cred_params: Option<Vec<CreateCredentialChallengeWithCodeResponsePubKeyCredParam>>,
 }
@@ -1121,7 +1123,8 @@ pub struct CreateDelegatedRecoveryChallengeBody {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDelegatedRecoveryChallengeResponse {
-    pub allowed_recovery_credentials: Vec<CreateDelegatedRecoveryChallengeResponseAllowedRecoveryCredential>,
+    pub allowed_recovery_credentials:
+        Vec<CreateDelegatedRecoveryChallengeResponseAllowedRecoveryCredential>,
 
     pub attestation: Attestation,
 
@@ -1137,7 +1140,8 @@ pub struct CreateDelegatedRecoveryChallengeResponse {
 
     pub rp: Option<CreateDelegatedRecoveryChallengeResponseRp>,
 
-    pub supported_credential_kinds: CreateDelegatedRecoveryChallengeResponseSupportedCredentialKinds,
+    pub supported_credential_kinds:
+        CreateDelegatedRecoveryChallengeResponseSupportedCredentialKinds,
 
     pub temporary_authentication_token: String,
 
@@ -1245,7 +1249,8 @@ pub struct CreateDelegatedRegistrationChallengeResponse {
 
     pub rp: Option<CreateDelegatedRegistrationChallengeResponseRp>,
 
-    pub supported_credential_kinds: CreateDelegatedRegistrationChallengeResponseSupportedCredentialKinds,
+    pub supported_credential_kinds:
+        CreateDelegatedRegistrationChallengeResponseSupportedCredentialKinds,
 
     pub temporary_authentication_token: String,
 
@@ -1873,7 +1878,8 @@ pub struct CreateSocialRegistrationChallengeResponse {
 
     pub rp: Option<CreateSocialRegistrationChallengeResponseRp>,
 
-    pub supported_credential_kinds: CreateSocialRegistrationChallengeResponseSupportedCredentialKinds,
+    pub supported_credential_kinds:
+        CreateSocialRegistrationChallengeResponseSupportedCredentialKinds,
 
     pub temporary_authentication_token: String,
 
@@ -3645,7 +3651,8 @@ pub struct RecreateDelegatedRegistrationChallengeBody {
 pub struct RecreateDelegatedRegistrationChallengeResponse {
     pub attestation: Attestation,
 
-    pub authenticator_selection: RecreateDelegatedRegistrationChallengeResponseAuthenticatorSelection,
+    pub authenticator_selection:
+        RecreateDelegatedRegistrationChallengeResponseAuthenticatorSelection,
 
     pub challenge: String,
 
@@ -3657,7 +3664,8 @@ pub struct RecreateDelegatedRegistrationChallengeResponse {
 
     pub rp: Option<RecreateDelegatedRegistrationChallengeResponseRp>,
 
-    pub supported_credential_kinds: RecreateDelegatedRegistrationChallengeResponseSupportedCredentialKinds,
+    pub supported_credential_kinds:
+        RecreateDelegatedRegistrationChallengeResponseSupportedCredentialKinds,
 
     pub temporary_authentication_token: String,
 

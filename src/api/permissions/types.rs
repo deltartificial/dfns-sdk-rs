@@ -1,6 +1,6 @@
 // @dfns-sdk-rs/src/api/permissions/types.rs
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 pub type DeleteAssignmentResponse = Option<serde_json::Value>;
 
@@ -705,4 +705,3 @@ pub struct UpdatePermissionRequestBody {
 
     pub operations: Option<Vec<Operation>>,
 }
-

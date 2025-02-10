@@ -10,7 +10,8 @@ pub fn split_string(text: &str, max_line_length: Option<usize>) -> Vec<String> {
 }
 
 pub fn to_hex(buffer: &[u8]) -> String {
-    buffer.iter()
+    buffer
+        .iter()
         .map(|byte| format!("{:02x}", byte))
         .collect::<String>()
 }

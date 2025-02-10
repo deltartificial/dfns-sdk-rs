@@ -1,9 +1,12 @@
 // @dfns-sdk-rs/src/store.rs
 
-use serde::{Serialize, Deserialize};
-use crate::api::auth::types::{CreateRegistrationChallengeResponse, CreateCredentialChallengeResponse};
-use async_trait::async_trait;
+use crate::api::auth::types::{
+    CreateCredentialChallengeResponse, CreateRegistrationChallengeResponse,
+};
+use crate::error::DfnsError;
+use serde::{Deserialize, Serialize};
 use std::future::Future;
+use std::pin::Pin;
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
@@ -263,16 +266,25 @@ pub enum CredentialAttestationCredentialKind {
 
 pub type UserRegistrationChallenge = CreateRegistrationChallengeResponse;
 
-#[async_trait]
-pub trait CredentialStore<T> 
-where 
-    T: CredentialAttestation + Send + Sync,
-{
-    async fn create(&self, challenge: Challenge) -> Result<T, Box<dyn std::error::Error + Send + Sync>>;
-}
-
 #[derive(Debug, Clone)]
 pub enum Challenge {
     Registration(CreateRegistrationChallengeResponse),
     Credential(CreateCredentialChallengeResponse),
+}
+
+pub trait CredentialAttestationTrait: Send + Sync + 'static {
+    fn get_kind(&self) -> &str;
+}
+
+pub trait CredentialStore<T: CredentialAttestationTrait> {
+    fn create<'a>(
+        &'a self,
+        challenge: Challenge,
+    ) -> Pin<Box<dyn Future<Output = Result<T, DfnsError>> + Send + 'a>>;
+}
+
+impl CredentialAttestationTrait for FirstFactorAttestation {
+    fn get_kind(&self) -> &str {
+        "FirstFactor"
+    }
 }

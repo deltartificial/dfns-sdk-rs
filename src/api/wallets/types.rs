@@ -1,6 +1,6 @@
 // @dfns-sdk-rs/src/api/wallets/types.rs
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 pub type TagWalletResponse = HashMap<String, Option<serde_json::Value>>;

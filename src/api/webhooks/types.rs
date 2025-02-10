@@ -1,6 +1,6 @@
 // @dfns-sdk-rs/src/api/webhooks/types.rs
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
