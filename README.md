@@ -1,5 +1,7 @@
 # Dfns SDK Rust
 
+> **Warning**: This SDK is currently under development and not ready for production use. The API is subject to change.
+
 ## Structure
 
 ```md

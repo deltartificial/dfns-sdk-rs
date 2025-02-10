@@ -1,6 +1,7 @@
 // @dfns-sdk-rs/src/signer.rs
 
 use serde::{Deserialize, Serialize};
+use async_trait::async_trait;
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
@@ -346,5 +347,7 @@ pub enum CredentialAssertionKind {
     Totp,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct CredentialSignerT {}
+#[async_trait]
+pub trait CredentialSigner: Send + Sync {
+    async fn sign(&self, challenge: UserActionChallenge) -> Result<FirstFactorAssertion, DfnsError>;
+}
