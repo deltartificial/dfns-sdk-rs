@@ -1,6 +1,5 @@
 // @dfns-sdk-rs/src/models/mod.rs
 
-pub mod auth;
 pub mod exchanges;
 pub mod networks;
 pub mod permissions;

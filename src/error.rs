@@ -111,3 +111,9 @@ impl From<InvalidHeaderValue> for DfnsError {
         Self::new(400, format!("Invalid header value: {}", err), None)
     }
 }
+
+impl From<serde_json::Error> for DfnsError {
+    fn from(err: serde_json::Error) -> Self {
+        Self::new(400, format!("JSON serialization error: {}", err), None)
+    }
+}

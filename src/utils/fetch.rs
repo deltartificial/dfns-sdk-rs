@@ -6,7 +6,7 @@ use crate::{
     utils::nonce::generate_nonce,
 };
 use reqwest::{Client, Method, Response, StatusCode};
-use serde::{de::DeserializeOwned, Serialize};
+use serde::{de::DeserializeOwned, Serialize, Deserialize};
 use serde_json::Value;
 use std::collections::HashMap;
 use url::Url;
@@ -14,7 +14,8 @@ use url::Url;
 const DEFAULT_DFNS_BASE_URL: &str = "https://api.dfns.io";
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
-#[derive(Debug, Clone, PartialEq, Serialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "UPPERCASE")]
 pub enum HttpMethod {
     GET,
     POST,
@@ -58,6 +59,7 @@ impl DfnsFetch {
         }
     }
 
+    #[warn(dead_code)]
     async fn handle_response(&self, response: Response) -> FetchResult {
         if response.status().is_success() {
             Ok(response)

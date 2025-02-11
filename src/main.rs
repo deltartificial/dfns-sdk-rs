@@ -7,6 +7,8 @@ pub mod store;
 pub mod utils;
 pub mod models;
 
+pub mod client;
+
 
 
 fn main() {
