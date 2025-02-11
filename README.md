@@ -10,51 +10,53 @@
 
 ## Structure
 
+53/67 files are implemented = 79%
+
 ```md
 ├── api
 │   ├── auth
-│   │   ├── client.rs
+│   │   ├── client.rs ✅
 │   │   ├── delegated_client.rs
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 │   ├── exchanges
-│   │   ├── client.rs
+│   │   ├── client.rs ✅
 │   │   ├── delegated_client.rs
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 │   ├── mod.rs ✅
 │   ├── networks
-│   │   ├── client.rs
+│   │   ├── client.rs ✅
 │   │   ├── delegated_client.rs
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 │   ├── permissions
-│   │   ├── client.rs
+│   │   ├── client.rs ✅
 │   │   ├── delegated_client.rs
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 │   ├── policies
-│   │   ├── client.rs
+│   │   ├── client.rs ✅
 │   │   ├── delegated_client.rs
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 │   ├── signers
-│   │   ├── client.rs
+│   │   ├── client.rs ✅
 │   │   ├── delegated_client.rs
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 │   ├── staking
-│   │   ├── client.rs
+│   │   ├── client.rs ✅
 │   │   ├── delegated_client.rs
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 │   ├── wallets
-│   │   ├── client.rs
+│   │   ├── client.rs ✅
 │   │   ├── delegated_client.rs
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 │   └── webhooks
-│   │   ├── client.rs
+│   │   ├── client.rs ✅
 │   │   ├── delegated_client.rs
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
@@ -67,7 +69,7 @@
 ├── error.rs ✅
 ├── lib.rs
 ├── main.rs
-├── models ✅
+├── models
 │   ├── auth.rs ✅
 │   ├── exchanges.rs ✅
 │   ├── generic.rs ✅
@@ -81,7 +83,7 @@
 │   └── webhooks.rs ✅
 ├── signer.rs ✅
 ├── store.rs ✅
-└── utils ✅
+└── utils
 │   ├── base64.rs ✅
 │   ├── bigint.rs ✅
 │   ├── crypto.rs ✅
@@ -92,5 +94,5 @@
 │   ├── url.rs ✅
 │   └── user_action_fetch.rs ✅
 
-14 directories, 66 files
+14 directories, 67 files
 ```
