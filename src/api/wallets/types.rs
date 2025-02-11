@@ -1434,6 +1434,14 @@ pub enum NetWorth {
     True,
 }
 
+impl std::fmt::Display for NetWorth {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            NetWorth::True => write!(f, "true"),
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletAssetsResponse {
@@ -1540,6 +1548,35 @@ pub enum Direction {
     In,
 
     Out,
+}
+
+impl std::fmt::Display for Direction {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Direction::In => write!(f, "in"),
+            Direction::Out => write!(f, "out"),
+        }
+    }
+}
+
+impl std::fmt::Display for GetWalletHistoryQueryKind {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            GetWalletHistoryQueryKind::Aip21Transfer => write!(f, "Aip21Transfer"),
+            GetWalletHistoryQueryKind::AsaTransfer => write!(f, "AsaTransfer"),
+            GetWalletHistoryQueryKind::Erc20Transfer => write!(f, "Erc20Transfer"),
+            GetWalletHistoryQueryKind::Erc721Transfer => write!(f, "Erc721Transfer"),
+            GetWalletHistoryQueryKind::NativeTransfer => write!(f, "NativeTransfer"),
+            GetWalletHistoryQueryKind::Sep41Transfer => write!(f, "Sep41Transfer"),
+            GetWalletHistoryQueryKind::Spl2022Transfer => write!(f, "Spl2022Transfer"),
+            GetWalletHistoryQueryKind::SplTransfer => write!(f, "SplTransfer"),
+            GetWalletHistoryQueryKind::Tep74Transfer => write!(f, "Tep74Transfer"),
+            GetWalletHistoryQueryKind::Trc10Transfer => write!(f, "Trc10Transfer"),
+            GetWalletHistoryQueryKind::Trc20Transfer => write!(f, "Trc20Transfer"),
+            GetWalletHistoryQueryKind::Trc721Transfer => write!(f, "Trc721Transfer"),
+            GetWalletHistoryQueryKind::UtxoTransfer => write!(f, "UtxoTransfer"),
+        }
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
