@@ -1,6 +1,6 @@
 # Dfns SDK Rust
 
-![Build status](https://img.shields.io/badge/build-passing-brightgreen?style=flat) ![License](https://img.shields.io/badge/license-MIT-blue) ![Implementation](https://img.shields.io/badge/implemented-88%25-blue)
+![Build status](https://img.shields.io/badge/build-passing-brightgreen?style=flat) ![License](https://img.shields.io/badge/license-MIT-blue) ![Implementation](https://img.shields.io/badge/implemented-92%25-blue)
 
 **Modular, extensible, and easy-to-use Rust SDK for the Dfns API.**
 
@@ -10,7 +10,7 @@
 
 ## Structure
 
-59/67 files are implemented = 88%
+62/67 files are implemented = 92%
 
 ```md
 ├── api
@@ -21,18 +21,18 @@
 │   │   └── types.rs ✅
 │   ├── exchanges
 │   │   ├── client.rs ✅
-│   │   ├── delegated_client.rs
+│   │   ├── delegated_client.rs ✅
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 │   ├── mod.rs ✅
 │   ├── networks
 │   │   ├── client.rs ✅
-│   │   ├── delegated_client.rs
+│   │   ├── delegated_client.rs ✅
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 │   ├── permissions
 │   │   ├── client.rs ✅
-│   │   ├── delegated_client.rs
+│   │   ├── delegated_client.rs ✅
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 │   ├── policies
