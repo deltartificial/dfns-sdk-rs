@@ -14,12 +14,35 @@ pub struct DfnsBaseApiOptions {
     pub app_secret: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct DfnsApiClientOptions {
-    #[serde(flatten)]
     pub base: DfnsBaseApiOptions,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip)]
     pub signer: Option<Box<dyn CredentialSigner>>,
+}
+
+impl std::fmt::Debug for DfnsApiClientOptions {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("DfnsApiClientOptions")
+            .field("base", &self.base)
+            .field("signer", &"<dyn CredentialSigner>")
+            .finish()
+    }
+}
+
+impl Clone for DfnsApiClientOptions {
+    fn clone(&self) -> Self {
+        Self {
+            base: self.base.clone(),
+            signer: None,
+        }
+    }
+}
+
+impl PartialEq for DfnsApiClientOptions {
+    fn eq(&self, other: &Self) -> bool {
+        self.base == other.base
+    }
 }
 
 impl DfnsApiClientOptions {
