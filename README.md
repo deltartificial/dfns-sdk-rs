@@ -54,8 +54,8 @@
 │   │   └── types.rs ✅
 ├── client
 │   ├── api_client.rs
-│   ├── authenticator.rs
-│   ├── base_auth_api.rs
+│   ├── authenticator.rs ✅
+│   ├── base_auth_api.rs ✅
 │   ├── delegated_api_client.rs
 │   └── mod.rs
 ├── error.rs ✅
@@ -79,7 +79,7 @@
 │   ├── base64.rs ✅
 │   ├── bigint.rs ✅
 │   ├── crypto.rs ✅
-│   ├── fetch.rs
+│   ├── fetch.rs ✅
 │   ├── mod.rs ✅
 │   ├── nonce.rs ✅
 │   ├── string.rs ✅

@@ -7,6 +7,7 @@ use crate::signer::{
 use crate::models::generic::DfnsBaseApiOptions;
 use crate::store::{FirstFactorAttestation, RecoveryFactorAttestation, SecondFactorAttestation};
 use crate::utils::fetch::{simple_fetch, FetchOptions, HttpMethod};
+use crate::api::auth::types::CreateRegistrationChallengeResponse;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -178,7 +179,7 @@ impl BaseAuthApi {
     pub async fn create_user_registration_challenge(
         request: CreateUserRegistrationChallengeRequest,
         options: DfnsBaseApiOptions,
-    ) -> Result<UserActionChallenge, DfnsError> {
+    ) -> Result<CreateRegistrationChallengeResponse, DfnsError> {
         let fetch_options = FetchOptions {
             method: HttpMethod::POST,
             headers: None,
