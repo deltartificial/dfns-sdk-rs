@@ -397,7 +397,6 @@ pub struct IndigoRequester {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListStakeActionsRequest {
-    pub stake_id: String,
     pub query: Option<ListStakeActionsRequestQuery>,
 }
 

@@ -2,8 +2,6 @@
 
 ![Build status](https://img.shields.io/badge/build-passing-brightgreen?style=flat) ![License](https://img.shields.io/badge/license-MIT-blue) ![Implementation](https://img.shields.io/badge/implemented-82%25-blue)
 
-
-
 **Modular, extensible, and easy-to-use Rust SDK for the Dfns API.**
 
 ![](./assets/sdk-rs.png)
@@ -49,17 +47,17 @@
 │   │   └── types.rs ✅
 │   ├── staking
 │   │   ├── client.rs ✅
-│   │   ├── delegated_client.rs
+│   │   ├── delegated_client.rs ✅
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 │   ├── wallets
 │   │   ├── client.rs ✅
-│   │   ├── delegated_client.rs
+│   │   ├── delegated_client.rs ✅
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 │   └── webhooks
 │   │   ├── client.rs ✅
-│   │   ├── delegated_client.rs
+│   │   ├── delegated_client.rs ✅
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 ├── client

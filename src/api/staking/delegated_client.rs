@@ -183,19 +183,17 @@ impl DelegatedStakingClient {
 
     pub async fn list_stake_actions(
         &self,
+        stake_id: String,
         request: Option<ListStakeActionsRequest>,
     ) -> Result<ListStakeActionsResponse, DfnsError> {
         let path = build_path_and_query(
             "/staking/stakes/:stakeId/actions",
             &PathAndQueryParams {
-                path: request
-                    .as_ref()
-                    .map(|r| {
-                        let mut map = HashMap::new();
-                        map.insert("stakeId".to_string(), r.stake_id.clone());
-                        map
-                    })
-                    .unwrap_or_default(),
+                path: {
+                    let mut map = HashMap::new();
+                    map.insert("stakeId".to_string(), stake_id);
+                    map
+                },
                 query: request
                     .and_then(|r| r.query)
                     .map(|q| {
