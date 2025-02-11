@@ -102,7 +102,8 @@ impl Fetch for DfnsFetch {
 
         if let Some(custom_headers) = options.headers {
             for (key, value) in custom_headers {
-                headers.insert(key.as_str(), value.parse()?);
+                let key_str: &'static str = Box::leak(key.into_boxed_str());
+                headers.insert(key_str, value.parse()?);
             }
         }
 

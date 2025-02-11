@@ -2,6 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 use async_trait::async_trait;
+use crate::error::DfnsError;
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]

@@ -3,6 +3,9 @@
 use serde::Serialize;
 use std::error::Error;
 use std::fmt;
+use reqwest::Error as ReqwestError;
+use url::ParseError;
+use reqwest::header::InvalidHeaderValue;
 
 #[derive(Debug, Serialize)]
 pub struct DfnsError {
@@ -82,5 +85,29 @@ impl Error for PolicyPendingError {}
 impl From<PolicyPendingError> for DfnsError {
     fn from(err: PolicyPendingError) -> Self {
         Self::new(err.http_status, err.message, err.context)
+    }
+}
+
+impl From<ReqwestError> for DfnsError {
+    fn from(err: ReqwestError) -> Self {
+        Self::new(
+            err.status()
+                .map(|s| s.as_u16())
+                .unwrap_or(500),
+            err.to_string(),
+            None,
+        )
+    }
+}
+
+impl From<ParseError> for DfnsError {
+    fn from(err: ParseError) -> Self {
+        Self::new(400, format!("URL parsing error: {}", err), None)
+    }
+}
+
+impl From<InvalidHeaderValue> for DfnsError {
+    fn from(err: InvalidHeaderValue) -> Self {
+        Self::new(400, format!("Invalid header value: {}", err), None)
     }
 }
