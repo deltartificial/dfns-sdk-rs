@@ -251,6 +251,12 @@ pub enum ArchivePolicyResponseStatus {
     Archived,
 }
 
+impl std::fmt::Display for ArchivePolicyResponseStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?}", self)
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePolicyRequest {
@@ -2888,6 +2894,19 @@ pub struct ListApprovalsQuery {
     pub pagination_token: Option<String>,
 
     pub status: Option<ListApprovalsQueryStatus>,
+}
+
+impl std::fmt::Display for ListApprovalsQueryStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Approved => write!(f, "Approved"),
+            Self::AutoApproved => write!(f, "AutoApproved"),
+            Self::AutoDenied => write!(f, "AutoDenied"),
+            Self::Denied => write!(f, "Denied"),
+            Self::Expired => write!(f, "Expired"),
+            Self::Pending => write!(f, "Pending"),
+        }
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
