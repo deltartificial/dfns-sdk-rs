@@ -126,6 +126,6 @@ pub async fn simple_fetch<T: Serialize + DeserializeOwned>(
     options: FetchOptions<DfnsBaseApiOptions>,
 ) -> Result<T, DfnsError> {
     let fetch = DfnsFetch::new();
-    let response = fetch.execute(resource, options)?;
+    let response = fetch.execute(resource, options).await?;
     response.json::<T>().await.map_err(|e| e.into())
 }
