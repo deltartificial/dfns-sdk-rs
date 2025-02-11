@@ -1,4 +1,5 @@
 # Dfns SDK Rust
+
 ![Build status](https://img.shields.io/badge/build-passing-brightgreen?style=flat)
 
 **Modular, extensible, and easy-to-use Rust SDK for the Dfns API.**
@@ -66,7 +67,7 @@
 ├── error.rs ✅
 ├── lib.rs
 ├── main.rs
-├── models
+├── models ✅
 │   ├── auth.rs ✅
 │   ├── exchanges.rs ✅
 │   ├── generic.rs ✅
@@ -80,7 +81,7 @@
 │   └── webhooks.rs ✅
 ├── signer.rs ✅
 ├── store.rs ✅
-└── utils
+└── utils ✅
 │   ├── base64.rs ✅
 │   ├── bigint.rs ✅
 │   ├── crypto.rs ✅
@@ -89,7 +90,7 @@
 │   ├── nonce.rs ✅
 │   ├── string.rs ✅
 │   ├── url.rs ✅
-│   └── user_action_fetch.rs
+│   └── user_action_fetch.rs ✅
 
 14 directories, 66 files
 ```

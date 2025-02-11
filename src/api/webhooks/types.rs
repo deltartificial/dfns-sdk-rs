@@ -330,6 +330,15 @@ pub enum DeliveryFailed {
     True,
 }
 
+impl std::fmt::Display for DeliveryFailed {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::False => write!(f, "false"),
+            Self::True => write!(f, "true"),
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListWebhookEventsResponse {
@@ -516,4 +525,33 @@ pub struct UpdateWebhookRequestBody {
     pub status: Option<Status>,
 
     pub url: Option<String>,
+}
+
+impl std::fmt::Display for Kind {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::PolicyApprovalPending => write!(f, "policy.approval.pending"),
+            Self::PolicyApprovalResolved => write!(f, "policy.approval.resolved"),
+            Self::PolicyTriggered => write!(f, "policy.triggered"),
+            Self::WalletBlockchaineventDetected => write!(f, "wallet.blockchainevent.detected"),
+            Self::WalletCreated => write!(f, "wallet.created"),
+            Self::WalletDelegated => write!(f, "wallet.delegated"),
+            Self::WalletExported => write!(f, "wallet.exported"),
+            Self::WalletSignatureFailed => write!(f, "wallet.signature.failed"),
+            Self::WalletSignatureRejected => write!(f, "wallet.signature.rejected"),
+            Self::WalletSignatureRequested => write!(f, "wallet.signature.requested"),
+            Self::WalletSignatureSigned => write!(f, "wallet.signature.signed"),
+            Self::WalletTagsModified => write!(f, "wallet.tags.modified"),
+            Self::WalletTransactionBroadcasted => write!(f, "wallet.transaction.broadcasted"),
+            Self::WalletTransactionConfirmed => write!(f, "wallet.transaction.confirmed"),
+            Self::WalletTransactionFailed => write!(f, "wallet.transaction.failed"),
+            Self::WalletTransactionRejected => write!(f, "wallet.transaction.rejected"),
+            Self::WalletTransactionRequested => write!(f, "wallet.transaction.requested"),
+            Self::WalletTransferBroadcasted => write!(f, "wallet.transfer.broadcasted"),
+            Self::WalletTransferConfirmed => write!(f, "wallet.transfer.confirmed"),
+            Self::WalletTransferFailed => write!(f, "wallet.transfer.failed"),
+            Self::WalletTransferRejected => write!(f, "wallet.transfer.rejected"),
+            Self::WalletTransferRequested => write!(f, "wallet.transfer.requested"),
+        }
+    }
 }
