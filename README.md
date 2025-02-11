@@ -10,7 +10,7 @@
 
 ## Structure
 
-53/67 files are implemented = 79%
+55/67 files are implemented = 82%
 
 ```md
 ├── api
@@ -61,11 +61,11 @@
 │   │   ├── mod.rs ✅
 │   │   └── types.rs ✅
 ├── client
-│   ├── api_client.rs
+│   ├── api_client.rs ✅
 │   ├── authenticator.rs ✅
 │   ├── base_auth_api.rs ✅
 │   ├── delegated_api_client.rs
-│   └── mod.rs
+│   └── mod.rs ✅
 ├── error.rs ✅
 ├── lib.rs
 ├── main.rs
