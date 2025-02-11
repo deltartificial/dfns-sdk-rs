@@ -1,8 +1,8 @@
 // @dfns-sdk-rs/src/signer.rs
 
-use serde::{Deserialize, Serialize};
-use async_trait::async_trait;
 use crate::error::DfnsError;
+use async_trait::async_trait;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
@@ -350,5 +350,6 @@ pub enum CredentialAssertionKind {
 
 #[async_trait]
 pub trait CredentialSigner: Send + Sync {
-    async fn sign(&self, challenge: UserActionChallenge) -> Result<FirstFactorAssertion, DfnsError>;
+    async fn sign(&self, challenge: UserActionChallenge)
+        -> Result<FirstFactorAssertion, DfnsError>;
 }

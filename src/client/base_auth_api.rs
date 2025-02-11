@@ -1,13 +1,13 @@
 // @dfns-sdk-rs/src/client/base_auth_api.rs
 
+use crate::api::auth::types::CreateRegistrationChallengeResponse;
 use crate::error::DfnsError;
+use crate::models::generic::DfnsBaseApiOptions;
 use crate::signer::{
     FirstFactorAssertion, RecoveryKeyAssertion, SecondFactorAssertion, UserActionChallenge,
 };
-use crate::models::generic::DfnsBaseApiOptions;
 use crate::store::{FirstFactorAttestation, RecoveryFactorAttestation, SecondFactorAttestation};
 use crate::utils::fetch::{simple_fetch, FetchOptions, HttpMethod};
-use crate::api::auth::types::CreateRegistrationChallengeResponse;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -163,7 +163,11 @@ impl BaseAuthApi {
 
     pub async fn user_logout(options: DfnsBaseApiOptions) -> Result<(), DfnsError> {
         if options.auth_token.is_none() {
-            return Err(DfnsError::new(400, "authToken is required".to_string(), None));
+            return Err(DfnsError::new(
+                400,
+                "authToken is required".to_string(),
+                None,
+            ));
         }
 
         let fetch_options = FetchOptions {

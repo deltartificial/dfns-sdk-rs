@@ -1,7 +1,7 @@
 // @dfns-sdk-rs/src/models/generic.rs
 
-use serde::{Deserialize, Serialize};
 use crate::signer::CredentialSigner;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct DfnsBaseApiOptions {
@@ -47,10 +47,7 @@ impl PartialEq for DfnsApiClientOptions {
 
 impl DfnsApiClientOptions {
     pub fn new(base: DfnsBaseApiOptions) -> Self {
-        Self {
-            base,
-            signer: None,
-        }
+        Self { base, signer: None }
     }
 
     pub fn with_signer(mut self, signer: Box<dyn CredentialSigner>) -> Self {

@@ -6,7 +6,7 @@ use crate::{
     utils::nonce::generate_nonce,
 };
 use reqwest::{Client, Method, Response, StatusCode};
-use serde::{de::DeserializeOwned, Serialize, Deserialize};
+use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::Value;
 use std::collections::HashMap;
 use url::Url;
@@ -52,6 +52,28 @@ pub struct DfnsFetch {
     client: Client,
 }
 
+impl Clone for DfnsFetch {
+    fn clone(&self) -> Self {
+        Self {
+            client: Client::new(),
+        }
+    }
+}
+
+impl std::fmt::Debug for DfnsFetch {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("DfnsFetch")
+            .field("client", &"Client")
+            .finish()
+    }
+}
+
+impl PartialEq for DfnsFetch {
+    fn eq(&self, _other: &Self) -> bool {
+        true
+    }
+}
+
 impl DfnsFetch {
     pub fn new() -> Self {
         Self {
@@ -66,11 +88,12 @@ impl DfnsFetch {
         } else {
             let status = response.status();
             let body: Value = response.json().await.unwrap_or_default();
-            
+
             if status == StatusCode::ACCEPTED {
                 Err(PolicyPendingError::new(Some(body)).into())
             } else {
-                let message = body.get("error")
+                let message = body
+                    .get("error")
                     .and_then(|e| e.get("message"))
                     .or_else(|| body.get("message"))
                     .and_then(|m| m.as_str())
@@ -84,12 +107,19 @@ impl DfnsFetch {
 }
 
 impl Fetch for DfnsFetch {
-    async fn execute(&self, resource: &str, options: FetchOptions<DfnsBaseApiOptions>) -> FetchResult {
-        let base_url = options.api_options.base_url.unwrap_or_else(|| DEFAULT_DFNS_BASE_URL.to_string());
+    async fn execute(
+        &self,
+        resource: &str,
+        options: FetchOptions<DfnsBaseApiOptions>,
+    ) -> FetchResult {
+        let base_url = options
+            .api_options
+            .base_url
+            .unwrap_or_else(|| DEFAULT_DFNS_BASE_URL.to_string());
         let url = Url::parse(&base_url)?.join(resource)?;
 
         let mut headers = reqwest::header::HeaderMap::new();
-        
+
         headers.insert("x-dfns-appid", options.api_options.app_id.parse()?);
         headers.insert("x-dfns-nonce", generate_nonce().parse()?);
         headers.insert("x-dfns-sdk-version", VERSION.parse()?);
@@ -109,7 +139,8 @@ impl Fetch for DfnsFetch {
             }
         }
 
-        let mut request = self.client
+        let mut request = self
+            .client
             .request(options.method.into(), url)
             .headers(headers);
 

@@ -1,11 +1,11 @@
 // @dfns-sdk-rs/src/error.rs
 
+use reqwest::header::InvalidHeaderValue;
+use reqwest::Error as ReqwestError;
 use serde::Serialize;
 use std::error::Error;
 use std::fmt;
-use reqwest::Error as ReqwestError;
 use url::ParseError;
-use reqwest::header::InvalidHeaderValue;
 
 #[derive(Debug, Serialize)]
 pub struct DfnsError {
@@ -91,9 +91,7 @@ impl From<PolicyPendingError> for DfnsError {
 impl From<ReqwestError> for DfnsError {
     fn from(err: ReqwestError) -> Self {
         Self::new(
-            err.status()
-                .map(|s| s.as_u16())
-                .unwrap_or(500),
+            err.status().map(|s| s.as_u16()).unwrap_or(500),
             err.to_string(),
             None,
         )
