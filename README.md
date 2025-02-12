@@ -79,6 +79,34 @@ Check out the list of all examples in [this repository](https://github.com/delta
 - [x] [List Policies](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/policies/list_policies.rs) - Lists all policies
 - [x] [Update Policy](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/policies/update_policy.rs) - Updates policy configuration
 
+##### Permissions
+
+- [x] [Archive Permission](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/permissions/archive_permission.rs) - Archives a permission
+- [x] [Create Assignment](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/permissions/create_assignment.rs) - Creates a permission assignment
+- [x] [Create Permission](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/permissions/create_permission.rs) - Creates a new permission
+- [x] [Delete Assignment](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/permissions/delete_assignment.rs) - Deletes a permission assignment
+- [x] [Get Permission](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/permissions/get_permission.rs) - Gets permission details
+- [x] [List Assignments](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/permissions/list_assignments.rs) - Lists all assignments
+- [x] [List Permissions](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/permissions/list_permissions.rs) - Lists all permissions
+- [x] [Update Permission](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/permissions/update_permission.rs) - Updates permission configuration
+
+##### Networks
+
+- [x] [Get Fees](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/networks/get_fees.rs) - Gets network fees for various blockchains
+- [x] [Read Contract](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/networks/read_contract.rs) - Reads data from a smart contract
+
+##### Exchanges
+
+- [x] [Create Deposit](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/exchanges/create_deposit.rs) - Creates a new deposit
+- [x] [Create Exchange](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/exchanges/create_exchange.rs) - Creates a new exchange
+- [x] [Create Withdrawal](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/exchanges/create_withdrawal.rs) - Creates a new withdrawal
+- [x] [Delete Exchange](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/exchanges/delete_exchange.rs) - Deletes an exchange
+- [x] [Get Exchange](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/exchanges/get_exchange.rs) - Gets exchange details
+- [x] [List Account Assets](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/exchanges/list_account_assets.rs) - Lists assets in an account
+- [x] [List Accounts](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/exchanges/list_accounts.rs) - Lists all accounts
+- [x] [List Asset Withdrawal Networks](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/exchanges/list_asset_withdrawal_networks.rs) - Lists withdrawal networks for an asset
+- [x] [List Exchanges](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/exchanges/list_exchanges.rs) - Lists all exchanges
+
 ## Usage
 
 Here's a simple example of how to use the SDK:
