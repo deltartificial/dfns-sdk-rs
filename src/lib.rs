@@ -1,7 +1,7 @@
 // @dfns-sdk-rs/src/lib.rs
 
 // @title: Dfns SDK Rust
-// @author: deltartificial 
+// @author: deltartificial
 // @version: 0.1.0
 // @description: Rust SDK for the Dfns API
 

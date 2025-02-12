@@ -2,6 +2,13 @@
 name = "dfns-sdk-rs"
 version = "0.1.0"
 edition = "2021"
+description = "Modular, extensible, and easy-to-use Rust SDK for the Dfns API"
+license = "MIT"
+repository = "https://github.com/deltartificial/dfns-sdk-rs"
+documentation = "https://docs.rs/dfns-sdk-rs"
+readme = "README.md"
+keywords = ["dfns", "sdk", "api", "crypto", "wallet", "ethereum", "solana", "bitcoin"]
+categories = ["api-bindings", "cryptography"]
 
 [dependencies]
 base64 = "0.22.1"
