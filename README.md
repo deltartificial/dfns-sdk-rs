@@ -64,6 +64,21 @@ Check out the list of all examples in [this repository](https://github.com/delta
 - [x] [List Stake Actions](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/staking/list_stake_actions.rs) - Lists stake actions
 - [x] [List Stakes](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/staking/list_stakes.rs) - Lists all stakes
 
+##### Signers
+
+- [x] [List Signers](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/signers/list_signers.rs) - Lists all signers in clusters
+
+##### Policies
+
+- [x] [Archive Policy](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/policies/archive_policy.rs) - Archives a policy
+- [x] [Create Approval Decision](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/policies/create_approval_decision.rs) - Creates an approval decision
+- [x] [Create Policy](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/policies/create_policy.rs) - Creates a new policy
+- [x] [Get Approval](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/policies/get_approval.rs) - Gets approval details
+- [x] [Get Policy](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/policies/get_policy.rs) - Gets policy details
+- [x] [List Approvals](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/policies/list_approvals.rs) - Lists all approvals
+- [x] [List Policies](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/policies/list_policies.rs) - Lists all policies
+- [x] [Update Policy](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/policies/update_policy.rs) - Updates policy configuration
+
 ## Usage
 
 Here's a simple example of how to use the SDK:
