@@ -11,6 +11,63 @@
 - [Dfns Website](https://www.dfns.co)
 - [Dfns API Docs](https://docs.dfns.co)
 
+## Installation
+
+```bash
+cargo add dfns-sdk-rs
+```
+
+## Usage
+
+Here's a simple example of how to use the SDK:
+
+```rust
+use dfns_sdk_rs::{
+    DfnsApiClient, DfnsBaseApiOptions, CredentialSigner,
+    models::wallets::CreateWalletRequest,
+};
+use std::sync::Arc;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // Initialize your signer (implementation depends on your use case)
+    let signer = Arc::new(YourCredentialSigner::new());
+
+    // Create API client
+    let client = DfnsApiClient::new(
+        DfnsBaseApiOptions {
+            base_url: "https://api.dfns.io".to_string(),
+            app_id: "ap-2ng9jv-80cfc-983pop0iauf2sv8r".to_string(),
+            auth_token: "your-auth-token".to_string(),
+        },
+        Some(signer),
+    );
+
+    // Create a wallet
+    let wallet = client
+        .wallets()
+        .create_wallet(CreateWalletRequest {
+            network: "EthereumSepolia".to_string(),
+        })
+        .await?;
+
+    // Get wallet assets
+    let assets = client
+        .wallets()
+        .get_wallet_assets(wallet.id)
+        .await?;
+
+    println!("Wallet assets: {:?}", assets);
+    Ok(())
+}
+```
+
+The example above demonstrates:
+
+- Creating an API client with authentication
+- Creating a new wallet
+- Retrieving wallet assets
+
 ## Documentation
 
 ### Generating Documentation
@@ -36,3 +93,5 @@ python3 -m http.server 8000 --directory ./docs/doc
 ```
 
 Then open [http://localhost:8000/dfns_sdk_rs/](http://localhost:8000/dfns_sdk_rs/) in your browser.
+
+For more examples and detailed API documentation, check the [documentation section](#documentation).
