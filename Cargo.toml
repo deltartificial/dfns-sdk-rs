@@ -7,7 +7,7 @@ license = "MIT"
 repository = "https://github.com/deltartificial/dfns-sdk-rs"
 documentation = "https://docs.rs/dfns-sdk-rs"
 readme = "README.md"
-keywords = ["dfns", "sdk", "api", "crypto", "wallet", "ethereum", "solana", "bitcoin"]
+keywords = ["dfns", "sdk", "api", "crypto", "wallet"]
 categories = ["api-bindings", "cryptography"]
 
 [dependencies]
