@@ -107,6 +107,66 @@ Check out the list of all examples in [this repository](https://github.com/delta
 - [x] [List Asset Withdrawal Networks](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/exchanges/list_asset_withdrawal_networks.rs) - Lists withdrawal networks for an asset
 - [x] [List Exchanges](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/exchanges/list_exchanges.rs) - Lists all exchanges
 
+##### Authentication (WORK IN PROGRESS)
+
+- [x] [Activate Application](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/activate_application.rs) - Activates an application
+- [x] [Activate Credential](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/activate_credential.rs) - Activates a credential
+- [x] [Activate Personal Access Token](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/activate_personal_access_token.rs) - Activates a personal access token
+- [x] [Activate Service Account](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/activate_service_account.rs) - Activates a service account
+- [x] [Activate User](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/activate_user.rs) - Activates a user
+- [x] [Deactivate Application](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/deactivate_application.rs) - Deactivates an application
+- [x] [Deactivate Credential](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/deactivate_credential.rs) - Deactivates a credential
+- [x] [Deactivate Personal Access Token](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/deactivate_personal_access_token.rs) - Deactivates a personal access token
+- [x] [Deactivate Service Account](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/deactivate_service_account.rs) - Deactivates a service account
+- [x] [Deactivate User](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/deactivate_user.rs) - Deactivates a user
+- [x] [Archive Application](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/archive_application.rs) - Archives an application
+- [x] [Archive Credential](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/archive_credential.rs) - Archives a credential
+- [x] [Archive Personal Access Token](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/archive_personal_access_token.rs) - Archives a personal access token
+- [x] [Archive Service Account](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/archive_service_account.rs) - Archives a service account
+- [x] [Archive User](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/archive_user.rs) - Archives a user
+- [x] [Create Credential Challenge](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_credential_challenge.rs) - Creates a credential challenge
+- [x] [Create Delegated Recovery Challenge](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_delegated_recovery_challenge.rs) - Creates a delegated recovery challenge
+- [x] [Create Delegated Registration Challenge](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_delegated_registration_challenge.rs) - Creates a delegated registration challenge
+- [x] [Create Login Challenge](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_login_challenge.rs) - Creates a login challenge
+- [x] [Create Recovery Challenge](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_recovery_challenge.rs) - Creates a recovery challenge
+- [x] [Create Registration Challenge](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_registration_challenge.rs) - Creates a registration challenge
+- [x] [Create Service Account Challenge](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_service_account_challenge.rs) - Creates a service account challenge
+- [x] [Create User Action Challenge](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_user_action_challenge.rs) - Creates a user action challenge
+- [x] [Verify Challenge](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/verify_challenge.rs) - Verifies a challenge
+- [x] [Verify Recovery Challenge](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/verify_recovery_challenge.rs) - Verifies a recovery challenge
+- [x] [Verify Registration Challenge](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/verify_registration_challenge.rs) - Verifies a registration challenge
+- [x] [Create Credential Code](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_credential_code.rs) - Creates a credential code
+- [x] [Create Credential With Code](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_credential_with_code.rs) - Creates a credential using a code
+- [x] [Create User Action Signature](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_user_action_signature.rs) - Creates a user action signature
+- [x] [Delegate Credential](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/delegate_credential.rs) - Delegates a credential
+- [x] [Get Credential](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/get_credential.rs) - Gets credential details
+- [x] [List Credentials](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/list_credentials.rs) - Lists all credentials
+- [x] [Update Credential](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/update_credential.rs) - Updates a credential
+- [x] [Create User](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_user.rs) - Creates a new user
+- [x] [Get User](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/get_user.rs) - Gets user details
+- [x] [List Users](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/list_users.rs) - Lists all users
+- [x] [Update User](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/update_user.rs) - Updates a user
+- [x] [Register](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/register.rs) - Registers a new user
+- [x] [Register End User](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/register_end_user.rs) - Registers an end user
+- [x] [Register With Code](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/register_with_code.rs) - Registers using a code
+- [x] [Register With Recovery](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/register_with_recovery.rs) - Registers using recovery
+- [x] [Recover](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/recover.rs) - Recovers an account
+- [x] [Create Application](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_application.rs) - Creates a new application
+- [x] [Get Application](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/get_application.rs) - Gets application details
+- [x] [List Applications](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/list_applications.rs) - Lists all applications
+- [x] [Update Application](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/update_application.rs) - Updates an application
+- [x] [Create Service Account](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_service_account.rs) - Creates a service account
+- [x] [Get Service Account](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/get_service_account.rs) - Gets service account details
+- [x] [List Service Accounts](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/list_service_accounts.rs) - Lists all service accounts
+- [x] [Update Service Account](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/update_service_account.rs) - Updates a service account
+- [x] [Create Personal Access Token](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/create_personal_access_token.rs) - Creates a personal access token
+- [x] [Get Personal Access Token](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/get_personal_access_token.rs) - Gets personal access token details
+- [x] [List Personal Access Tokens](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/list_personal_access_tokens.rs) - Lists all personal access tokens
+- [x] [Update Personal Access Token](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/update_personal_access_token.rs) - Updates a personal access token
+- [x] [Login](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/login.rs) - Performs a login
+- [x] [Initiate Challenge](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/initiate_challenge.rs) - Initiates a challenge
+- [x] [Recreate Delegated Registration Challenge](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/auth/recreate_delegated_registration_challenge.rs) - Recreates a delegated registration challenge
+
 ## Usage
 
 Here's a simple example of how to use the SDK:
