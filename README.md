@@ -56,6 +56,14 @@ Check out the list of all examples in [this repository](https://github.com/delta
 - [x] [Get Webhook Event](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/webhooks/get_webhook_event.rs) - Gets webhook event details
 - [x] [List Webhook Events](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/webhooks/list_webhook_events.rs) - Lists webhook events
 
+##### Staking
+
+- [x] [Create Stake](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/staking/create_stake.rs) - Creates a new stake
+- [x] [Create Stake Action](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/staking/create_stake_action.rs) - Creates a stake action
+- [x] [Get Stake Rewards](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/staking/get_stake_rewards.rs) - Gets stake rewards
+- [x] [List Stake Actions](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/staking/list_stake_actions.rs) - Lists stake actions
+- [x] [List Stakes](https://github.com/deltartificial/dfns-sdk-rs-examples/blob/master/examples/staking/list_stakes.rs) - Lists all stakes
+
 ## Usage
 
 Here's a simple example of how to use the SDK:
