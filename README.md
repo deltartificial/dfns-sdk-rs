@@ -17,6 +17,10 @@
 cargo add dfns-sdk-rs
 ```
 
+## Examples
+
+Check out the list of all examples in [this repository](https://github.com/deltartificial/dfns-sdk-rs-examples).
+
 ## Usage
 
 Here's a simple example of how to use the SDK:
