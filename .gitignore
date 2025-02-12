@@ -19,3 +19,6 @@ out/
 # Added by cargo
 /target
 .DS_Store
+
+# Ignore all files in the docs/ directory
+docs/
