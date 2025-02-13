@@ -82,10 +82,8 @@ impl DfnsFetch {
         }
     }
 
-    #[allow(async_fn_in_trait)]
-    #[allow(dead_code)]
-    async fn handle_response(&self, response: Response) -> FetchResult {
-        if response.status().is_success() {
+    pub async fn handle_response(&self, response: Response) -> FetchResult {
+        if response.status().is_success() && response.status() != StatusCode::ACCEPTED {
             Ok(response)
         } else {
             let status = response.status();

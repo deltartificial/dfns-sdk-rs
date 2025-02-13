@@ -2,6 +2,7 @@
 mod base64_test;
 mod bigint_test;
 mod crypto_test;
+mod fetch_test;
 mod nonce_test;
 mod string_test;
 mod url_test;
