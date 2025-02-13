@@ -6,3 +6,4 @@ mod fetch_test;
 mod nonce_test;
 mod string_test;
 mod url_test;
+mod user_action_fetch_test;
