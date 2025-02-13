@@ -2,8 +2,12 @@
 
 pub fn split_string(text: &str, max_line_length: Option<usize>) -> Vec<String> {
     let length = max_line_length.unwrap_or(64);
-    text.chars()
-        .collect::<Vec<_>>()
+    if text.is_empty() {
+        return Vec::new();
+    }
+
+    let chars: Vec<char> = text.chars().collect();
+    chars
         .chunks(length)
         .map(|chunk| chunk.iter().collect::<String>())
         .collect()
