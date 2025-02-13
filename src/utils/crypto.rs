@@ -20,15 +20,35 @@ pub fn raw_signature_to_asn1(raw_signature: &[u8]) -> Vec<u8> {
     let min_r = bigint::minimize_bigint(r);
     let min_s = bigint::minimize_bigint(s);
 
-    let mut result = Vec::with_capacity(2 + min_r.len() + min_s.len() + 6);
+    let r_bytes = if !min_r.is_empty() && (min_r[0] & 0x80) != 0 {
+        let mut padded = Vec::with_capacity(min_r.len() + 1);
+        padded.push(0);
+        padded.extend_from_slice(&min_r);
+        padded
+    } else {
+        min_r
+    };
+
+    let s_bytes = if !min_s.is_empty() && (min_s[0] & 0x80) != 0 {
+        let mut padded = Vec::with_capacity(min_s.len() + 1);
+        padded.push(0);
+        padded.extend_from_slice(&min_s);
+        padded
+    } else {
+        min_s
+    };
+
+    let total_len = r_bytes.len() + s_bytes.len() + 4;
+
+    let mut result = Vec::with_capacity(total_len + 2);
     result.push(0x30);
-    result.push((min_r.len() + min_s.len() + 4) as u8);
+    result.push(total_len as u8);
     result.push(0x02);
-    result.push(min_r.len() as u8);
-    result.extend_from_slice(&min_r);
+    result.push(r_bytes.len() as u8);
+    result.extend_from_slice(&r_bytes);
     result.push(0x02);
-    result.push(min_s.len() as u8);
-    result.extend_from_slice(&min_s);
+    result.push(s_bytes.len() as u8);
+    result.extend_from_slice(&s_bytes);
 
     result
 }

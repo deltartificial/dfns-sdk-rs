@@ -23,3 +23,5 @@ futures = "0.3"
 thiserror = "2.0.11"
 reqwest = { version = "0.12", features = ["json"] }
 async-trait = "0.1"
+tokio-test = "0.4"
+tokio = { version = "1.36", features = ["macros", "rt-multi-thread"] }
