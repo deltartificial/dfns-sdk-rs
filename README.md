@@ -1,6 +1,9 @@
 # Dfns SDK Rust
 
-![Build status](https://img.shields.io/badge/build-passing-brightgreen?style=flat) ![License](https://img.shields.io/badge/license-MIT-blue) ![Implementation](https://img.shields.io/badge/implemented-100%25-green)
+![Build status](https://img.shields.io/badge/build-passing-brightgreen?style=flat) ![License](https://img.shields.io/badge/license-MIT-blue?style=flat) ![Implementation](https://img.shields.io/badge/implemented-100%25-green?style=flat) [![Crates.io](https://img.shields.io/badge/crates.io-FF6C2C?style=flat&logo=rust&logoColor=white)](https://crates.io/crates/dfns-sdk-rs) [![Downloads](https://img.shields.io/crates/d/dfns-sdk-rs?style=flat&color=FF6C2C)](https://crates.io/crates/dfns-sdk-rs)
+
+
+
 
 **Modular, extensible, and easy-to-use Rust SDK for the Dfns API.**
 
