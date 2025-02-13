@@ -9,7 +9,7 @@
 
 ![](./assets/sdk-rs.png)
 
-> **Warning**: This SDK is currently under development and not ready for production use. The API is subject to change. This SDK is not fully implemented and missing tests.
+> **Warning**: This SDK is currently under development and not ready for production use. The API is subject to change. This SDK is missing tests, but we are working on it. Please feel free to contribute.
 
 - [Dfns Website](https://www.dfns.co)
 - [Dfns API Docs](https://docs.dfns.co)
