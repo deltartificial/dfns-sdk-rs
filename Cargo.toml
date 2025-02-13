@@ -1,6 +1,6 @@
 [package]
 name = "dfns-sdk-rs"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 description = "Modular, extensible, and easy-to-use Rust SDK for the Dfns API"
 license = "MIT"

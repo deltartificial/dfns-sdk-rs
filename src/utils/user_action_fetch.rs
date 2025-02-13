@@ -26,7 +26,7 @@ impl Fetch for UserActionFetch {
     async fn execute(
         &self,
         resource: &str,
-        mut options: FetchOptions<DfnsBaseApiOptions>,
+        options: FetchOptions<DfnsBaseApiOptions>,
     ) -> Result<Response, DfnsError> {
         if options.method != HttpMethod::GET {
             return Err(DfnsError::new(

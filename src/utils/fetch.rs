@@ -45,6 +45,7 @@ pub struct FetchOptions<T> {
 pub type FetchResult = Result<Response, DfnsError>;
 
 pub trait Fetch {
+    #[allow(async_fn_in_trait)]
     async fn execute(&self, url: &str, options: FetchOptions<DfnsBaseApiOptions>) -> FetchResult;
 }
 
@@ -81,7 +82,8 @@ impl DfnsFetch {
         }
     }
 
-    #[warn(dead_code)]
+    #[allow(async_fn_in_trait)]
+    #[allow(dead_code)]
     async fn handle_response(&self, response: Response) -> FetchResult {
         if response.status().is_success() {
             Ok(response)
