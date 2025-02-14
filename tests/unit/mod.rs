@@ -4,3 +4,4 @@ mod utils;
 
 mod error_test;
 mod signer_test;
+mod store_test;
