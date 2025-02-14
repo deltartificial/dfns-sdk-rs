@@ -1,4 +1,5 @@
 /// @dfns-sdk-rs/tests/unit/mod.rs
+mod client;
 mod models;
 mod utils;
 
