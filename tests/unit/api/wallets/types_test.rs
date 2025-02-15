@@ -10,7 +10,15 @@ mod tests {
         GenerateSignatureResponseStatus, GetWalletAssetsResponse, GetWalletHistoryQueryKind,
         GetWalletHistoryResponseItem, GetWalletNftsResponse, ImportWalletBody, ListSignaturesResponse,
         ListTransactionsResponse, ListTransfersResponse, ListWalletsResponse, Nonce, NftKind,
-        Priority, Protocol, Scheme, TransferAssetBody, TransferAssetBodyKind,
+        Priority, Protocol, Scheme, TransferAssetBody, TransferAssetBodyKind, Message, PurpleSignature,
+        TagWalletBody, TagWalletResponse, UntagWalletBody, UpdateWalletBody, UpdateWalletResponse,
+        GetTransactionResponse, GetTransferResponse, GetWalletResponse, GetSignatureResponse,
+        DelegateWalletResponse, DelegateWalletResponseStatus, GetWalletHistoryQuery,
+        ImportWalletBodyEncryptedKeyShare, Nft, ListWalletsResponseItem, ItemSigningKey,
+        TransferAssetResponse, TentacledRequestBody, TentacledRequester,
+        BroadcastTransactionResponseRequestBody, BroadcastTransactionResponseRequester,
+        TransferAssetResponseMetadata, StickyAsset, ListWalletsQuery, UpdateWalletResponseSigningKey,
+        ListTransfersResponse, ListTransfersResponseItem,
     };
     use serde_json::json;
     use std::collections::HashMap;
@@ -496,5 +504,638 @@ mod tests {
         let serialized = serde_json::to_string(&wallets_response).unwrap();
         let deserialized: ListWalletsResponse = serde_json::from_str(&serialized).unwrap();
         assert_eq!(deserialized, wallets_response);
+    }
+
+    #[test]
+    fn test_generate_signature_response() {
+        let response = GenerateSignatureResponse {
+            approval_id: Some("approval-123".to_string()),
+            date_confirmed: Some("2024-01-01T00:01:00Z".to_string()),
+            date_policy_resolved: Some("2024-01-01T00:00:30Z".to_string()),
+            date_requested: "2024-01-01T00:00:00Z".to_string(),
+            date_signed: Some("2024-01-01T00:00:45Z".to_string()),
+            external_id: Some("ext-123".to_string()),
+            fee: Some("0.001".to_string()),
+            id: "sig-123".to_string(),
+            network: CreateWalletBodyNetwork::Ethereum,
+            reason: None,
+            request_body: dfns_sdk_rs::api::wallets::types::GenerateSignatureResponseRequestBody {
+                external_id: Some("ext-123".to_string()),
+                kind: GenerateSignatureBodyKind::Eip712,
+                sign_doc: None,
+                hash: None,
+                taproot_merkle_root: None,
+                message: Some(Message::String("Hello".to_string())),
+                transaction: None,
+                domain: None,
+                types: None,
+                psbt: None,
+                format: Some(Format::Full),
+            },
+            requester: dfns_sdk_rs::api::wallets::types::GenerateSignatureResponseRequester {
+                app_id: Some("app-123".to_string()),
+                token_id: Some("token-123".to_string()),
+                user_id: "user-123".to_string(),
+            },
+            signature: Some(PurpleSignature {
+                encoded: Some("0xsignature...".to_string()),
+                r: "r-value".to_string(),
+                recid: Some(0.0),
+                s: "s-value".to_string(),
+            }),
+            signatures: None,
+            signed_data: Some("signed-data".to_string()),
+            status: GenerateSignatureResponseStatus::Signed,
+            tx_hash: None,
+            wallet_id: "wallet-123".to_string(),
+        };
+
+        let serialized = serde_json::to_string(&response).unwrap();
+        let deserialized: GenerateSignatureResponse = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, response);
+    }
+
+    #[test]
+    fn test_tag_operations() {
+        // Test TagWalletBody
+        let tag_body = TagWalletBody {
+            tags: vec!["tag1".to_string(), "tag2".to_string()],
+        };
+        let serialized = serde_json::to_string(&tag_body).unwrap();
+        let deserialized: TagWalletBody = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, tag_body);
+
+        // Test UntagWalletBody
+        let untag_body = UntagWalletBody {
+            tags: vec!["tag1".to_string()],
+        };
+        let serialized = serde_json::to_string(&untag_body).unwrap();
+        let deserialized: UntagWalletBody = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, untag_body);
+
+        // Test TagWalletResponse
+        let mut tag_response = HashMap::new();
+        tag_response.insert("tag1".to_string(), Some(json!("value1")));
+        let serialized = serde_json::to_string(&tag_response).unwrap();
+        let deserialized: TagWalletResponse = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, tag_response);
+    }
+
+    #[test]
+    fn test_update_wallet() {
+        let body = UpdateWalletBody {
+            external_id: Some("new-ext-123".to_string()),
+            name: Some("Updated Wallet Name".to_string()),
+        };
+        let serialized = serde_json::to_string(&body).unwrap();
+        let deserialized: UpdateWalletBody = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, body);
+
+        let response = UpdateWalletResponse {
+            address: Some("0x123...".to_string()),
+            custodial: true,
+            date_created: "2024-01-01T00:00:00Z".to_string(),
+            date_exported: None,
+            exported: Some(false),
+            external_id: Some("new-ext-123".to_string()),
+            id: "wallet-123".to_string(),
+            imported: Some(false),
+            name: Some("Updated Wallet Name".to_string()),
+            network: CreateWalletBodyNetwork::Ethereum,
+            signing_key: dfns_sdk_rs::api::wallets::types::UpdateWalletResponseSigningKey {
+                curve: Curve::Secp256K1,
+                public_key: "pubkey123".to_string(),
+                scheme: Scheme::Ecdsa,
+            },
+            status: CreateWalletResponseStatus::Active,
+            tags: vec!["tag1".to_string()],
+        };
+        let serialized = serde_json::to_string(&response).unwrap();
+        let deserialized: UpdateWalletResponse = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, response);
+    }
+
+    #[test]
+    fn test_get_responses() {
+        // Test GetTransactionResponse
+        let tx_response = GetTransactionResponse {
+            approval_id: Some("approval-123".to_string()),
+            date_broadcasted: Some("2024-01-01T00:00:00Z".to_string()),
+            date_confirmed: Some("2024-01-01T00:01:00Z".to_string()),
+            date_policy_resolved: Some("2024-01-01T00:00:30Z".to_string()),
+            date_requested: "2024-01-01T00:00:00Z".to_string(),
+            external_id: Some("ext-123".to_string()),
+            fee: Some("0.001".to_string()),
+            id: "tx-123".to_string(),
+            network: BroadcastTransactionResponseNetwork::Ethereum,
+            reason: None,
+            request_body: dfns_sdk_rs::api::wallets::types::GetTransactionResponseRequestBody {
+                external_id: Some("ext-123".to_string()),
+                kind: BroadcastTransactionBodyKind::Evm,
+                transaction: Some("0xraw...".to_string()),
+                data: Some("0xdata...".to_string()),
+                gas_limit: Some("21000".to_string()),
+                nonce: Some(Nonce::String("1".to_string())),
+                to: Some("0x123...".to_string()),
+                value: Some("1.0".to_string()),
+                max_fee_per_gas: None,
+                max_priority_fee_per_gas: None,
+                gas_price: Some("50000000000".to_string()),
+                psbt: None,
+            },
+            requester: dfns_sdk_rs::api::wallets::types::GetTransactionResponseRequester {
+                app_id: Some("app-123".to_string()),
+                token_id: Some("token-123".to_string()),
+                user_id: "user-123".to_string(),
+            },
+            status: BroadcastTransactionResponseStatus::Confirmed,
+            tx_hash: Some("0xhash...".to_string()),
+            wallet_id: "wallet-123".to_string(),
+        };
+        let serialized = serde_json::to_string(&tx_response).unwrap();
+        let deserialized: GetTransactionResponse = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, tx_response);
+
+        // Test GetWalletResponse
+        let wallet_response = GetWalletResponse {
+            address: Some("0x123...".to_string()),
+            custodial: true,
+            date_created: "2024-01-01T00:00:00Z".to_string(),
+            date_exported: None,
+            exported: Some(false),
+            external_id: Some("ext-123".to_string()),
+            id: "wallet-123".to_string(),
+            imported: Some(false),
+            name: Some("Test Wallet".to_string()),
+            network: CreateWalletBodyNetwork::Ethereum,
+            signing_key: dfns_sdk_rs::api::wallets::types::GetWalletResponseSigningKey {
+                curve: Curve::Secp256K1,
+                public_key: "pubkey123".to_string(),
+                scheme: Scheme::Ecdsa,
+            },
+            status: CreateWalletResponseStatus::Active,
+            tags: vec!["tag1".to_string()],
+        };
+        let serialized = serde_json::to_string(&wallet_response).unwrap();
+        let deserialized: GetWalletResponse = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, wallet_response);
+    }
+
+    #[test]
+    fn test_delegate_wallet_response() {
+        let response = DelegateWalletResponse {
+            status: DelegateWalletResponseStatus::Delegated,
+            wallet_id: "wallet-123".to_string(),
+        };
+        let serialized = serde_json::to_string(&response).unwrap();
+        let deserialized: DelegateWalletResponse = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, response);
+    }
+
+    #[test]
+    fn test_wallet_history_query() {
+        let query = GetWalletHistoryQuery {
+            contract: Some("0x123...".to_string()),
+            direction: Some(Direction::In),
+            kind: Some(GetWalletHistoryQueryKind::NativeTransfer),
+            limit: Some("10".to_string()),
+            pagination_token: Some("token123".to_string()),
+        };
+        let serialized = serde_json::to_string(&query).unwrap();
+        let deserialized: GetWalletHistoryQuery = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, query);
+
+        // Test Direction Display implementation
+        assert_eq!(Direction::In.to_string(), "in");
+        assert_eq!(Direction::Out.to_string(), "out");
+
+        // Test GetWalletHistoryQueryKind Display implementation
+        assert_eq!(
+            GetWalletHistoryQueryKind::NativeTransfer.to_string(),
+            "NativeTransfer"
+        );
+        assert_eq!(
+            GetWalletHistoryQueryKind::Erc20Transfer.to_string(),
+            "Erc20Transfer"
+        );
+    }
+
+    #[test]
+    fn test_signature_response_statuses() {
+        let statuses = vec![
+            (GenerateSignatureResponseStatus::Confirmed, "Confirmed"),
+            (GenerateSignatureResponseStatus::Executing, "Executing"),
+            (GenerateSignatureResponseStatus::Failed, "Failed"),
+            (GenerateSignatureResponseStatus::Pending, "Pending"),
+            (GenerateSignatureResponseStatus::Rejected, "Rejected"),
+            (GenerateSignatureResponseStatus::Signed, "Signed"),
+        ];
+
+        for (status, expected) in statuses {
+            let serialized = serde_json::to_string(&status).unwrap();
+            assert_eq!(serialized, format!("\"{}\"", expected));
+
+            let deserialized: GenerateSignatureResponseStatus =
+                serde_json::from_str(&serialized).unwrap();
+            assert_eq!(deserialized, status);
+        }
+    }
+
+    #[test]
+    fn test_transaction_response_statuses() {
+        let statuses = vec![
+            (BroadcastTransactionResponseStatus::Broadcasted, "Broadcasted"),
+            (BroadcastTransactionResponseStatus::Confirmed, "Confirmed"),
+            (BroadcastTransactionResponseStatus::Executing, "Executing"),
+            (BroadcastTransactionResponseStatus::Failed, "Failed"),
+            (BroadcastTransactionResponseStatus::Pending, "Pending"),
+            (BroadcastTransactionResponseStatus::Rejected, "Rejected"),
+        ];
+
+        for (status, expected) in statuses {
+            let serialized = serde_json::to_string(&status).unwrap();
+            assert_eq!(serialized, format!("\"{}\"", expected));
+
+            let deserialized: BroadcastTransactionResponseStatus =
+                serde_json::from_str(&serialized).unwrap();
+            assert_eq!(deserialized, status);
+        }
+    }
+
+    #[test]
+    fn test_import_wallet_body() {
+        let body = ImportWalletBody {
+            curve: Curve::Secp256K1,
+            encrypted_key_shares: vec![
+                dfns_sdk_rs::api::wallets::types::ImportWalletBodyEncryptedKeyShare {
+                    encrypted_key_share: "encrypted-data".to_string(),
+                    signer_id: "signer-123".to_string(),
+                },
+            ],
+            external_id: Some("ext-123".to_string()),
+            min_signers: 2.0,
+            name: Some("Imported Wallet".to_string()),
+            network: CreateWalletBodyNetwork::Ethereum,
+            protocol: Protocol::Frost,
+        };
+
+        let serialized = serde_json::to_string(&body).unwrap();
+        let deserialized: ImportWalletBody = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, body);
+    }
+
+    #[test]
+    fn test_nft_kinds() {
+        let kinds = vec![
+            (NftKind::Erc721, "Erc721"),
+            (NftKind::Asa, "Asa"),
+            (NftKind::Trc721, "Trc721"),
+        ];
+
+        for (kind, expected) in kinds {
+            let serialized = serde_json::to_string(&kind).unwrap();
+            assert_eq!(serialized, format!("\"{}\"", expected));
+
+            let deserialized: NftKind = serde_json::from_str(&serialized).unwrap();
+            assert_eq!(deserialized, kind);
+        }
+    }
+
+    #[test]
+    fn test_get_wallet_nfts_response() {
+        let response = GetWalletNftsResponse {
+            network: BroadcastTransactionResponseNetwork::Ethereum,
+            nfts: vec![Nft {
+                asset_id: Some("asset-123".to_string()),
+                kind: NftKind::Erc721,
+                symbol: Some("BAYC".to_string()),
+                token_uri: Some("ipfs://...".to_string()),
+                contract: Some("0x123...".to_string()),
+                token_id: Some("1234".to_string()),
+            }],
+            wallet_id: "wallet-123".to_string(),
+        };
+
+        let serialized = serde_json::to_string(&response).unwrap();
+        let deserialized: GetWalletNftsResponse = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, response);
+    }
+
+    #[test]
+    fn test_list_wallets_response() {
+        let response = ListWalletsResponse {
+            items: vec![ListWalletsResponseItem {
+                address: Some("0x123...".to_string()),
+                custodial: true,
+                date_created: "2024-01-01T00:00:00Z".to_string(),
+                date_exported: None,
+                exported: Some(false),
+                external_id: Some("ext-123".to_string()),
+                id: "wallet-123".to_string(),
+                imported: Some(false),
+                name: Some("Test Wallet".to_string()),
+                network: CreateWalletBodyNetwork::Ethereum,
+                signing_key: ItemSigningKey {
+                    curve: Curve::Secp256K1,
+                    public_key: "pubkey123".to_string(),
+                    scheme: Scheme::Ecdsa,
+                },
+                status: CreateWalletResponseStatus::Active,
+                tags: vec!["tag1".to_string()],
+            }],
+            next_page_token: Some("next-page".to_string()),
+        };
+
+        let serialized = serde_json::to_string(&response).unwrap();
+        let deserialized: ListWalletsResponse = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, response);
+    }
+
+    #[test]
+    fn test_transfer_asset_response() {
+        let response = TransferAssetResponse {
+            approval_id: Some("approval-123".to_string()),
+            date_broadcasted: Some("2024-01-01T00:00:00Z".to_string()),
+            date_confirmed: Some("2024-01-01T00:01:00Z".to_string()),
+            date_policy_resolved: Some("2024-01-01T00:00:30Z".to_string()),
+            date_requested: "2024-01-01T00:00:00Z".to_string(),
+            external_id: Some("ext-123".to_string()),
+            fee: Some("0.001".to_string()),
+            id: "tx-123".to_string(),
+            network: BroadcastTransactionResponseNetwork::Ethereum,
+            reason: None,
+            request_body: TentacledRequestBody {
+                amount: Some("1.5".to_string()),
+                create_destination_account: Some(false),
+                external_id: Some("ext-123".to_string()),
+                kind: TransferAssetBodyKind::Native,
+                memo: Some("Test transfer".to_string()),
+                priority: Some(Priority::Fast),
+                to: "0x456...".to_string(),
+                asset_id: Some("asset-123".to_string()),
+                metadata: Some("metadata".to_string()),
+                contract: Some("0x789...".to_string()),
+                token_id: Some("token-123".to_string()),
+                asset_code: Some("ETH".to_string()),
+                issuer: Some("issuer-123".to_string()),
+                mint: Some("mint-123".to_string()),
+                master: Some("master-123".to_string()),
+            },
+            requester: TentacledRequester {
+                app_id: Some("app-123".to_string()),
+                token_id: Some("token-123".to_string()),
+                user_id: "user-123".to_string(),
+            },
+            status: BroadcastTransactionResponseStatus::Confirmed,
+            tx_hash: Some("0xhash...".to_string()),
+            wallet_id: "wallet-123".to_string(),
+        };
+
+        let serialized = serde_json::to_string(&response).unwrap();
+        let deserialized: TransferAssetResponse = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, response);
+    }
+
+    #[test]
+    fn test_list_transactions_response() {
+        let response = ListTransactionsResponse {
+            items: vec![ListTransactionsResponseItem {
+                approval_id: Some("approval-123".to_string()),
+                date_broadcasted: Some("2024-01-01T00:00:00Z".to_string()),
+                date_confirmed: Some("2024-01-01T00:01:00Z".to_string()),
+                date_policy_resolved: Some("2024-01-01T00:00:30Z".to_string()),
+                date_requested: "2024-01-01T00:00:00Z".to_string(),
+                external_id: Some("ext-123".to_string()),
+                fee: Some("0.001".to_string()),
+                id: "tx-123".to_string(),
+                network: BroadcastTransactionResponseNetwork::Ethereum,
+                reason: None,
+                request_body: FluffyRequestBody {
+                    external_id: Some("ext-123".to_string()),
+                    kind: BroadcastTransactionBodyKind::Evm,
+                    transaction: Some("0xraw...".to_string()),
+                    data: Some("0xdata...".to_string()),
+                    gas_limit: Some("21000".to_string()),
+                    nonce: Some(Nonce::String("1".to_string())),
+                    to: Some("0x123...".to_string()),
+                    value: Some("1.0".to_string()),
+                    max_fee_per_gas: None,
+                    max_priority_fee_per_gas: None,
+                    gas_price: Some("50000000000".to_string()),
+                    psbt: None,
+                },
+                requester: FluffyRequester {
+                    app_id: Some("app-123".to_string()),
+                    token_id: Some("token-123".to_string()),
+                    user_id: "user-123".to_string(),
+                },
+                status: BroadcastTransactionResponseStatus::Confirmed,
+                tx_hash: Some("0xhash...".to_string()),
+                wallet_id: "wallet-123".to_string(),
+            }],
+            next_page_token: Some("next-page".to_string()),
+            wallet_id: "wallet-123".to_string(),
+        };
+
+        let serialized = serde_json::to_string(&response).unwrap();
+        let deserialized: ListTransactionsResponse = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, response);
+    }
+
+    #[test]
+    fn test_broadcast_transaction_response() {
+        let response = BroadcastTransactionResponse {
+            approval_id: Some("approval-123".to_string()),
+            date_broadcasted: Some("2024-01-01T00:00:00Z".to_string()),
+            date_confirmed: Some("2024-01-01T00:01:00Z".to_string()),
+            date_policy_resolved: Some("2024-01-01T00:00:30Z".to_string()),
+            date_requested: "2024-01-01T00:00:00Z".to_string(),
+            external_id: Some("ext-123".to_string()),
+            fee: Some("0.001".to_string()),
+            id: "tx-123".to_string(),
+            network: BroadcastTransactionResponseNetwork::Ethereum,
+            reason: None,
+            request_body: BroadcastTransactionResponseRequestBody {
+                external_id: Some("ext-123".to_string()),
+                kind: BroadcastTransactionBodyKind::Evm,
+                transaction: Some("0xraw...".to_string()),
+                data: Some("0xdata...".to_string()),
+                gas_limit: Some("21000".to_string()),
+                nonce: Some(Nonce::String("1".to_string())),
+                to: Some("0x123...".to_string()),
+                value: Some("1.0".to_string()),
+                max_fee_per_gas: None,
+                max_priority_fee_per_gas: None,
+                gas_price: Some("50000000000".to_string()),
+                psbt: None,
+            },
+            requester: BroadcastTransactionResponseRequester {
+                app_id: Some("app-123".to_string()),
+                token_id: Some("token-123".to_string()),
+                user_id: "user-123".to_string(),
+            },
+            status: BroadcastTransactionResponseStatus::Confirmed,
+            tx_hash: Some("0xhash...".to_string()),
+            wallet_id: "wallet-123".to_string(),
+        };
+
+        let serialized = serde_json::to_string(&response).unwrap();
+        let deserialized: BroadcastTransactionResponse = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, response);
+    }
+
+    #[test]
+    fn test_broadcast_transaction_body_kind() {
+        let kinds = vec![
+            (BroadcastTransactionBodyKind::Eip1559, "Eip1559"),
+            (BroadcastTransactionBodyKind::Evm, "Evm"),
+            (BroadcastTransactionBodyKind::EvmLegacy, "EvmLegacy"),
+            (BroadcastTransactionBodyKind::Psbt, "Psbt"),
+            (BroadcastTransactionBodyKind::Transaction, "Transaction"),
+        ];
+
+        for (kind, expected) in kinds {
+            let serialized = serde_json::to_string(&kind).unwrap();
+            assert_eq!(serialized, format!("\"{}\"", expected));
+
+            let deserialized: BroadcastTransactionBodyKind = serde_json::from_str(&serialized).unwrap();
+            assert_eq!(deserialized, kind);
+        }
+    }
+
+    #[test]
+    fn test_nonce_enum() {
+        let double_nonce = Nonce::Double(1.0);
+        let string_nonce = Nonce::String("1".to_string());
+
+        let serialized_double = serde_json::to_string(&double_nonce).unwrap();
+        let serialized_string = serde_json::to_string(&string_nonce).unwrap();
+
+        assert_eq!(serialized_double, "1.0");
+        assert_eq!(serialized_string, "\"1\"");
+
+        let deserialized_double: Nonce = serde_json::from_str(&serialized_double).unwrap();
+        let deserialized_string: Nonce = serde_json::from_str(&serialized_string).unwrap();
+
+        assert_eq!(deserialized_double, double_nonce);
+        assert_eq!(deserialized_string, string_nonce);
+    }
+
+    #[test]
+    fn test_create_wallet_body() {
+        let body = CreateWalletBody {
+            delay_delegation: Some(true),
+            delegate_to: Some("delegate-123".to_string()),
+            external_id: Some("ext-123".to_string()),
+            name: Some("Test Wallet".to_string()),
+            network: CreateWalletBodyNetwork::Ethereum,
+            signing_key: Some(CreateWalletBodySigningKey {
+                curve: Curve::Secp256K1,
+                public_key: "pubkey123".to_string(),
+                scheme: Scheme::Ecdsa,
+            }),
+            tags: Some(vec!["tag1".to_string()]),
+        };
+
+        let serialized = serde_json::to_string(&body).unwrap();
+        let deserialized: CreateWalletBody = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, body);
+    }
+
+    #[test]
+    fn test_create_wallet_body_network() {
+        let networks = vec![
+            (CreateWalletBodyNetwork::Algorand, "Algorand"),
+            (CreateWalletBodyNetwork::Aptos, "Aptos"),
+            (CreateWalletBodyNetwork::Ethereum, "Ethereum"),
+            (CreateWalletBodyNetwork::Solana, "Solana"),
+        ];
+
+        for (network, expected) in networks {
+            let serialized = serde_json::to_string(&network).unwrap();
+            assert_eq!(serialized, format!("\"{}\"", expected));
+
+            let deserialized: CreateWalletBodyNetwork = serde_json::from_str(&serialized).unwrap();
+            assert_eq!(deserialized, network);
+        }
+    }
+
+    #[test]
+    fn test_transfer_asset_response_metadata() {
+        let metadata = TransferAssetResponseMetadata {
+            asset: StickyAsset {
+                decimals: Some(18.0),
+                quotes: Some(HashMap::from([("USD".to_string(), 2000.0)])),
+                symbol: Some("ETH".to_string()),
+                verified: Some(true),
+            },
+        };
+
+        let serialized = serde_json::to_string(&metadata).unwrap();
+        let deserialized: TransferAssetResponseMetadata = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, metadata);
+    }
+
+    #[test]
+    fn test_list_wallets_query() {
+        let query = ListWalletsQuery {
+            limit: Some("10".to_string()),
+            owner_id: Some("owner-123".to_string()),
+            owner_username: Some("user123".to_string()),
+            pagination_token: Some("token123".to_string()),
+        };
+
+        let serialized = serde_json::to_string(&query).unwrap();
+        let deserialized: ListWalletsQuery = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, query);
+    }
+
+    #[test]
+    fn test_update_wallet_response() {
+        let response = UpdateWalletResponse {
+            address: Some("0x123...".to_string()),
+            custodial: true,
+            date_created: "2024-01-01T00:00:00Z".to_string(),
+            date_exported: None,
+            exported: Some(false),
+            external_id: Some("new-ext-123".to_string()),
+            id: "wallet-123".to_string(),
+            imported: Some(false),
+            name: Some("Updated Wallet Name".to_string()),
+            network: CreateWalletBodyNetwork::Ethereum,
+            signing_key: UpdateWalletResponseSigningKey {
+                curve: Curve::Secp256K1,
+                public_key: "pubkey123".to_string(),
+                scheme: Scheme::Ecdsa,
+            },
+            status: CreateWalletResponseStatus::Active,
+            tags: vec!["tag1".to_string()],
+        };
+
+        let serialized = serde_json::to_string(&response).unwrap();
+        let deserialized: UpdateWalletResponse = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, response);
+    }
+
+    #[test]
+    fn test_tag_wallet_body() {
+        let body = TagWalletBody {
+            tags: vec!["tag1".to_string(), "tag2".to_string()],
+        };
+
+        let serialized = serde_json::to_string(&body).unwrap();
+        let deserialized: TagWalletBody = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, body);
+    }
+
+    #[test]
+    fn test_untag_wallet_body() {
+        let body = UntagWalletBody {
+            tags: vec!["tag1".to_string()],
+        };
+
+        let serialized = serde_json::to_string(&body).unwrap();
+        let deserialized: UntagWalletBody = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, body);
     }
 }
