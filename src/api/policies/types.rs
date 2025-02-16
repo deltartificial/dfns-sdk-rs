@@ -3,13 +3,13 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePolicyParams {
     pub policy_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePolicyResponse {
     pub action: ArchivePolicyResponseAction,
@@ -31,7 +31,7 @@ pub struct ArchivePolicyResponse {
     pub status: ArchivePolicyResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePolicyResponseAction {
     pub approval_groups: Option<Vec<PurpleApprovalGroup>>,
@@ -41,7 +41,7 @@ pub struct ArchivePolicyResponseAction {
     pub kind: ActionKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleApprovalGroup {
     pub approvers: PurpleApprovers,
 
@@ -50,19 +50,19 @@ pub struct PurpleApprovalGroup {
     pub quorum: f64,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleApprovers {
     pub user_id: Option<PurpleUserId>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleUserId {
     #[serde(rename = "in")]
     pub user_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ActionKind {
     Block,
 
@@ -71,9 +71,13 @@ pub enum ActionKind {
 
     #[serde(rename = "RequestApproval")]
     RequestApproval,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ActivityKindEnum {
     #[serde(rename = "Permissions:Assign")]
     PermissionsAssign,
@@ -89,9 +93,13 @@ pub enum ActivityKindEnum {
 
     #[serde(rename = "Wallets:Sign")]
     WalletsSign,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePolicyResponseFilters {
     pub permission_id: Option<PurplePermissionId>,
@@ -103,25 +111,25 @@ pub struct ArchivePolicyResponseFilters {
     pub wallet_tags: Option<PurpleWalletTags>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurplePermissionId {
     #[serde(rename = "in")]
     pub permission_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurplePolicyId {
     #[serde(rename = "in")]
     pub policy_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleWalletId {
     #[serde(rename = "in")]
     pub wallet_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleWalletTags {
     pub has_all: Option<Vec<String>>,
@@ -129,14 +137,14 @@ pub struct PurpleWalletTags {
     pub has_any: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ArchivePolicyResponseRule {
     pub configuration: Option<PurpleConfiguration>,
 
     pub kind: RuleKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleConfiguration {
     pub addresses: Option<BraggadociousAddresses>,
@@ -154,21 +162,25 @@ pub struct PurpleConfiguration {
     pub fallback_behaviours: Option<PurpleFallbackBehaviours>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum BraggadociousAddresses {
     PurpleAddresses(PurpleAddresses),
 
     StringArray(Vec<String>),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleAddresses {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleAlerts {
     pub alert_level: AlertLevel,
@@ -176,7 +188,7 @@ pub struct PurpleAlerts {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum AlertLevel {
     #[serde(rename = "HIGH")]
     High,
@@ -189,26 +201,34 @@ pub enum AlertLevel {
 
     #[serde(rename = "SEVERE")]
     Severe,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Currency {
     #[serde(rename = "USD")]
     Usd,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleExposures {
     pub direct: PurpleDirect,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleDirect {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleFallbackBehaviours {
     pub skip_chainalysis_failure: bool,
@@ -220,7 +240,7 @@ pub struct PurpleFallbackBehaviours {
     pub skip_unsupported_network: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum RuleKind {
     #[serde(rename = "AlwaysTrigger")]
     AlwaysTrigger,
@@ -242,13 +262,21 @@ pub enum RuleKind {
 
     #[serde(rename = "TransactionRecipientWhitelist")]
     TransactionRecipientWhitelist,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ArchivePolicyResponseStatus {
     Active,
 
     Archived,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
 impl std::fmt::Display for ArchivePolicyResponseStatus {
@@ -257,33 +285,37 @@ impl std::fmt::Display for ArchivePolicyResponseStatus {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePolicyRequest {
     pub policy_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateApprovalDecisionBody {
     pub reason: Option<String>,
 
     pub value: Value,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Value {
     Approved,
 
     Denied,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateApprovalDecisionParams {
     pub approval_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateApprovalDecisionResponse {
     pub activity: CreateApprovalDecisionResponseActivity,
@@ -307,7 +339,7 @@ pub struct CreateApprovalDecisionResponse {
     pub status: CreateApprovalDecisionResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateApprovalDecisionResponseActivity {
     pub kind: ActivityKindEnum,
@@ -323,7 +355,7 @@ pub struct CreateApprovalDecisionResponseActivity {
     pub change_request: Option<PurpleChangeRequest>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleBlockchainEvent {
     pub balance_id: Option<String>,
@@ -391,14 +423,18 @@ pub struct PurpleBlockchainEvent {
     pub tos: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Direction {
     In,
 
     Out,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum BlockchainEventKind {
     #[serde(rename = "Aip21Transfer")]
     Aip21Transfer,
@@ -438,16 +474,20 @@ pub enum BlockchainEventKind {
 
     #[serde(rename = "UtxoTransfer")]
     UtxoTransfer,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleMetadata {
     pub asset: PurpleAsset,
 
     pub fee: Option<PurpleFee>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleAsset {
     pub decimals: Option<f64>,
 
@@ -458,7 +498,7 @@ pub struct PurpleAsset {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleFee {
     pub decimals: Option<f64>,
 
@@ -469,7 +509,7 @@ pub struct PurpleFee {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum BlockchainEventNetwork {
     Algorand,
 
@@ -642,9 +682,13 @@ pub enum BlockchainEventNetwork {
 
     #[serde(rename = "XrpLedgerTestnet")]
     XrpLedgerTestnet,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleChangeRequest {
     pub approval_id: Option<String>,
@@ -668,7 +712,7 @@ pub struct PurpleChangeRequest {
     pub status: ChangeRequestStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleBody {
     pub action: Option<PurpleAction>,
@@ -700,7 +744,7 @@ pub struct PurpleBody {
     pub permission_id: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleAction {
     pub approval_groups: Option<Vec<FluffyApprovalGroup>>,
@@ -710,7 +754,7 @@ pub struct PurpleAction {
     pub kind: ActionKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyApprovalGroup {
     pub approvers: FluffyApprovers,
 
@@ -719,19 +763,19 @@ pub struct FluffyApprovalGroup {
     pub quorum: f64,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyApprovers {
     pub user_id: Option<FluffyUserId>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyUserId {
     #[serde(rename = "in")]
     pub user_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleFilters {
     pub permission_id: Option<FluffyPermissionId>,
@@ -743,25 +787,25 @@ pub struct PurpleFilters {
     pub wallet_tags: Option<FluffyWalletTags>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyPermissionId {
     #[serde(rename = "in")]
     pub permission_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyPolicyId {
     #[serde(rename = "in")]
     pub policy_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyWalletId {
     #[serde(rename = "in")]
     pub wallet_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyWalletTags {
     pub has_all: Option<Vec<String>>,
@@ -769,14 +813,14 @@ pub struct FluffyWalletTags {
     pub has_any: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleRule {
     pub configuration: Option<FluffyConfiguration>,
 
     pub kind: RuleKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyConfiguration {
     pub addresses: Option<Addresses1>,
@@ -794,21 +838,25 @@ pub struct FluffyConfiguration {
     pub fallback_behaviours: Option<FluffyFallbackBehaviours>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Addresses1 {
     FluffyAddresses(FluffyAddresses),
 
     StringArray(Vec<String>),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyAddresses {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyAlerts {
     pub alert_level: AlertLevel,
@@ -816,18 +864,18 @@ pub struct FluffyAlerts {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyExposures {
     pub direct: FluffyDirect,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyDirect {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyFallbackBehaviours {
     pub skip_chainalysis_failure: bool,
@@ -839,25 +887,33 @@ pub struct FluffyFallbackBehaviours {
     pub skip_unsupported_network: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ChangeRequestKind {
     Assignment,
 
     Permission,
 
     Policy,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ChangeRequestOperationKind {
     Create,
 
     Delete,
 
     Update,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleRequester {
     pub app_id: Option<String>,
@@ -867,7 +923,7 @@ pub struct PurpleRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ChangeRequestStatus {
     Applied,
 
@@ -876,9 +932,13 @@ pub enum ChangeRequestStatus {
     Pending,
 
     Rejected,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleSignatureRequest {
     pub approval_id: Option<String>,
@@ -918,7 +978,7 @@ pub struct PurpleSignatureRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum SignatureRequestNetwork {
     Algorand,
 
@@ -1100,9 +1160,13 @@ pub enum SignatureRequestNetwork {
 
     #[serde(rename = "XrpLedgerTestnet")]
     XrpLedgerTestnet,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleRequestBody {
     pub external_id: Option<String>,
@@ -1128,7 +1192,7 @@ pub struct PurpleRequestBody {
     pub format: Option<Format>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleDomain {
     pub chain_id: Option<ChainId>,
@@ -1142,22 +1206,30 @@ pub struct PurpleDomain {
     pub version: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ChainId {
     Double(f64),
 
     String(String),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Format {
     Full,
 
     Simple,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum PurpleKind {
     Bip322,
 
@@ -1173,17 +1245,25 @@ pub enum PurpleKind {
     SignDocDirect,
 
     Transaction,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Message {
     AnythingMap(HashMap<String, Option<serde_json::Value>>),
 
     String(String),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleType {
     pub name: String,
 
@@ -1191,7 +1271,7 @@ pub struct PurpleType {
     pub type_type: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyRequester {
     pub app_id: Option<String>,
@@ -1201,7 +1281,7 @@ pub struct FluffyRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleSignature {
     pub encoded: Option<String>,
 
@@ -1212,7 +1292,7 @@ pub struct PurpleSignature {
     pub s: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffySignature {
     pub encoded: Option<String>,
 
@@ -1223,7 +1303,7 @@ pub struct FluffySignature {
     pub s: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum SignatureRequestStatus {
     Confirmed,
 
@@ -1236,9 +1316,13 @@ pub enum SignatureRequestStatus {
     Rejected,
 
     Signed,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleTransactionRequest {
     pub approval_id: Option<String>,
@@ -1272,7 +1356,7 @@ pub struct PurpleTransactionRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyRequestBody {
     pub external_id: Option<String>,
@@ -1300,7 +1384,7 @@ pub struct FluffyRequestBody {
     pub psbt: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum FluffyKind {
     Eip1559,
 
@@ -1312,9 +1396,13 @@ pub enum FluffyKind {
     Psbt,
 
     Transaction,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledRequester {
     pub app_id: Option<String>,
@@ -1324,7 +1412,7 @@ pub struct TentacledRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum TransactionRequestStatus {
     Broadcasted,
 
@@ -1337,9 +1425,13 @@ pub enum TransactionRequestStatus {
     Pending,
 
     Rejected,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleTransferRequest {
     pub approval_id: Option<String>,
@@ -1375,12 +1467,12 @@ pub struct PurpleTransferRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyMetadata {
     pub asset: FluffyAsset,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyAsset {
     pub decimals: Option<f64>,
 
@@ -1391,7 +1483,7 @@ pub struct FluffyAsset {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledRequestBody {
     pub amount: Option<String>,
@@ -1425,7 +1517,7 @@ pub struct TentacledRequestBody {
     pub master: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum TentacledKind {
     Aip21,
 
@@ -1450,18 +1542,26 @@ pub enum TentacledKind {
     Trc20,
 
     Trc721,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Priority {
     Fast,
 
     Slow,
 
     Standard,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyRequester {
     pub app_id: Option<String>,
@@ -1471,7 +1571,7 @@ pub struct StickyRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateApprovalDecisionResponseDecision {
     pub date: String,
@@ -1483,7 +1583,7 @@ pub struct CreateApprovalDecisionResponseDecision {
     pub value: Value,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateApprovalDecisionResponsePolicyEvaluation {
     pub policy_id: String,
@@ -1493,7 +1593,7 @@ pub struct CreateApprovalDecisionResponsePolicyEvaluation {
     pub triggered: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum CreateApprovalDecisionResponseStatus {
     Approved,
 
@@ -1502,9 +1602,13 @@ pub enum CreateApprovalDecisionResponseStatus {
     Expired,
 
     Pending,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateApprovalDecisionRequest {
     pub approval_id: String,
@@ -1512,14 +1616,14 @@ pub struct CreateApprovalDecisionRequest {
     pub body: CreateApprovalDecisionRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateApprovalDecisionRequestBody {
     pub reason: Option<String>,
 
     pub value: Value,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreatePolicyResponse {
     pub action: CreatePolicyResponseAction,
@@ -1541,7 +1645,7 @@ pub struct CreatePolicyResponse {
     pub status: ArchivePolicyResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreatePolicyResponseAction {
     pub approval_groups: Option<Vec<StickyApprovalGroup>>,
@@ -1551,7 +1655,7 @@ pub struct CreatePolicyResponseAction {
     pub kind: ActionKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct StickyApprovalGroup {
     pub approvers: StickyApprovers,
 
@@ -1560,19 +1664,19 @@ pub struct StickyApprovalGroup {
     pub quorum: f64,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyApprovers {
     pub user_id: Option<StickyUserId>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct StickyUserId {
     #[serde(rename = "in")]
     pub user_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreatePolicyResponseFilters {
     pub permission_id: Option<StickyPermissionId>,
@@ -1584,25 +1688,25 @@ pub struct CreatePolicyResponseFilters {
     pub wallet_tags: Option<StickyWalletTags>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct StickyPermissionId {
     #[serde(rename = "in")]
     pub permission_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct StickyPolicyId {
     #[serde(rename = "in")]
     pub policy_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct StickyWalletId {
     #[serde(rename = "in")]
     pub wallet_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyWalletTags {
     pub has_all: Option<Vec<String>>,
@@ -1610,14 +1714,14 @@ pub struct StickyWalletTags {
     pub has_any: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreatePolicyResponseRule {
     pub configuration: Option<StickyConfiguration>,
 
     pub kind: RuleKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyConfiguration {
     pub addresses: Option<Addresses3>,
@@ -1635,21 +1739,25 @@ pub struct StickyConfiguration {
     pub fallback_behaviours: Option<StickyFallbackBehaviours>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Addresses3 {
     StickyAddresses(StickyAddresses),
 
     StringArray(Vec<String>),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyAddresses {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyAlerts {
     pub alert_level: AlertLevel,
@@ -1657,18 +1765,18 @@ pub struct StickyAlerts {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct StickyExposures {
     pub direct: StickyDirect,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyDirect {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyFallbackBehaviours {
     pub skip_chainalysis_failure: bool,
@@ -1680,12 +1788,12 @@ pub struct StickyFallbackBehaviours {
     pub skip_unsupported_network: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreatePolicyRequest {
     pub body: CreatePolicyBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreatePolicyBody {
     pub action: CreatePolicyBodyAction,
@@ -1699,7 +1807,7 @@ pub struct CreatePolicyBody {
     pub rule: CreatePolicyBodyRule,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreatePolicyBodyAction {
     pub approval_groups: Option<Vec<TentacledApprovalGroup>>,
@@ -1709,7 +1817,7 @@ pub struct CreatePolicyBodyAction {
     pub kind: ActionKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledApprovalGroup {
     pub approvers: TentacledApprovers,
 
@@ -1718,19 +1826,19 @@ pub struct TentacledApprovalGroup {
     pub quorum: f64,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledApprovers {
     pub user_id: Option<TentacledUserId>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledUserId {
     #[serde(rename = "in")]
     pub user_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreatePolicyBodyFilters {
     pub permission_id: Option<TentacledPermissionId>,
@@ -1742,25 +1850,25 @@ pub struct CreatePolicyBodyFilters {
     pub wallet_tags: Option<TentacledWalletTags>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledPermissionId {
     #[serde(rename = "in")]
     pub permission_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledPolicyId {
     #[serde(rename = "in")]
     pub policy_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledWalletId {
     #[serde(rename = "in")]
     pub wallet_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledWalletTags {
     pub has_all: Option<Vec<String>>,
@@ -1768,14 +1876,14 @@ pub struct TentacledWalletTags {
     pub has_any: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreatePolicyBodyRule {
     pub configuration: Option<TentacledConfiguration>,
 
     pub kind: RuleKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledConfiguration {
     pub addresses: Option<Addresses2>,
@@ -1793,21 +1901,25 @@ pub struct TentacledConfiguration {
     pub fallback_behaviours: Option<TentacledFallbackBehaviours>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Addresses2 {
     StringArray(Vec<String>),
 
     TentacledAddresses(TentacledAddresses),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledAddresses {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledAlerts {
     pub alert_level: AlertLevel,
@@ -1815,18 +1927,18 @@ pub struct TentacledAlerts {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledExposures {
     pub direct: TentacledDirect,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledDirect {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledFallbackBehaviours {
     pub skip_chainalysis_failure: bool,
@@ -1838,13 +1950,13 @@ pub struct TentacledFallbackBehaviours {
     pub skip_unsupported_network: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetApprovalParams {
     pub approval_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetApprovalResponse {
     pub activity: GetApprovalResponseActivity,
@@ -1868,7 +1980,7 @@ pub struct GetApprovalResponse {
     pub status: CreateApprovalDecisionResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetApprovalResponseActivity {
     pub kind: ActivityKindEnum,
@@ -1884,7 +1996,7 @@ pub struct GetApprovalResponseActivity {
     pub change_request: Option<FluffyChangeRequest>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyBlockchainEvent {
     pub balance_id: Option<String>,
@@ -1952,14 +2064,14 @@ pub struct FluffyBlockchainEvent {
     pub tos: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledMetadata {
     pub asset: TentacledAsset,
 
     pub fee: Option<FluffyFee>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledAsset {
     pub decimals: Option<f64>,
 
@@ -1970,7 +2082,7 @@ pub struct TentacledAsset {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyFee {
     pub decimals: Option<f64>,
 
@@ -1981,7 +2093,7 @@ pub struct FluffyFee {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyChangeRequest {
     pub approval_id: Option<String>,
@@ -2005,7 +2117,7 @@ pub struct FluffyChangeRequest {
     pub status: ChangeRequestStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyBody {
     pub action: Option<FluffyAction>,
@@ -2037,7 +2149,7 @@ pub struct FluffyBody {
     pub permission_id: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyAction {
     pub approval_groups: Option<Vec<IndigoApprovalGroup>>,
@@ -2047,7 +2159,7 @@ pub struct FluffyAction {
     pub kind: ActionKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndigoApprovalGroup {
     pub approvers: IndigoApprovers,
 
@@ -2056,19 +2168,19 @@ pub struct IndigoApprovalGroup {
     pub quorum: f64,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoApprovers {
     pub user_id: Option<IndigoUserId>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndigoUserId {
     #[serde(rename = "in")]
     pub user_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyFilters {
     pub permission_id: Option<IndigoPermissionId>,
@@ -2080,25 +2192,25 @@ pub struct FluffyFilters {
     pub wallet_tags: Option<IndigoWalletTags>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndigoPermissionId {
     #[serde(rename = "in")]
     pub permission_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndigoPolicyId {
     #[serde(rename = "in")]
     pub policy_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndigoWalletId {
     #[serde(rename = "in")]
     pub wallet_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoWalletTags {
     pub has_all: Option<Vec<String>>,
@@ -2106,14 +2218,14 @@ pub struct IndigoWalletTags {
     pub has_any: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyRule {
     pub configuration: Option<IndigoConfiguration>,
 
     pub kind: RuleKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoConfiguration {
     pub addresses: Option<Addresses4>,
@@ -2131,21 +2243,25 @@ pub struct IndigoConfiguration {
     pub fallback_behaviours: Option<IndigoFallbackBehaviours>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Addresses4 {
     IndigoAddresses(IndigoAddresses),
 
     StringArray(Vec<String>),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoAddresses {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoAlerts {
     pub alert_level: AlertLevel,
@@ -2153,18 +2269,18 @@ pub struct IndigoAlerts {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndigoExposures {
     pub direct: IndigoDirect,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoDirect {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoFallbackBehaviours {
     pub skip_chainalysis_failure: bool,
@@ -2176,7 +2292,7 @@ pub struct IndigoFallbackBehaviours {
     pub skip_unsupported_network: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoRequester {
     pub app_id: Option<String>,
@@ -2186,7 +2302,7 @@ pub struct IndigoRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffySignatureRequest {
     pub approval_id: Option<String>,
@@ -2226,7 +2342,7 @@ pub struct FluffySignatureRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyRequestBody {
     pub external_id: Option<String>,
@@ -2252,7 +2368,7 @@ pub struct StickyRequestBody {
     pub format: Option<Format>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyDomain {
     pub chain_id: Option<ChainId>,
@@ -2266,7 +2382,7 @@ pub struct FluffyDomain {
     pub version: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyType {
     pub name: String,
 
@@ -2274,7 +2390,7 @@ pub struct FluffyType {
     pub type_type: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndecentRequester {
     pub app_id: Option<String>,
@@ -2284,7 +2400,7 @@ pub struct IndecentRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledSignature {
     pub encoded: Option<String>,
 
@@ -2295,7 +2411,7 @@ pub struct TentacledSignature {
     pub s: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct StickySignature {
     pub encoded: Option<String>,
 
@@ -2306,7 +2422,7 @@ pub struct StickySignature {
     pub s: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyTransactionRequest {
     pub approval_id: Option<String>,
@@ -2340,7 +2456,7 @@ pub struct FluffyTransactionRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoRequestBody {
     pub external_id: Option<String>,
@@ -2368,7 +2484,7 @@ pub struct IndigoRequestBody {
     pub psbt: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HilariousRequester {
     pub app_id: Option<String>,
@@ -2378,7 +2494,7 @@ pub struct HilariousRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyTransferRequest {
     pub approval_id: Option<String>,
@@ -2414,12 +2530,12 @@ pub struct FluffyTransferRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct StickyMetadata {
     pub asset: StickyAsset,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct StickyAsset {
     pub decimals: Option<f64>,
 
@@ -2430,7 +2546,7 @@ pub struct StickyAsset {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndecentRequestBody {
     pub amount: Option<String>,
@@ -2464,7 +2580,7 @@ pub struct IndecentRequestBody {
     pub master: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AmbitiousRequester {
     pub app_id: Option<String>,
@@ -2474,7 +2590,7 @@ pub struct AmbitiousRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetApprovalResponseDecision {
     pub date: String,
@@ -2486,7 +2602,7 @@ pub struct GetApprovalResponseDecision {
     pub value: Value,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetApprovalResponsePolicyEvaluation {
     pub policy_id: String,
@@ -2496,19 +2612,19 @@ pub struct GetApprovalResponsePolicyEvaluation {
     pub triggered: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetApprovalRequest {
     pub approval_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPolicyParams {
     pub policy_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPolicyResponse {
     pub action: GetPolicyResponseAction,
@@ -2532,7 +2648,7 @@ pub struct GetPolicyResponse {
     pub status: ArchivePolicyResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPolicyResponseAction {
     pub approval_groups: Option<Vec<IndecentApprovalGroup>>,
@@ -2542,7 +2658,7 @@ pub struct GetPolicyResponseAction {
     pub kind: ActionKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndecentApprovalGroup {
     pub approvers: IndecentApprovers,
 
@@ -2551,19 +2667,19 @@ pub struct IndecentApprovalGroup {
     pub quorum: f64,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndecentApprovers {
     pub user_id: Option<IndecentUserId>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndecentUserId {
     #[serde(rename = "in")]
     pub user_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPolicyResponseFilters {
     pub permission_id: Option<IndecentPermissionId>,
@@ -2575,25 +2691,25 @@ pub struct GetPolicyResponseFilters {
     pub wallet_tags: Option<IndecentWalletTags>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndecentPermissionId {
     #[serde(rename = "in")]
     pub permission_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndecentPolicyId {
     #[serde(rename = "in")]
     pub policy_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndecentWalletId {
     #[serde(rename = "in")]
     pub wallet_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndecentWalletTags {
     pub has_all: Option<Vec<String>>,
@@ -2601,7 +2717,7 @@ pub struct IndecentWalletTags {
     pub has_any: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPolicyResponsePendingChangeRequest {
     pub approval_id: Option<String>,
@@ -2625,7 +2741,7 @@ pub struct GetPolicyResponsePendingChangeRequest {
     pub status: ChangeRequestStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledBody {
     pub action: TentacledAction,
@@ -2647,7 +2763,7 @@ pub struct TentacledBody {
     pub status: ArchivePolicyResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledAction {
     pub approval_groups: Option<Vec<HilariousApprovalGroup>>,
@@ -2657,7 +2773,7 @@ pub struct TentacledAction {
     pub kind: ActionKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct HilariousApprovalGroup {
     pub approvers: HilariousApprovers,
 
@@ -2666,19 +2782,19 @@ pub struct HilariousApprovalGroup {
     pub quorum: f64,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HilariousApprovers {
     pub user_id: Option<HilariousUserId>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct HilariousUserId {
     #[serde(rename = "in")]
     pub user_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledFilters {
     pub permission_id: Option<HilariousPermissionId>,
@@ -2690,25 +2806,25 @@ pub struct TentacledFilters {
     pub wallet_tags: Option<HilariousWalletTags>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct HilariousPermissionId {
     #[serde(rename = "in")]
     pub permission_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct HilariousPolicyId {
     #[serde(rename = "in")]
     pub policy_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct HilariousWalletId {
     #[serde(rename = "in")]
     pub wallet_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HilariousWalletTags {
     pub has_all: Option<Vec<String>>,
@@ -2716,14 +2832,14 @@ pub struct HilariousWalletTags {
     pub has_any: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledRule {
     pub configuration: Option<IndecentConfiguration>,
 
     pub kind: RuleKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndecentConfiguration {
     pub addresses: Option<Addresses5>,
@@ -2741,21 +2857,25 @@ pub struct IndecentConfiguration {
     pub fallback_behaviours: Option<IndecentFallbackBehaviours>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Addresses5 {
     IndecentAddresses(IndecentAddresses),
 
     StringArray(Vec<String>),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndecentAddresses {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndecentAlerts {
     pub alert_level: AlertLevel,
@@ -2763,18 +2883,18 @@ pub struct IndecentAlerts {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndecentExposures {
     pub direct: IndecentDirect,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndecentDirect {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndecentFallbackBehaviours {
     pub skip_chainalysis_failure: bool,
@@ -2786,17 +2906,25 @@ pub struct IndecentFallbackBehaviours {
     pub skip_unsupported_network: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum PendingChangeRequestKind {
     Policy,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum PendingChangeRequestOperationKind {
     Update,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CunningRequester {
     pub app_id: Option<String>,
@@ -2806,14 +2934,14 @@ pub struct CunningRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct GetPolicyResponseRule {
     pub configuration: Option<HilariousConfiguration>,
 
     pub kind: RuleKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HilariousConfiguration {
     pub addresses: Option<Addresses6>,
@@ -2831,21 +2959,25 @@ pub struct HilariousConfiguration {
     pub fallback_behaviours: Option<HilariousFallbackBehaviours>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Addresses6 {
     HilariousAddresses(HilariousAddresses),
 
     StringArray(Vec<String>),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HilariousAddresses {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HilariousAlerts {
     pub alert_level: AlertLevel,
@@ -2853,18 +2985,18 @@ pub struct HilariousAlerts {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct HilariousExposures {
     pub direct: HilariousDirect,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HilariousDirect {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HilariousFallbackBehaviours {
     pub skip_chainalysis_failure: bool,
@@ -2876,13 +3008,13 @@ pub struct HilariousFallbackBehaviours {
     pub skip_unsupported_network: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPolicyRequest {
     pub policy_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListApprovalsQuery {
     pub approver_id: Option<String>,
@@ -2909,7 +3041,7 @@ impl std::fmt::Display for ListApprovalsQueryStatus {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ListApprovalsQueryStatus {
     Approved,
 
@@ -2924,9 +3056,13 @@ pub enum ListApprovalsQueryStatus {
     Expired,
 
     Pending,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListApprovalsResponse {
     pub items: Vec<ListApprovalsResponseItem>,
@@ -2934,7 +3070,7 @@ pub struct ListApprovalsResponse {
     pub next_page_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListApprovalsResponseItem {
     pub activity: ItemActivity,
@@ -2958,7 +3094,7 @@ pub struct ListApprovalsResponseItem {
     pub status: CreateApprovalDecisionResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ItemActivity {
     pub kind: ActivityKindEnum,
@@ -2974,7 +3110,7 @@ pub struct ItemActivity {
     pub change_request: Option<TentacledChangeRequest>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledBlockchainEvent {
     pub balance_id: Option<String>,
@@ -3042,14 +3178,14 @@ pub struct TentacledBlockchainEvent {
     pub tos: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndigoMetadata {
     pub asset: IndigoAsset,
 
     pub fee: Option<TentacledFee>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndigoAsset {
     pub decimals: Option<f64>,
 
@@ -3060,7 +3196,7 @@ pub struct IndigoAsset {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledFee {
     pub decimals: Option<f64>,
 
@@ -3071,7 +3207,7 @@ pub struct TentacledFee {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledChangeRequest {
     pub approval_id: Option<String>,
@@ -3095,7 +3231,7 @@ pub struct TentacledChangeRequest {
     pub status: ChangeRequestStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyBody {
     pub action: Option<StickyAction>,
@@ -3127,7 +3263,7 @@ pub struct StickyBody {
     pub permission_id: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyAction {
     pub approval_groups: Option<Vec<AmbitiousApprovalGroup>>,
@@ -3137,7 +3273,7 @@ pub struct StickyAction {
     pub kind: ActionKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct AmbitiousApprovalGroup {
     pub approvers: AmbitiousApprovers,
 
@@ -3146,19 +3282,19 @@ pub struct AmbitiousApprovalGroup {
     pub quorum: f64,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AmbitiousApprovers {
     pub user_id: Option<AmbitiousUserId>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct AmbitiousUserId {
     #[serde(rename = "in")]
     pub user_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyFilters {
     pub permission_id: Option<AmbitiousPermissionId>,
@@ -3170,25 +3306,25 @@ pub struct StickyFilters {
     pub wallet_tags: Option<AmbitiousWalletTags>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct AmbitiousPermissionId {
     #[serde(rename = "in")]
     pub permission_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct AmbitiousPolicyId {
     #[serde(rename = "in")]
     pub policy_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct AmbitiousWalletId {
     #[serde(rename = "in")]
     pub wallet_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AmbitiousWalletTags {
     pub has_all: Option<Vec<String>>,
@@ -3196,14 +3332,14 @@ pub struct AmbitiousWalletTags {
     pub has_any: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct StickyRule {
     pub configuration: Option<AmbitiousConfiguration>,
 
     pub kind: RuleKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AmbitiousConfiguration {
     pub addresses: Option<Addresses7>,
@@ -3221,21 +3357,25 @@ pub struct AmbitiousConfiguration {
     pub fallback_behaviours: Option<AmbitiousFallbackBehaviours>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Addresses7 {
     AmbitiousAddresses(AmbitiousAddresses),
 
     StringArray(Vec<String>),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AmbitiousAddresses {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AmbitiousAlerts {
     pub alert_level: AlertLevel,
@@ -3243,18 +3383,18 @@ pub struct AmbitiousAlerts {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct AmbitiousExposures {
     pub direct: AmbitiousDirect,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AmbitiousDirect {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AmbitiousFallbackBehaviours {
     pub skip_chainalysis_failure: bool,
@@ -3266,7 +3406,7 @@ pub struct AmbitiousFallbackBehaviours {
     pub skip_unsupported_network: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MagentaRequester {
     pub app_id: Option<String>,
@@ -3276,7 +3416,7 @@ pub struct MagentaRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledSignatureRequest {
     pub approval_id: Option<String>,
@@ -3316,7 +3456,7 @@ pub struct TentacledSignatureRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HilariousRequestBody {
     pub external_id: Option<String>,
@@ -3342,7 +3482,7 @@ pub struct HilariousRequestBody {
     pub format: Option<Format>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledDomain {
     pub chain_id: Option<ChainId>,
@@ -3356,7 +3496,7 @@ pub struct TentacledDomain {
     pub version: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledType {
     pub name: String,
 
@@ -3364,7 +3504,7 @@ pub struct TentacledType {
     pub type_type: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FriskyRequester {
     pub app_id: Option<String>,
@@ -3374,7 +3514,7 @@ pub struct FriskyRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndigoSignature {
     pub encoded: Option<String>,
 
@@ -3385,7 +3525,7 @@ pub struct IndigoSignature {
     pub s: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndecentSignature {
     pub encoded: Option<String>,
 
@@ -3396,7 +3536,7 @@ pub struct IndecentSignature {
     pub s: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledTransactionRequest {
     pub approval_id: Option<String>,
@@ -3430,7 +3570,7 @@ pub struct TentacledTransactionRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AmbitiousRequestBody {
     pub external_id: Option<String>,
@@ -3458,7 +3598,7 @@ pub struct AmbitiousRequestBody {
     pub psbt: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MischievousRequester {
     pub app_id: Option<String>,
@@ -3468,7 +3608,7 @@ pub struct MischievousRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledTransferRequest {
     pub approval_id: Option<String>,
@@ -3504,12 +3644,12 @@ pub struct TentacledTransferRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndecentMetadata {
     pub asset: IndecentAsset,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndecentAsset {
     pub decimals: Option<f64>,
 
@@ -3520,7 +3660,7 @@ pub struct IndecentAsset {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CunningRequestBody {
     pub amount: Option<String>,
@@ -3554,7 +3694,7 @@ pub struct CunningRequestBody {
     pub master: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BraggadociousRequester {
     pub app_id: Option<String>,
@@ -3564,7 +3704,7 @@ pub struct BraggadociousRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ItemDecision {
     pub date: String,
@@ -3576,7 +3716,7 @@ pub struct ItemDecision {
     pub value: Value,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ItemPolicyEvaluation {
     pub policy_id: String,
@@ -3586,12 +3726,12 @@ pub struct ItemPolicyEvaluation {
     pub triggered: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ListApprovalsRequest {
     pub query: Option<ListApprovalsRequestQuery>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListApprovalsRequestQuery {
     pub approver_id: Option<String>,
@@ -3605,7 +3745,7 @@ pub struct ListApprovalsRequestQuery {
     pub status: Option<ListApprovalsQueryStatus>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListPoliciesQuery {
     pub limit: Option<String>,
@@ -3615,7 +3755,7 @@ pub struct ListPoliciesQuery {
     pub status: Option<ArchivePolicyResponseStatus>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListPoliciesResponse {
     pub items: Vec<ListPoliciesResponseItem>,
@@ -3623,7 +3763,7 @@ pub struct ListPoliciesResponse {
     pub next_page_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListPoliciesResponseItem {
     pub action: ItemAction,
@@ -3647,7 +3787,7 @@ pub struct ListPoliciesResponseItem {
     pub status: ArchivePolicyResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ItemAction {
     pub approval_groups: Option<Vec<CunningApprovalGroup>>,
@@ -3657,7 +3797,7 @@ pub struct ItemAction {
     pub kind: ActionKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CunningApprovalGroup {
     pub approvers: CunningApprovers,
 
@@ -3666,19 +3806,19 @@ pub struct CunningApprovalGroup {
     pub quorum: f64,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CunningApprovers {
     pub user_id: Option<CunningUserId>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CunningUserId {
     #[serde(rename = "in")]
     pub user_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ItemFilters {
     pub permission_id: Option<CunningPermissionId>,
@@ -3690,25 +3830,25 @@ pub struct ItemFilters {
     pub wallet_tags: Option<CunningWalletTags>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CunningPermissionId {
     #[serde(rename = "in")]
     pub permission_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CunningPolicyId {
     #[serde(rename = "in")]
     pub policy_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CunningWalletId {
     #[serde(rename = "in")]
     pub wallet_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CunningWalletTags {
     pub has_all: Option<Vec<String>>,
@@ -3716,7 +3856,7 @@ pub struct CunningWalletTags {
     pub has_any: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ItemPendingChangeRequest {
     pub approval_id: Option<String>,
@@ -3740,7 +3880,7 @@ pub struct ItemPendingChangeRequest {
     pub status: ChangeRequestStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoBody {
     pub action: IndigoAction,
@@ -3762,7 +3902,7 @@ pub struct IndigoBody {
     pub status: ArchivePolicyResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoAction {
     pub approval_groups: Option<Vec<MagentaApprovalGroup>>,
@@ -3772,7 +3912,7 @@ pub struct IndigoAction {
     pub kind: ActionKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MagentaApprovalGroup {
     pub approvers: MagentaApprovers,
 
@@ -3781,19 +3921,19 @@ pub struct MagentaApprovalGroup {
     pub quorum: f64,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MagentaApprovers {
     pub user_id: Option<MagentaUserId>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MagentaUserId {
     #[serde(rename = "in")]
     pub user_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoFilters {
     pub permission_id: Option<MagentaPermissionId>,
@@ -3805,25 +3945,25 @@ pub struct IndigoFilters {
     pub wallet_tags: Option<MagentaWalletTags>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MagentaPermissionId {
     #[serde(rename = "in")]
     pub permission_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MagentaPolicyId {
     #[serde(rename = "in")]
     pub policy_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MagentaWalletId {
     #[serde(rename = "in")]
     pub wallet_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MagentaWalletTags {
     pub has_all: Option<Vec<String>>,
@@ -3831,14 +3971,14 @@ pub struct MagentaWalletTags {
     pub has_any: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndigoRule {
     pub configuration: Option<CunningConfiguration>,
 
     pub kind: RuleKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CunningConfiguration {
     pub addresses: Option<Addresses8>,
@@ -3856,21 +3996,25 @@ pub struct CunningConfiguration {
     pub fallback_behaviours: Option<CunningFallbackBehaviours>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Addresses8 {
     CunningAddresses(CunningAddresses),
 
     StringArray(Vec<String>),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CunningAddresses {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CunningAlerts {
     pub alert_level: AlertLevel,
@@ -3878,18 +4022,18 @@ pub struct CunningAlerts {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CunningExposures {
     pub direct: CunningDirect,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CunningDirect {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CunningFallbackBehaviours {
     pub skip_chainalysis_failure: bool,
@@ -3901,7 +4045,7 @@ pub struct CunningFallbackBehaviours {
     pub skip_unsupported_network: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Requester1 {
     pub app_id: Option<String>,
@@ -3911,14 +4055,14 @@ pub struct Requester1 {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ItemRule {
     pub configuration: Option<MagentaConfiguration>,
 
     pub kind: RuleKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MagentaConfiguration {
     pub addresses: Option<Addresses9>,
@@ -3936,21 +4080,25 @@ pub struct MagentaConfiguration {
     pub fallback_behaviours: Option<MagentaFallbackBehaviours>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Addresses9 {
     MagentaAddresses(MagentaAddresses),
 
     StringArray(Vec<String>),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MagentaAddresses {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MagentaAlerts {
     pub alert_level: AlertLevel,
@@ -3958,18 +4106,18 @@ pub struct MagentaAlerts {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MagentaExposures {
     pub direct: MagentaDirect,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MagentaDirect {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MagentaFallbackBehaviours {
     pub skip_chainalysis_failure: bool,
@@ -3981,12 +4129,12 @@ pub struct MagentaFallbackBehaviours {
     pub skip_unsupported_network: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ListPoliciesRequest {
     pub query: Option<ListPoliciesRequestQuery>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListPoliciesRequestQuery {
     pub limit: Option<String>,
@@ -3996,13 +4144,13 @@ pub struct ListPoliciesRequestQuery {
     pub status: Option<ArchivePolicyResponseStatus>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePolicyParams {
     pub policy_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePolicyResponse {
     pub action: UpdatePolicyResponseAction,
@@ -4024,7 +4172,7 @@ pub struct UpdatePolicyResponse {
     pub status: ArchivePolicyResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePolicyResponseAction {
     pub approval_groups: Option<Vec<MischievousApprovalGroup>>,
@@ -4034,7 +4182,7 @@ pub struct UpdatePolicyResponseAction {
     pub kind: ActionKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MischievousApprovalGroup {
     pub approvers: MischievousApprovers,
 
@@ -4043,19 +4191,19 @@ pub struct MischievousApprovalGroup {
     pub quorum: f64,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MischievousApprovers {
     pub user_id: Option<MischievousUserId>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MischievousUserId {
     #[serde(rename = "in")]
     pub user_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePolicyResponseFilters {
     pub permission_id: Option<MischievousPermissionId>,
@@ -4067,25 +4215,25 @@ pub struct UpdatePolicyResponseFilters {
     pub wallet_tags: Option<MischievousWalletTags>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MischievousPermissionId {
     #[serde(rename = "in")]
     pub permission_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MischievousPolicyId {
     #[serde(rename = "in")]
     pub policy_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MischievousWalletId {
     #[serde(rename = "in")]
     pub wallet_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MischievousWalletTags {
     pub has_all: Option<Vec<String>>,
@@ -4093,14 +4241,14 @@ pub struct MischievousWalletTags {
     pub has_any: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct UpdatePolicyResponseRule {
     pub configuration: Option<MischievousConfiguration>,
 
     pub kind: RuleKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MischievousConfiguration {
     pub addresses: Option<Addresses11>,
@@ -4118,21 +4266,25 @@ pub struct MischievousConfiguration {
     pub fallback_behaviours: Option<MischievousFallbackBehaviours>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Addresses11 {
     MischievousAddresses(MischievousAddresses),
 
     StringArray(Vec<String>),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MischievousAddresses {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MischievousAlerts {
     pub alert_level: AlertLevel,
@@ -4140,18 +4292,18 @@ pub struct MischievousAlerts {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MischievousExposures {
     pub direct: MischievousDirect,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MischievousDirect {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MischievousFallbackBehaviours {
     pub skip_chainalysis_failure: bool,
@@ -4163,7 +4315,7 @@ pub struct MischievousFallbackBehaviours {
     pub skip_unsupported_network: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePolicyRequest {
     pub body: UpdatePolicyBody,
@@ -4171,7 +4323,7 @@ pub struct UpdatePolicyRequest {
     pub policy_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePolicyBody {
     pub action: UpdatePolicyBodyAction,
@@ -4185,7 +4337,7 @@ pub struct UpdatePolicyBody {
     pub rule: UpdatePolicyBodyRule,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePolicyBodyAction {
     pub approval_groups: Option<Vec<FriskyApprovalGroup>>,
@@ -4195,7 +4347,7 @@ pub struct UpdatePolicyBodyAction {
     pub kind: ActionKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FriskyApprovalGroup {
     pub approvers: FriskyApprovers,
 
@@ -4204,19 +4356,19 @@ pub struct FriskyApprovalGroup {
     pub quorum: f64,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FriskyApprovers {
     pub user_id: Option<FriskyUserId>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FriskyUserId {
     #[serde(rename = "in")]
     pub user_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePolicyBodyFilters {
     pub permission_id: Option<FriskyPermissionId>,
@@ -4228,25 +4380,25 @@ pub struct UpdatePolicyBodyFilters {
     pub wallet_tags: Option<FriskyWalletTags>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FriskyPermissionId {
     #[serde(rename = "in")]
     pub permission_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FriskyPolicyId {
     #[serde(rename = "in")]
     pub policy_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FriskyWalletId {
     #[serde(rename = "in")]
     pub wallet_id_in: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FriskyWalletTags {
     pub has_all: Option<Vec<String>>,
@@ -4254,14 +4406,14 @@ pub struct FriskyWalletTags {
     pub has_any: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct UpdatePolicyBodyRule {
     pub configuration: Option<FriskyConfiguration>,
 
     pub kind: RuleKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FriskyConfiguration {
     pub addresses: Option<Addresses10>,
@@ -4279,21 +4431,25 @@ pub struct FriskyConfiguration {
     pub fallback_behaviours: Option<FriskyFallbackBehaviours>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Addresses10 {
     FriskyAddresses(FriskyAddresses),
 
     StringArray(Vec<String>),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FriskyAddresses {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FriskyAlerts {
     pub alert_level: AlertLevel,
@@ -4301,18 +4457,18 @@ pub struct FriskyAlerts {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FriskyExposures {
     pub direct: FriskyDirect,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FriskyDirect {
     pub category_ids: Vec<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FriskyFallbackBehaviours {
     pub skip_chainalysis_failure: bool,
