@@ -2,12 +2,12 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct GetFeesQuery {
     pub network: GetFeesQueryNetwork,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum GetFeesQueryNetwork {
     #[serde(rename = "ArbitrumGoerli")]
     ArbitrumGoerli,
@@ -92,6 +92,10 @@ pub enum GetFeesQueryNetwork {
 
     #[serde(rename = "RaceSepolia")]
     RaceSepolia,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
 impl std::fmt::Display for GetFeesQueryNetwork {
@@ -100,7 +104,7 @@ impl std::fmt::Display for GetFeesQueryNetwork {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetFeesResponse {
     pub block_number: f64,
@@ -118,7 +122,7 @@ pub struct GetFeesResponse {
     pub estimated_base_fee: Option<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Fast {
     pub block_horizon: Option<f64>,
@@ -130,14 +134,18 @@ pub struct Fast {
     pub max_priority_fee_per_gas: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum GetFeesResponseKind {
     Bitcoin,
 
     Eip1559,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum GetFeesResponseNetwork {
     #[serde(rename = "ArbitrumGoerli")]
     ArbitrumGoerli,
@@ -232,9 +240,13 @@ pub enum GetFeesResponseNetwork {
 
     #[serde(rename = "RaceSepolia")]
     RaceSepolia,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Slow {
     pub block_horizon: Option<f64>,
@@ -246,7 +258,7 @@ pub struct Slow {
     pub max_priority_fee_per_gas: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Standard {
     pub block_horizon: Option<f64>,
@@ -258,17 +270,17 @@ pub struct Standard {
     pub max_priority_fee_per_gas: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct GetFeesRequest {
     pub query: Option<Query>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Query {
     pub network: GetFeesQueryNetwork,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ReadContractBody {
     pub contract: String,
 
@@ -279,12 +291,16 @@ pub struct ReadContractBody {
     pub network: ReadContractBodyNetwork,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ReadContractBodyKind {
     Evm,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ReadContractBodyNetwork {
     #[serde(rename = "ArbitrumGoerli")]
     ArbitrumGoerli,
@@ -361,21 +377,25 @@ pub enum ReadContractBodyNetwork {
 
     #[serde(rename = "RaceSepolia")]
     RaceSepolia,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ReadContractResponse {
     pub data: String,
 
     pub kind: ReadContractBodyKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ReadContractRequest {
     pub body: Body,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Body {
     pub contract: String,
 
