@@ -6,13 +6,13 @@ use std::collections::HashMap;
 pub type TagWalletResponse = HashMap<String, Option<serde_json::Value>>;
 pub type UntagWalletResponse = HashMap<String, Option<serde_json::Value>>;
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BroadcastTransactionParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BroadcastTransactionResponse {
     pub approval_id: Option<String>,
@@ -46,7 +46,7 @@ pub struct BroadcastTransactionResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum BroadcastTransactionResponseNetwork {
     Algorand,
 
@@ -219,9 +219,13 @@ pub enum BroadcastTransactionResponseNetwork {
 
     #[serde(rename = "XrpLedgerTestnet")]
     XrpLedgerTestnet,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BroadcastTransactionResponseRequestBody {
     pub external_id: Option<String>,
@@ -249,7 +253,7 @@ pub struct BroadcastTransactionResponseRequestBody {
     pub psbt: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum BroadcastTransactionBodyKind {
     Eip1559,
 
@@ -261,17 +265,25 @@ pub enum BroadcastTransactionBodyKind {
     Psbt,
 
     Transaction,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Nonce {
     Double(f64),
 
+    #[default]
+    #[serde(rename = "*")]
+    None,
+
     String(String),
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BroadcastTransactionResponseRequester {
     pub app_id: Option<String>,
@@ -281,7 +293,7 @@ pub struct BroadcastTransactionResponseRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum BroadcastTransactionResponseStatus {
     Broadcasted,
 
@@ -294,9 +306,13 @@ pub enum BroadcastTransactionResponseStatus {
     Pending,
 
     Rejected,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BroadcastTransactionRequest {
     pub body: BroadcastTransactionBody,
@@ -304,7 +320,7 @@ pub struct BroadcastTransactionRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BroadcastTransactionBody {
     pub external_id: Option<String>,
@@ -332,7 +348,7 @@ pub struct BroadcastTransactionBody {
     pub psbt: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateWalletBody {
     pub delay_delegation: Option<bool>,
@@ -350,7 +366,7 @@ pub struct CreateWalletBody {
     pub tags: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum CreateWalletBodyNetwork {
     Algorand,
 
@@ -532,16 +548,20 @@ pub enum CreateWalletBodyNetwork {
 
     #[serde(rename = "XrpLedgerTestnet")]
     XrpLedgerTestnet,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateWalletBodySigningKey {
     pub curve: Option<Curve>,
 
     pub scheme: Option<Scheme>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Curve {
     Ed25519,
@@ -549,9 +569,13 @@ pub enum Curve {
     Secp256K1,
 
     Stark,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Scheme {
     #[serde(rename = "ECDSA")]
     Ecdsa,
@@ -560,9 +584,13 @@ pub enum Scheme {
     EdDsa,
 
     Schnorr,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateWalletResponse {
     pub address: Option<String>,
@@ -592,7 +620,7 @@ pub struct CreateWalletResponse {
     pub tags: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateWalletResponseSigningKey {
     pub curve: Curve,
@@ -602,19 +630,23 @@ pub struct CreateWalletResponseSigningKey {
     pub scheme: Scheme,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum CreateWalletResponseStatus {
     Active,
 
     Archived,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateWalletRequest {
     pub body: CreateWalletRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateWalletRequestBody {
     pub delay_delegation: Option<bool>,
@@ -632,26 +664,26 @@ pub struct CreateWalletRequestBody {
     pub tags: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct BodySigningKey {
     pub curve: Option<Curve>,
 
     pub scheme: Option<Scheme>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DelegateWalletBody {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DelegateWalletParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DelegateWalletResponse {
     pub status: DelegateWalletResponseStatus,
@@ -659,12 +691,16 @@ pub struct DelegateWalletResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum DelegateWalletResponseStatus {
     Delegated,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DelegateWalletRequest {
     pub body: DelegateWalletRequestBody,
@@ -672,13 +708,13 @@ pub struct DelegateWalletRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DelegateWalletRequestBody {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ExportWalletBody {
     pub encryption_key: String,
@@ -686,14 +722,14 @@ pub struct ExportWalletBody {
     pub supported_schemes: Vec<ExportWalletBodySupportedScheme>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ExportWalletBodySupportedScheme {
     pub curve: Curve,
 
     pub protocol: Protocol,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum Protocol {
     Cggmp21,
@@ -704,15 +740,19 @@ pub enum Protocol {
     FrostBitcoin,
 
     Ku23,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ExportWalletParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ExportWalletResponse {
     pub curve: Curve,
@@ -729,7 +769,7 @@ pub struct ExportWalletResponse {
     pub public_key: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ExportWalletResponseEncryptedKeyShare {
     /// Base64-encoded keyshare
@@ -739,7 +779,7 @@ pub struct ExportWalletResponseEncryptedKeyShare {
     pub signer_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ExportWalletRequest {
     pub body: ExportWalletRequestBody,
@@ -747,7 +787,7 @@ pub struct ExportWalletRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ExportWalletRequestBody {
     pub encryption_key: String,
@@ -755,20 +795,20 @@ pub struct ExportWalletRequestBody {
     pub supported_schemes: Vec<BodySupportedScheme>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct BodySupportedScheme {
     pub curve: Curve,
 
     pub protocol: Protocol,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GenerateSignatureParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GenerateSignatureResponse {
     pub approval_id: Option<String>,
@@ -808,7 +848,7 @@ pub struct GenerateSignatureResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GenerateSignatureResponseRequestBody {
     pub external_id: Option<String>,
@@ -834,7 +874,7 @@ pub struct GenerateSignatureResponseRequestBody {
     pub format: Option<Format>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleDomain {
     pub chain_id: Option<Nonce>,
@@ -848,14 +888,18 @@ pub struct PurpleDomain {
     pub version: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Format {
     Full,
 
     Simple,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum GenerateSignatureBodyKind {
     Bip322,
 
@@ -871,17 +915,25 @@ pub enum GenerateSignatureBodyKind {
     SignDocDirect,
 
     Transaction,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Message {
     AnythingMap(HashMap<String, Option<serde_json::Value>>),
 
     String(String),
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleType {
     pub name: String,
 
@@ -889,7 +941,7 @@ pub struct PurpleType {
     pub type_type: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GenerateSignatureResponseRequester {
     pub app_id: Option<String>,
@@ -899,7 +951,7 @@ pub struct GenerateSignatureResponseRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleSignature {
     pub encoded: Option<String>,
 
@@ -910,7 +962,7 @@ pub struct PurpleSignature {
     pub s: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffySignature {
     pub encoded: Option<String>,
 
@@ -921,7 +973,7 @@ pub struct FluffySignature {
     pub s: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum GenerateSignatureResponseStatus {
     Confirmed,
 
@@ -934,9 +986,13 @@ pub enum GenerateSignatureResponseStatus {
     Rejected,
 
     Signed,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GenerateSignatureRequest {
     pub body: GenerateSignatureBody,
@@ -944,7 +1000,7 @@ pub struct GenerateSignatureRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GenerateSignatureBody {
     pub external_id: Option<String>,
@@ -970,7 +1026,7 @@ pub struct GenerateSignatureBody {
     pub format: Option<Format>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GenerateSignatureBodyDomain {
     pub chain_id: Option<Nonce>,
@@ -984,7 +1040,7 @@ pub struct GenerateSignatureBodyDomain {
     pub version: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct GenerateSignatureBodyType {
     pub name: String,
 
@@ -992,7 +1048,7 @@ pub struct GenerateSignatureBodyType {
     pub type_type: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetSignatureParams {
     pub signature_id: String,
@@ -1000,7 +1056,7 @@ pub struct GetSignatureParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetSignatureResponse {
     pub approval_id: Option<String>,
@@ -1040,7 +1096,7 @@ pub struct GetSignatureResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetSignatureResponseRequestBody {
     pub external_id: Option<String>,
@@ -1066,7 +1122,7 @@ pub struct GetSignatureResponseRequestBody {
     pub format: Option<Format>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyDomain {
     pub chain_id: Option<Nonce>,
@@ -1080,7 +1136,7 @@ pub struct FluffyDomain {
     pub version: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyType {
     pub name: String,
 
@@ -1088,7 +1144,7 @@ pub struct FluffyType {
     pub type_type: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetSignatureResponseRequester {
     pub app_id: Option<String>,
@@ -1098,7 +1154,7 @@ pub struct GetSignatureResponseRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledSignature {
     pub encoded: Option<String>,
 
@@ -1109,7 +1165,7 @@ pub struct TentacledSignature {
     pub s: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct StickySignature {
     pub encoded: Option<String>,
 
@@ -1120,7 +1176,7 @@ pub struct StickySignature {
     pub s: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetSignatureRequest {
     pub signature_id: String,
@@ -1128,7 +1184,7 @@ pub struct GetSignatureRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTransactionParams {
     pub transaction_id: String,
@@ -1136,7 +1192,7 @@ pub struct GetTransactionParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTransactionResponse {
     pub approval_id: Option<String>,
@@ -1170,7 +1226,7 @@ pub struct GetTransactionResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTransactionResponseRequestBody {
     pub external_id: Option<String>,
@@ -1198,7 +1254,7 @@ pub struct GetTransactionResponseRequestBody {
     pub psbt: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTransactionResponseRequester {
     pub app_id: Option<String>,
@@ -1208,7 +1264,7 @@ pub struct GetTransactionResponseRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTransactionRequest {
     pub transaction_id: String,
@@ -1216,7 +1272,7 @@ pub struct GetTransactionRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTransferParams {
     pub transfer_id: String,
@@ -1224,7 +1280,7 @@ pub struct GetTransferParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTransferResponse {
     pub approval_id: Option<String>,
@@ -1260,12 +1316,12 @@ pub struct GetTransferResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct GetTransferResponseMetadata {
     pub asset: PurpleAsset,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleAsset {
     pub decimals: Option<f64>,
 
@@ -1276,7 +1332,7 @@ pub struct PurpleAsset {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTransferResponseRequestBody {
     pub amount: Option<String>,
@@ -1310,7 +1366,7 @@ pub struct GetTransferResponseRequestBody {
     pub master: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum TransferAssetBodyKind {
     Aip21,
 
@@ -1335,18 +1391,26 @@ pub enum TransferAssetBodyKind {
     Trc20,
 
     Trc721,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Priority {
     Fast,
 
     Slow,
 
     Standard,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTransferResponseRequester {
     pub app_id: Option<String>,
@@ -1356,7 +1420,7 @@ pub struct GetTransferResponseRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTransferRequest {
     pub transfer_id: String,
@@ -1364,13 +1428,13 @@ pub struct GetTransferRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletResponse {
     pub address: Option<String>,
@@ -1400,7 +1464,7 @@ pub struct GetWalletResponse {
     pub tags: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletResponseSigningKey {
     pub curve: Curve,
@@ -1410,39 +1474,44 @@ pub struct GetWalletResponseSigningKey {
     pub scheme: Scheme,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletAssetsParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletAssetsQuery {
     pub net_worth: Option<NetWorth>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum NetWorth {
     True,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
 impl std::fmt::Display for NetWorth {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             NetWorth::True => write!(f, "true"),
+            NetWorth::None => write!(f, "*"),
         }
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletAssetsResponse {
     pub assets: Vec<AssetElement>,
@@ -1454,7 +1523,7 @@ pub struct GetWalletAssetsResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AssetElement {
     pub balance: String,
@@ -1486,7 +1555,7 @@ pub struct AssetElement {
     pub master: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum AssetKind {
     Aip21,
 
@@ -1507,9 +1576,13 @@ pub enum AssetKind {
     Trc10,
 
     Trc20,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletAssetsRequest {
     pub query: Option<GetWalletAssetsRequestQuery>,
@@ -1517,19 +1590,19 @@ pub struct GetWalletAssetsRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletAssetsRequestQuery {
     pub net_worth: Option<NetWorth>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletHistoryParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletHistoryQuery {
     pub contract: Option<String>,
@@ -1543,11 +1616,15 @@ pub struct GetWalletHistoryQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Direction {
     In,
 
     Out,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
 impl std::fmt::Display for Direction {
@@ -1555,6 +1632,7 @@ impl std::fmt::Display for Direction {
         match self {
             Direction::In => write!(f, "in"),
             Direction::Out => write!(f, "out"),
+            Direction::None => write!(f, "*"),
         }
     }
 }
@@ -1575,11 +1653,12 @@ impl std::fmt::Display for GetWalletHistoryQueryKind {
             GetWalletHistoryQueryKind::Trc20Transfer => write!(f, "Trc20Transfer"),
             GetWalletHistoryQueryKind::Trc721Transfer => write!(f, "Trc721Transfer"),
             GetWalletHistoryQueryKind::UtxoTransfer => write!(f, "UtxoTransfer"),
+            GetWalletHistoryQueryKind::None => write!(f, "*"),
         }
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum GetWalletHistoryQueryKind {
     #[serde(rename = "Aip21Transfer")]
     Aip21Transfer,
@@ -1619,9 +1698,13 @@ pub enum GetWalletHistoryQueryKind {
 
     #[serde(rename = "UtxoTransfer")]
     UtxoTransfer,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletHistoryResponse {
     pub items: Vec<GetWalletHistoryResponseItem>,
@@ -1633,7 +1716,7 @@ pub struct GetWalletHistoryResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletHistoryResponseItem {
     pub balance_id: Option<String>,
@@ -1701,14 +1784,14 @@ pub struct GetWalletHistoryResponseItem {
     pub tos: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleMetadata {
     pub asset: FluffyAsset,
 
     pub fee: Option<Fee>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyAsset {
     pub decimals: Option<f64>,
 
@@ -1719,7 +1802,7 @@ pub struct FluffyAsset {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Fee {
     pub decimals: Option<f64>,
 
@@ -1730,7 +1813,7 @@ pub struct Fee {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletHistoryRequest {
     pub query: Option<GetWalletHistoryRequestQuery>,
@@ -1738,7 +1821,7 @@ pub struct GetWalletHistoryRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletHistoryRequestQuery {
     pub contract: Option<String>,
@@ -1752,13 +1835,13 @@ pub struct GetWalletHistoryRequestQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletNftsParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletNftsResponse {
     pub network: BroadcastTransactionResponseNetwork,
@@ -1768,7 +1851,7 @@ pub struct GetWalletNftsResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Nft {
     pub asset_id: Option<String>,
@@ -1784,22 +1867,26 @@ pub struct Nft {
     pub token_id: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum NftKind {
     Asa,
 
     Erc721,
 
     Trc721,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletNftsRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ImportWalletBody {
     pub curve: Curve,
@@ -1817,7 +1904,7 @@ pub struct ImportWalletBody {
     pub protocol: Protocol,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ImportWalletBodyEncryptedKeyShare {
     pub encrypted_key_share: String,
@@ -1825,7 +1912,7 @@ pub struct ImportWalletBodyEncryptedKeyShare {
     pub signer_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ImportWalletResponse {
     pub address: Option<String>,
@@ -1855,7 +1942,7 @@ pub struct ImportWalletResponse {
     pub tags: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ImportWalletResponseSigningKey {
     pub curve: Curve,
@@ -1865,12 +1952,12 @@ pub struct ImportWalletResponseSigningKey {
     pub scheme: Scheme,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ImportWalletRequest {
     pub body: ImportWalletRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ImportWalletRequestBody {
     pub curve: Curve,
@@ -1888,7 +1975,7 @@ pub struct ImportWalletRequestBody {
     pub protocol: Protocol,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BodyEncryptedKeyShare {
     pub encrypted_key_share: String,
@@ -1896,13 +1983,13 @@ pub struct BodyEncryptedKeyShare {
     pub signer_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListSignaturesParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListSignaturesQuery {
     pub limit: Option<String>,
@@ -1910,7 +1997,7 @@ pub struct ListSignaturesQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListSignaturesResponse {
     pub items: Vec<ListSignaturesResponseItem>,
@@ -1920,7 +2007,7 @@ pub struct ListSignaturesResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListSignaturesResponseItem {
     pub approval_id: Option<String>,
@@ -1960,7 +2047,7 @@ pub struct ListSignaturesResponseItem {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleRequestBody {
     pub external_id: Option<String>,
@@ -1986,7 +2073,7 @@ pub struct PurpleRequestBody {
     pub format: Option<Format>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledDomain {
     pub chain_id: Option<Nonce>,
@@ -2000,7 +2087,7 @@ pub struct TentacledDomain {
     pub version: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledType {
     pub name: String,
 
@@ -2008,7 +2095,7 @@ pub struct TentacledType {
     pub type_type: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleRequester {
     pub app_id: Option<String>,
@@ -2018,7 +2105,7 @@ pub struct PurpleRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndigoSignature {
     pub encoded: Option<String>,
 
@@ -2029,7 +2116,7 @@ pub struct IndigoSignature {
     pub s: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IndecentSignature {
     pub encoded: Option<String>,
 
@@ -2040,7 +2127,7 @@ pub struct IndecentSignature {
     pub s: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListSignaturesRequest {
     pub query: Option<ListSignaturesRequestQuery>,
@@ -2048,7 +2135,7 @@ pub struct ListSignaturesRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListSignaturesRequestQuery {
     pub limit: Option<String>,
@@ -2056,13 +2143,13 @@ pub struct ListSignaturesRequestQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListTransactionsParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListTransactionsQuery {
     pub limit: Option<String>,
@@ -2070,7 +2157,7 @@ pub struct ListTransactionsQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListTransactionsResponse {
     pub items: Vec<ListTransactionsResponseItem>,
@@ -2080,7 +2167,7 @@ pub struct ListTransactionsResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListTransactionsResponseItem {
     pub approval_id: Option<String>,
@@ -2114,7 +2201,7 @@ pub struct ListTransactionsResponseItem {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyRequestBody {
     pub external_id: Option<String>,
@@ -2142,7 +2229,7 @@ pub struct FluffyRequestBody {
     pub psbt: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyRequester {
     pub app_id: Option<String>,
@@ -2152,7 +2239,7 @@ pub struct FluffyRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListTransactionsRequest {
     pub query: Option<ListTransactionsRequestQuery>,
@@ -2160,7 +2247,7 @@ pub struct ListTransactionsRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListTransactionsRequestQuery {
     pub limit: Option<String>,
@@ -2168,13 +2255,13 @@ pub struct ListTransactionsRequestQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListTransfersParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListTransfersQuery {
     pub limit: Option<String>,
@@ -2182,7 +2269,7 @@ pub struct ListTransfersQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListTransfersResponse {
     pub items: Vec<ListTransfersResponseItem>,
@@ -2192,7 +2279,7 @@ pub struct ListTransfersResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListTransfersResponseItem {
     pub approval_id: Option<String>,
@@ -2228,12 +2315,12 @@ pub struct ListTransfersResponseItem {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyMetadata {
     pub asset: TentacledAsset,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TentacledAsset {
     pub decimals: Option<f64>,
 
@@ -2244,7 +2331,7 @@ pub struct TentacledAsset {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledRequestBody {
     pub amount: Option<String>,
@@ -2278,7 +2365,7 @@ pub struct TentacledRequestBody {
     pub master: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledRequester {
     pub app_id: Option<String>,
@@ -2288,7 +2375,7 @@ pub struct TentacledRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListTransfersRequest {
     pub query: Option<ListTransfersRequestQuery>,
@@ -2296,7 +2383,7 @@ pub struct ListTransfersRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListTransfersRequestQuery {
     pub limit: Option<String>,
@@ -2304,7 +2391,7 @@ pub struct ListTransfersRequestQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListWalletsQuery {
     pub limit: Option<String>,
@@ -2316,7 +2403,7 @@ pub struct ListWalletsQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListWalletsResponse {
     pub items: Vec<ListWalletsResponseItem>,
@@ -2324,7 +2411,7 @@ pub struct ListWalletsResponse {
     pub next_page_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListWalletsResponseItem {
     pub address: Option<String>,
@@ -2354,7 +2441,7 @@ pub struct ListWalletsResponseItem {
     pub tags: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ItemSigningKey {
     pub curve: Curve,
@@ -2364,12 +2451,12 @@ pub struct ItemSigningKey {
     pub scheme: Scheme,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ListWalletsRequest {
     pub query: Option<ListWalletsRequestQuery>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListWalletsRequestQuery {
     pub limit: Option<String>,
@@ -2381,18 +2468,18 @@ pub struct ListWalletsRequestQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TagWalletBody {
     pub tags: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TagWalletParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TagWalletRequest {
     pub body: TagWalletRequestBody,
@@ -2400,18 +2487,18 @@ pub struct TagWalletRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TagWalletRequestBody {
     pub tags: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TransferAssetParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TransferAssetResponse {
     pub approval_id: Option<String>,
@@ -2447,12 +2534,12 @@ pub struct TransferAssetResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TransferAssetResponseMetadata {
     pub asset: StickyAsset,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct StickyAsset {
     pub decimals: Option<f64>,
 
@@ -2463,7 +2550,7 @@ pub struct StickyAsset {
     pub verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TransferAssetResponseRequestBody {
     pub amount: Option<String>,
@@ -2497,7 +2584,7 @@ pub struct TransferAssetResponseRequestBody {
     pub master: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TransferAssetResponseRequester {
     pub app_id: Option<String>,
@@ -2507,7 +2594,7 @@ pub struct TransferAssetResponseRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TransferAssetRequest {
     pub body: TransferAssetBody,
@@ -2515,7 +2602,7 @@ pub struct TransferAssetRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TransferAssetBody {
     pub amount: Option<String>,
@@ -2549,18 +2636,18 @@ pub struct TransferAssetBody {
     pub master: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct UntagWalletBody {
     pub tags: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UntagWalletParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UntagWalletRequest {
     pub body: UntagWalletRequestBody,
@@ -2568,12 +2655,12 @@ pub struct UntagWalletRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct UntagWalletRequestBody {
     pub tags: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateWalletBody {
     pub external_id: Option<String>,
@@ -2581,13 +2668,13 @@ pub struct UpdateWalletBody {
     pub name: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateWalletParams {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateWalletResponse {
     pub address: Option<String>,
@@ -2617,7 +2704,7 @@ pub struct UpdateWalletResponse {
     pub tags: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateWalletResponseSigningKey {
     pub curve: Curve,
@@ -2627,7 +2714,7 @@ pub struct UpdateWalletResponseSigningKey {
     pub scheme: Scheme,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateWalletRequest {
     pub body: UpdateWalletRequestBody,
@@ -2635,7 +2722,7 @@ pub struct UpdateWalletRequest {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateWalletRequestBody {
     pub external_id: Option<String>,
