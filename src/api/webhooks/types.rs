@@ -9,7 +9,6 @@ pub struct CreateWebhookBody {
 
     pub events: Vec<Event>,
 
-    /// Webhook status
     pub status: Option<Status>,
 
     pub url: String,
@@ -87,7 +86,6 @@ pub enum Event {
     WalletTransferRequested,
 }
 
-/// Webhook status
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Status {
     Disabled,
@@ -98,28 +96,20 @@ pub enum Status {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateWebhookResponse {
-    /// Date when webhook was created
     pub date_created: String,
 
-    /// Date when webhook was last updated
     pub date_updated: String,
 
-    /// Short description this webhook's purpose
     pub description: Option<String>,
 
-    /// All events this webhook is subscribed to.
     pub events: Vec<Event>,
 
-    /// Webhook ID
     pub id: String,
 
-    /// The secret associated with this webhook, with which webhook requests will be signed.
     pub secret: String,
 
-    /// Webhook status
     pub status: Status,
 
-    /// Webhook url
     pub url: String,
 }
 
@@ -134,7 +124,6 @@ pub struct CreateWebhookRequestBody {
 
     pub events: Vec<Event>,
 
-    /// Webhook status
     pub status: Option<Status>,
 
     pub url: String,
@@ -166,25 +155,18 @@ pub struct GetWebhookParams {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetWebhookResponse {
-    /// Date when webhook was created
     pub date_created: String,
 
-    /// Date when webhook was last updated
     pub date_updated: String,
 
-    /// Short description this webhook's purpose
     pub description: Option<String>,
 
-    /// All events this webhook is subscribed to.
     pub events: Vec<Event>,
 
-    /// Webhook ID
     pub id: String,
 
-    /// Webhook status
     pub status: Status,
 
-    /// Webhook url
     pub url: String,
 }
 
@@ -207,26 +189,19 @@ pub struct GetWebhookEventParams {
 pub struct GetWebhookEventResponse {
     pub data: HashMap<String, Option<serde_json::Value>>,
 
-    /// ISO date string when event was raised
     pub date: String,
 
-    /// Error message if any error happened during the webhook request.
     pub error: Option<String>,
 
-    /// WebhookEvent ID
     pub id: String,
 
-    /// Webhook event
     pub kind: Kind,
 
-    /// Status code of the webhook request
     pub status: String,
 
-    /// Unix timestamp when the event was forwarded to the webhook url by our servers.
     pub timestamp_sent: f64,
 }
 
-/// Webhook event
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Kind {
     #[serde(rename = "policy.approval.pending")]
@@ -352,22 +327,16 @@ pub struct ListWebhookEventsResponse {
 pub struct ListWebhookEventsResponseItem {
     pub data: HashMap<String, Option<serde_json::Value>>,
 
-    /// ISO date string when event was raised
     pub date: String,
 
-    /// Error message if any error happened during the webhook request.
     pub error: Option<String>,
 
-    /// WebhookEvent ID
     pub id: String,
 
-    /// Webhook event
     pub kind: Kind,
 
-    /// Status code of the webhook request
     pub status: String,
 
-    /// Unix timestamp when the event was forwarded to the webhook url by our servers.
     pub timestamp_sent: f64,
 }
 
@@ -410,25 +379,18 @@ pub struct ListWebhooksResponse {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListWebhooksResponseItem {
-    /// Date when webhook was created
     pub date_created: String,
 
-    /// Date when webhook was last updated
     pub date_updated: String,
 
-    /// Short description this webhook's purpose
     pub description: Option<String>,
 
-    /// All events this webhook is subscribed to.
     pub events: Vec<Event>,
 
-    /// Webhook ID
     pub id: String,
 
-    /// Webhook status
     pub status: Status,
 
-    /// Webhook url
     pub url: String,
 }
 
@@ -470,7 +432,6 @@ pub struct UpdateWebhookBody {
 
     pub events: Option<Vec<Event>>,
 
-    /// Webhook status
     pub status: Option<Status>,
 
     pub url: Option<String>,
@@ -485,25 +446,18 @@ pub struct UpdateWebhookParams {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateWebhookResponse {
-    /// Date when webhook was created
     pub date_created: String,
 
-    /// Date when webhook was last updated
     pub date_updated: String,
 
-    /// Short description this webhook's purpose
     pub description: Option<String>,
 
-    /// All events this webhook is subscribed to.
     pub events: Vec<Event>,
 
-    /// Webhook ID
     pub id: String,
 
-    /// Webhook status
     pub status: Status,
 
-    /// Webhook url
     pub url: String,
 }
 
@@ -521,7 +475,6 @@ pub struct UpdateWebhookRequestBody {
 
     pub events: Option<Vec<Event>>,
 
-    /// Webhook status
     pub status: Option<Status>,
 
     pub url: Option<String>,
