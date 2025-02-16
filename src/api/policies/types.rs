@@ -3037,6 +3037,7 @@ impl std::fmt::Display for ListApprovalsQueryStatus {
             Self::Denied => write!(f, "Denied"),
             Self::Expired => write!(f, "Expired"),
             Self::Pending => write!(f, "Pending"),
+            Self::None => write!(f, "*"),
         }
     }
 }
