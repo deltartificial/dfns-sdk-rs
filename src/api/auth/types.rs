@@ -2,13 +2,13 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateApplicationParams {
     pub app_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateApplicationResponse {
     pub access_tokens: Vec<ActivateApplicationResponseAccessToken>,
@@ -30,7 +30,7 @@ pub struct ActivateApplicationResponse {
     pub permission_assignments: Vec<ActivateApplicationResponsePermissionAssignment>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateApplicationResponseAccessToken {
     pub access_token: Option<String>,
@@ -58,7 +58,7 @@ pub struct ActivateApplicationResponseAccessToken {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum AccessTokenKind {
     Application,
 
@@ -74,9 +74,12 @@ pub enum AccessTokenKind {
     Temp,
 
     Token,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurplePermissionAssignment {
     pub assignment_id: String,
@@ -88,16 +91,19 @@ pub struct PurplePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ActivateApplicationResponseKind {
     #[serde(rename = "ClientSideApplication")]
     ClientSideApplication,
 
     #[serde(rename = "ServerSideApplication")]
     ServerSideApplication,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateApplicationResponsePermissionAssignment {
     pub assignment_id: String,
@@ -109,41 +115,41 @@ pub struct ActivateApplicationResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateApplicationRequest {
     pub app_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateCredentialBody {
     pub credential_uuid: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ActivateCredentialResponse {
     pub message: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ActivateCredentialRequest {
     pub body: ActivateCredentialRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateCredentialRequestBody {
     pub credential_uuid: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivatePersonalAccessTokenParams {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivatePersonalAccessTokenResponse {
     pub access_token: Option<String>,
@@ -171,7 +177,7 @@ pub struct ActivatePersonalAccessTokenResponse {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivatePersonalAccessTokenResponsePermissionAssignment {
     pub assignment_id: String,
@@ -183,19 +189,19 @@ pub struct ActivatePersonalAccessTokenResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivatePersonalAccessTokenRequest {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateServiceAccountParams {
     pub service_account_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateServiceAccountResponse {
     pub access_tokens: Vec<ActivateServiceAccountResponseAccessToken>,
@@ -203,7 +209,7 @@ pub struct ActivateServiceAccountResponse {
     pub user_info: ActivateServiceAccountResponseUserInfo,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateServiceAccountResponseAccessToken {
     pub access_token: Option<String>,
@@ -231,7 +237,7 @@ pub struct ActivateServiceAccountResponseAccessToken {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyPermissionAssignment {
     pub assignment_id: String,
@@ -243,7 +249,7 @@ pub struct FluffyPermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateServiceAccountResponseUserInfo {
     pub credential_uuid: String,
@@ -269,7 +275,7 @@ pub struct ActivateServiceAccountResponseUserInfo {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum UserInfoKind {
     #[serde(rename = "CustomerEmployee")]
     CustomerEmployee,
@@ -279,9 +285,12 @@ pub enum UserInfoKind {
 
     #[serde(rename = "EndUser")]
     EndUser,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledPermissionAssignment {
     pub assignment_id: String,
@@ -293,19 +302,19 @@ pub struct TentacledPermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateServiceAccountRequest {
     pub service_account_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateUserParams {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateUserResponse {
     pub credential_uuid: String,
@@ -331,7 +340,7 @@ pub struct ActivateUserResponse {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateUserResponsePermissionAssignment {
     pub assignment_id: String,
@@ -343,19 +352,19 @@ pub struct ActivateUserResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivateUserRequest {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchiveApplicationParams {
     pub app_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchiveApplicationResponse {
     pub access_tokens: Vec<ArchiveApplicationResponseAccessToken>,
@@ -377,7 +386,7 @@ pub struct ArchiveApplicationResponse {
     pub permission_assignments: Vec<ArchiveApplicationResponsePermissionAssignment>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchiveApplicationResponseAccessToken {
     pub access_token: Option<String>,
@@ -405,7 +414,7 @@ pub struct ArchiveApplicationResponseAccessToken {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyPermissionAssignment {
     pub assignment_id: String,
@@ -417,7 +426,7 @@ pub struct StickyPermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchiveApplicationResponsePermissionAssignment {
     pub assignment_id: String,
@@ -429,19 +438,19 @@ pub struct ArchiveApplicationResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchiveApplicationRequest {
     pub app_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePersonalAccessTokenParams {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePersonalAccessTokenResponse {
     pub access_token: Option<String>,
@@ -469,7 +478,7 @@ pub struct ArchivePersonalAccessTokenResponse {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePersonalAccessTokenResponsePermissionAssignment {
     pub assignment_id: String,
@@ -481,19 +490,19 @@ pub struct ArchivePersonalAccessTokenResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePersonalAccessTokenRequest {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchiveServiceAccountParams {
     pub service_account_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchiveServiceAccountResponse {
     pub access_tokens: Vec<ArchiveServiceAccountResponseAccessToken>,
@@ -501,7 +510,7 @@ pub struct ArchiveServiceAccountResponse {
     pub user_info: ArchiveServiceAccountResponseUserInfo,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchiveServiceAccountResponseAccessToken {
     pub access_token: Option<String>,
@@ -529,7 +538,7 @@ pub struct ArchiveServiceAccountResponseAccessToken {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoPermissionAssignment {
     pub assignment_id: String,
@@ -541,7 +550,7 @@ pub struct IndigoPermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchiveServiceAccountResponseUserInfo {
     pub credential_uuid: String,
@@ -567,7 +576,7 @@ pub struct ArchiveServiceAccountResponseUserInfo {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndecentPermissionAssignment {
     pub assignment_id: String,
@@ -579,19 +588,19 @@ pub struct IndecentPermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchiveServiceAccountRequest {
     pub service_account_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchiveUserParams {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchiveUserResponse {
     pub credential_uuid: String,
@@ -617,7 +626,7 @@ pub struct ArchiveUserResponse {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchiveUserResponsePermissionAssignment {
     pub assignment_id: String,
@@ -629,13 +638,13 @@ pub struct ArchiveUserResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchiveUserRequest {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateApplicationResponse {
     pub access_tokens: Vec<CreateApplicationResponseAccessToken>,
@@ -657,7 +666,7 @@ pub struct CreateApplicationResponse {
     pub permission_assignments: Vec<CreateApplicationResponsePermissionAssignment>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateApplicationResponseAccessToken {
     pub access_token: Option<String>,
@@ -685,7 +694,7 @@ pub struct CreateApplicationResponseAccessToken {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HilariousPermissionAssignment {
     pub assignment_id: String,
@@ -697,7 +706,7 @@ pub struct HilariousPermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateApplicationResponsePermissionAssignment {
     pub assignment_id: String,
@@ -709,12 +718,12 @@ pub struct CreateApplicationResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateApplicationRequest {
     pub body: CreateApplicationBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateApplicationBody {
     pub external_id: Option<String>,
@@ -734,7 +743,7 @@ pub struct CreateApplicationBody {
     pub public_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateCredentialResponse {
     pub credential_id: String,
@@ -756,7 +765,7 @@ pub struct CreateCredentialResponse {
     pub relying_party_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum CredentialKindElement {
     Fido2,
 
@@ -771,14 +780,17 @@ pub enum CredentialKindElement {
     RecoveryKey,
 
     Totp,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialRequest {
     pub body: CreateCredentialBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateCredentialBody {
     pub challenge_identifier: String,
@@ -792,7 +804,7 @@ pub struct CreateCredentialBody {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateCredentialBodyCredentialInfo {
     pub attestation_data: Option<String>,
@@ -806,12 +818,12 @@ pub struct CreateCredentialBodyCredentialInfo {
     pub otp_code: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialChallengeBody {
     pub kind: CredentialKindElement,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateCredentialChallengeResponse {
     pub challenge_identifier: String,
@@ -837,7 +849,7 @@ pub struct CreateCredentialChallengeResponse {
     pub pub_key_cred_params: Option<Vec<CreateCredentialChallengeResponsePubKeyCredParam>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Attestation {
     Direct,
@@ -846,10 +858,11 @@ pub enum Attestation {
 
     Indirect,
 
+    #[default]
     None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateCredentialChallengeResponseAuthenticatorSelection {
     pub authenticator_attachment: Option<AuthenticatorAttachment>,
@@ -861,16 +874,19 @@ pub struct CreateCredentialChallengeResponseAuthenticatorSelection {
     pub user_verification: ResidentKey,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum AuthenticatorAttachment {
     #[serde(rename = "cross-platform")]
     CrossPlatform,
 
     Platform,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum ResidentKey {
     Discouraged,
@@ -878,9 +894,12 @@ pub enum ResidentKey {
     Preferred,
 
     Required,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialChallengeResponseExcludeCredential {
     pub id: String,
 
@@ -888,14 +907,17 @@ pub struct CreateCredentialChallengeResponseExcludeCredential {
     pub exclude_credential_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum Type {
     #[serde(rename = "public-key")]
     PublicKey,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialChallengeResponsePubKeyCredParam {
     pub alg: f64,
 
@@ -903,14 +925,14 @@ pub struct CreateCredentialChallengeResponsePubKeyCredParam {
     pub pub_key_cred_param_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialChallengeResponseRp {
     pub id: String,
 
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateCredentialChallengeResponseUser {
     pub display_name: String,
@@ -920,17 +942,17 @@ pub struct CreateCredentialChallengeResponseUser {
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialChallengeRequest {
     pub body: CreateCredentialChallengeRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialChallengeRequestBody {
     pub kind: CredentialKindElement,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateCredentialChallengeWithCodeBody {
     pub code: String,
@@ -938,7 +960,7 @@ pub struct CreateCredentialChallengeWithCodeBody {
     pub credential_kind: CredentialKindElement,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateCredentialChallengeWithCodeResponse {
     pub challenge_identifier: String,
@@ -966,7 +988,7 @@ pub struct CreateCredentialChallengeWithCodeResponse {
     pub pub_key_cred_params: Option<Vec<CreateCredentialChallengeWithCodeResponsePubKeyCredParam>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateCredentialChallengeWithCodeResponseAuthenticatorSelection {
     pub authenticator_attachment: Option<AuthenticatorAttachment>,
@@ -978,7 +1000,7 @@ pub struct CreateCredentialChallengeWithCodeResponseAuthenticatorSelection {
     pub user_verification: ResidentKey,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialChallengeWithCodeResponseExcludeCredential {
     pub id: String,
 
@@ -986,7 +1008,7 @@ pub struct CreateCredentialChallengeWithCodeResponseExcludeCredential {
     pub exclude_credential_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialChallengeWithCodeResponsePubKeyCredParam {
     pub alg: f64,
 
@@ -994,14 +1016,14 @@ pub struct CreateCredentialChallengeWithCodeResponsePubKeyCredParam {
     pub pub_key_cred_param_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialChallengeWithCodeResponseRp {
     pub id: String,
 
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateCredentialChallengeWithCodeResponseUser {
     pub display_name: String,
@@ -1011,12 +1033,12 @@ pub struct CreateCredentialChallengeWithCodeResponseUser {
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialChallengeWithCodeRequest {
     pub body: CreateCredentialChallengeWithCodeRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateCredentialChallengeWithCodeRequestBody {
     pub code: String,
@@ -1024,40 +1046,41 @@ pub struct CreateCredentialChallengeWithCodeRequestBody {
     pub credential_kind: CredentialKindElement,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialCodeBody {
-    /// Code expiration, as an ISO-8601 datetime string or a unix timestamp
     pub expiration: Expiration,
 }
 
-/// Code expiration, as an ISO-8601 datetime string or a unix timestamp
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Expiration {
     Double(f64),
 
     String(String),
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialCodeResponse {
     pub code: String,
 
     pub expiration: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialCodeRequest {
     pub body: CreateCredentialCodeRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialCodeRequestBody {
     /// Code expiration, as an ISO-8601 datetime string or a unix timestamp
     pub expiration: Expiration,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateCredentialWithCodeResponse {
     pub credential_id: String,
@@ -1079,12 +1102,12 @@ pub struct CreateCredentialWithCodeResponse {
     pub relying_party_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialWithCodeRequest {
     pub body: CreateCredentialWithCodeBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateCredentialWithCodeBody {
     pub challenge_identifier: String,
@@ -1098,7 +1121,7 @@ pub struct CreateCredentialWithCodeBody {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateCredentialWithCodeBodyCredentialInfo {
     pub attestation_data: Option<String>,
@@ -1112,7 +1135,7 @@ pub struct CreateCredentialWithCodeBodyCredentialInfo {
     pub otp_code: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDelegatedRecoveryChallengeBody {
     pub credential_id: String,
@@ -1120,7 +1143,7 @@ pub struct CreateDelegatedRecoveryChallengeBody {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDelegatedRecoveryChallengeResponse {
     pub allowed_recovery_credentials:
@@ -1148,7 +1171,7 @@ pub struct CreateDelegatedRecoveryChallengeResponse {
     pub user: CreateDelegatedRecoveryChallengeResponseUser,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDelegatedRecoveryChallengeResponseAllowedRecoveryCredential {
     pub encrypted_recovery_key: String,
@@ -1156,7 +1179,7 @@ pub struct CreateDelegatedRecoveryChallengeResponseAllowedRecoveryCredential {
     pub id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDelegatedRecoveryChallengeResponseAuthenticatorSelection {
     pub authenticator_attachment: Option<AuthenticatorAttachment>,
@@ -1168,7 +1191,7 @@ pub struct CreateDelegatedRecoveryChallengeResponseAuthenticatorSelection {
     pub user_verification: ResidentKey,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateDelegatedRecoveryChallengeResponseExcludeCredential {
     pub id: String,
 
@@ -1176,7 +1199,7 @@ pub struct CreateDelegatedRecoveryChallengeResponseExcludeCredential {
     pub exclude_credential_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateDelegatedRecoveryChallengeResponsePubKeyCredParam {
     pub alg: f64,
 
@@ -1184,14 +1207,14 @@ pub struct CreateDelegatedRecoveryChallengeResponsePubKeyCredParam {
     pub pub_key_cred_param_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateDelegatedRecoveryChallengeResponseRp {
     pub id: String,
 
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDelegatedRecoveryChallengeResponseSupportedCredentialKinds {
     pub first_factor: Vec<CredentialKindElement>,
@@ -1199,7 +1222,7 @@ pub struct CreateDelegatedRecoveryChallengeResponseSupportedCredentialKinds {
     pub second_factor: Vec<CredentialKindElement>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDelegatedRecoveryChallengeResponseUser {
     pub display_name: String,
@@ -1209,12 +1232,12 @@ pub struct CreateDelegatedRecoveryChallengeResponseUser {
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateDelegatedRecoveryChallengeRequest {
     pub body: CreateDelegatedRecoveryChallengeRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDelegatedRecoveryChallengeRequestBody {
     pub credential_id: String,
@@ -1222,7 +1245,7 @@ pub struct CreateDelegatedRecoveryChallengeRequestBody {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDelegatedRegistrationChallengeBody {
     pub email: String,
@@ -1232,7 +1255,7 @@ pub struct CreateDelegatedRegistrationChallengeBody {
     pub kind: UserInfoKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDelegatedRegistrationChallengeResponse {
     pub attestation: Attestation,
@@ -1257,7 +1280,7 @@ pub struct CreateDelegatedRegistrationChallengeResponse {
     pub user: CreateDelegatedRegistrationChallengeResponseUser,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDelegatedRegistrationChallengeResponseAuthenticatorSelection {
     pub authenticator_attachment: Option<AuthenticatorAttachment>,
@@ -1269,7 +1292,7 @@ pub struct CreateDelegatedRegistrationChallengeResponseAuthenticatorSelection {
     pub user_verification: ResidentKey,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateDelegatedRegistrationChallengeResponseExcludeCredential {
     pub id: String,
 
@@ -1277,7 +1300,7 @@ pub struct CreateDelegatedRegistrationChallengeResponseExcludeCredential {
     pub exclude_credential_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateDelegatedRegistrationChallengeResponsePubKeyCredParam {
     pub alg: f64,
 
@@ -1285,14 +1308,14 @@ pub struct CreateDelegatedRegistrationChallengeResponsePubKeyCredParam {
     pub pub_key_cred_param_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateDelegatedRegistrationChallengeResponseRp {
     pub id: String,
 
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDelegatedRegistrationChallengeResponseSupportedCredentialKinds {
     pub first_factor: Vec<CredentialKindElement>,
@@ -1300,7 +1323,7 @@ pub struct CreateDelegatedRegistrationChallengeResponseSupportedCredentialKinds 
     pub second_factor: Vec<CredentialKindElement>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDelegatedRegistrationChallengeResponseUser {
     pub display_name: String,
@@ -1310,12 +1333,12 @@ pub struct CreateDelegatedRegistrationChallengeResponseUser {
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateDelegatedRegistrationChallengeRequest {
     pub body: CreateDelegatedRegistrationChallengeRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDelegatedRegistrationChallengeRequestBody {
     pub email: String,
@@ -1325,7 +1348,7 @@ pub struct CreateDelegatedRegistrationChallengeRequestBody {
     pub kind: UserInfoKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateLoginChallengeBody {
     pub login_code: Option<String>,
@@ -1335,7 +1358,7 @@ pub struct CreateLoginChallengeBody {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateLoginChallengeResponse {
     pub allow_credentials: CreateLoginChallengeResponseAllowCredentials,
@@ -1355,7 +1378,7 @@ pub struct CreateLoginChallengeResponse {
     pub user_verification: ResidentKey,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateLoginChallengeResponseAllowCredentials {
     pub key: Vec<PurpleKey>,
@@ -1365,7 +1388,7 @@ pub struct CreateLoginChallengeResponseAllowCredentials {
     pub webauthn: Vec<PurpleWebauthn>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleKey {
     pub id: String,
 
@@ -1373,7 +1396,7 @@ pub struct PurpleKey {
     pub key_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurplePasswordProtectedKey {
     pub encrypted_private_key: String,
@@ -1384,7 +1407,7 @@ pub struct PurplePasswordProtectedKey {
     pub password_protected_key_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PurpleWebauthn {
     pub id: String,
 
@@ -1392,14 +1415,14 @@ pub struct PurpleWebauthn {
     pub webauthn_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateLoginChallengeResponseRp {
     pub id: String,
 
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateLoginChallengeResponseSupportedCredentialKind {
     pub factor: Factor,
@@ -1409,7 +1432,7 @@ pub struct CreateLoginChallengeResponseSupportedCredentialKind {
     pub requires_second_factor: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Factor {
     Either,
@@ -1417,14 +1440,17 @@ pub enum Factor {
     First,
 
     Second,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateLoginChallengeRequest {
     pub body: CreateLoginChallengeRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateLoginChallengeRequestBody {
     pub login_code: Option<String>,
@@ -1434,7 +1460,7 @@ pub struct CreateLoginChallengeRequestBody {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreatePersonalAccessTokenBody {
     pub days_valid: Option<f64>,
@@ -1450,7 +1476,7 @@ pub struct CreatePersonalAccessTokenBody {
     pub seconds_valid: Option<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreatePersonalAccessTokenResponse {
     pub access_token: String,
@@ -1478,7 +1504,7 @@ pub struct CreatePersonalAccessTokenResponse {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreatePersonalAccessTokenResponsePermissionAssignment {
     pub assignment_id: String,
@@ -1490,12 +1516,12 @@ pub struct CreatePersonalAccessTokenResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreatePersonalAccessTokenRequest {
     pub body: CreatePersonalAccessTokenRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreatePersonalAccessTokenRequestBody {
     pub days_valid: Option<f64>,
@@ -1511,7 +1537,7 @@ pub struct CreatePersonalAccessTokenRequestBody {
     pub seconds_valid: Option<f64>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateRecoveryChallengeBody {
     pub credential_id: String,
@@ -1523,7 +1549,7 @@ pub struct CreateRecoveryChallengeBody {
     pub verification_code: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateRecoveryChallengeResponse {
     pub allowed_recovery_credentials: Vec<CreateRecoveryChallengeResponseAllowedRecoveryCredential>,
@@ -1549,7 +1575,7 @@ pub struct CreateRecoveryChallengeResponse {
     pub user: CreateRecoveryChallengeResponseUser,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateRecoveryChallengeResponseAllowedRecoveryCredential {
     pub encrypted_recovery_key: String,
@@ -1557,7 +1583,7 @@ pub struct CreateRecoveryChallengeResponseAllowedRecoveryCredential {
     pub id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateRecoveryChallengeResponseAuthenticatorSelection {
     pub authenticator_attachment: Option<AuthenticatorAttachment>,
@@ -1569,7 +1595,7 @@ pub struct CreateRecoveryChallengeResponseAuthenticatorSelection {
     pub user_verification: ResidentKey,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateRecoveryChallengeResponseExcludeCredential {
     pub id: String,
 
@@ -1577,7 +1603,7 @@ pub struct CreateRecoveryChallengeResponseExcludeCredential {
     pub exclude_credential_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateRecoveryChallengeResponsePubKeyCredParam {
     pub alg: f64,
 
@@ -1585,14 +1611,14 @@ pub struct CreateRecoveryChallengeResponsePubKeyCredParam {
     pub pub_key_cred_param_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateRecoveryChallengeResponseRp {
     pub id: String,
 
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateRecoveryChallengeResponseSupportedCredentialKinds {
     pub first_factor: Vec<CredentialKindElement>,
@@ -1600,7 +1626,7 @@ pub struct CreateRecoveryChallengeResponseSupportedCredentialKinds {
     pub second_factor: Vec<CredentialKindElement>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateRecoveryChallengeResponseUser {
     pub display_name: String,
@@ -1610,12 +1636,12 @@ pub struct CreateRecoveryChallengeResponseUser {
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateRecoveryChallengeRequest {
     pub body: CreateRecoveryChallengeRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateRecoveryChallengeRequestBody {
     pub credential_id: String,
@@ -1627,7 +1653,7 @@ pub struct CreateRecoveryChallengeRequestBody {
     pub verification_code: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateRegistrationChallengeBody {
     pub org_id: String,
@@ -1637,7 +1663,7 @@ pub struct CreateRegistrationChallengeBody {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateRegistrationChallengeResponse {
     pub attestation: Attestation,
@@ -1661,7 +1687,7 @@ pub struct CreateRegistrationChallengeResponse {
     pub user: CreateRegistrationChallengeResponseUser,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateRegistrationChallengeResponseAuthenticatorSelection {
     pub authenticator_attachment: Option<AuthenticatorAttachment>,
@@ -1673,7 +1699,7 @@ pub struct CreateRegistrationChallengeResponseAuthenticatorSelection {
     pub user_verification: ResidentKey,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateRegistrationChallengeResponseExcludeCredential {
     pub id: String,
 
@@ -1681,7 +1707,7 @@ pub struct CreateRegistrationChallengeResponseExcludeCredential {
     pub exclude_credential_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateRegistrationChallengeResponsePubKeyCredParam {
     pub alg: f64,
 
@@ -1689,14 +1715,14 @@ pub struct CreateRegistrationChallengeResponsePubKeyCredParam {
     pub pub_key_cred_param_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateRegistrationChallengeResponseRp {
     pub id: String,
 
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateRegistrationChallengeResponseSupportedCredentialKinds {
     pub first_factor: Vec<CredentialKindElement>,
@@ -1704,7 +1730,7 @@ pub struct CreateRegistrationChallengeResponseSupportedCredentialKinds {
     pub second_factor: Vec<CredentialKindElement>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateRegistrationChallengeResponseUser {
     pub display_name: String,
@@ -1714,12 +1740,12 @@ pub struct CreateRegistrationChallengeResponseUser {
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateRegistrationChallengeRequest {
     pub body: CreateRegistrationChallengeRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateRegistrationChallengeRequestBody {
     pub org_id: String,
@@ -1729,7 +1755,7 @@ pub struct CreateRegistrationChallengeRequestBody {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateServiceAccountBody {
     pub days_valid: Option<f64>,
@@ -1743,7 +1769,7 @@ pub struct CreateServiceAccountBody {
     pub public_key: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateServiceAccountResponse {
     pub access_tokens: Vec<CreateServiceAccountResponseAccessToken>,
@@ -1751,7 +1777,7 @@ pub struct CreateServiceAccountResponse {
     pub user_info: CreateServiceAccountResponseUserInfo,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateServiceAccountResponseAccessToken {
     pub access_token: Option<String>,
@@ -1779,7 +1805,7 @@ pub struct CreateServiceAccountResponseAccessToken {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AmbitiousPermissionAssignment {
     pub assignment_id: String,
@@ -1791,7 +1817,7 @@ pub struct AmbitiousPermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateServiceAccountResponseUserInfo {
     pub credential_uuid: String,
@@ -1817,7 +1843,7 @@ pub struct CreateServiceAccountResponseUserInfo {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CunningPermissionAssignment {
     pub assignment_id: String,
@@ -1829,12 +1855,12 @@ pub struct CunningPermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateServiceAccountRequest {
     pub body: CreateServiceAccountRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateServiceAccountRequestBody {
     pub days_valid: Option<f64>,
@@ -1848,7 +1874,7 @@ pub struct CreateServiceAccountRequestBody {
     pub public_key: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateSocialRegistrationChallengeBody {
     pub id_token: String,
@@ -1856,12 +1882,15 @@ pub struct CreateSocialRegistrationChallengeBody {
     pub social_login_provider_kind: SocialLoginProviderKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum SocialLoginProviderKind {
     Oidc,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateSocialRegistrationChallengeResponse {
     pub attestation: Attestation,
@@ -1886,7 +1915,7 @@ pub struct CreateSocialRegistrationChallengeResponse {
     pub user: CreateSocialRegistrationChallengeResponseUser,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateSocialRegistrationChallengeResponseAuthenticatorSelection {
     pub authenticator_attachment: Option<AuthenticatorAttachment>,
@@ -1898,7 +1927,7 @@ pub struct CreateSocialRegistrationChallengeResponseAuthenticatorSelection {
     pub user_verification: ResidentKey,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateSocialRegistrationChallengeResponseExcludeCredential {
     pub id: String,
 
@@ -1906,7 +1935,7 @@ pub struct CreateSocialRegistrationChallengeResponseExcludeCredential {
     pub exclude_credential_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateSocialRegistrationChallengeResponsePubKeyCredParam {
     pub alg: f64,
 
@@ -1914,14 +1943,14 @@ pub struct CreateSocialRegistrationChallengeResponsePubKeyCredParam {
     pub pub_key_cred_param_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateSocialRegistrationChallengeResponseRp {
     pub id: String,
 
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateSocialRegistrationChallengeResponseSupportedCredentialKinds {
     pub first_factor: Vec<CredentialKindElement>,
@@ -1929,7 +1958,7 @@ pub struct CreateSocialRegistrationChallengeResponseSupportedCredentialKinds {
     pub second_factor: Vec<CredentialKindElement>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateSocialRegistrationChallengeResponseUser {
     pub display_name: String,
@@ -1939,12 +1968,12 @@ pub struct CreateSocialRegistrationChallengeResponseUser {
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateSocialRegistrationChallengeRequest {
     pub body: CreateSocialRegistrationChallengeRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateSocialRegistrationChallengeRequestBody {
     pub id_token: String,
@@ -1952,7 +1981,7 @@ pub struct CreateSocialRegistrationChallengeRequestBody {
     pub social_login_provider_kind: SocialLoginProviderKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateUserBody {
     pub email: String,
@@ -1964,16 +1993,19 @@ pub struct CreateUserBody {
     pub public_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum CreateUserBodyKind {
     #[serde(rename = "CustomerEmployee")]
     CustomerEmployee,
 
     #[serde(rename = "DfnsStaff")]
     DfnsStaff,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateUserResponse {
     pub credential_uuid: String,
@@ -1999,7 +2031,7 @@ pub struct CreateUserResponse {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateUserResponsePermissionAssignment {
     pub assignment_id: String,
@@ -2011,12 +2043,12 @@ pub struct CreateUserResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateUserRequest {
     pub body: CreateUserRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateUserRequestBody {
     pub email: String,
@@ -2028,7 +2060,7 @@ pub struct CreateUserRequestBody {
     pub public_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateUserActionChallengeBody {
     pub user_action_http_method: String,
@@ -2040,14 +2072,17 @@ pub struct CreateUserActionChallengeBody {
     pub user_action_server_kind: Option<UserActionServerKind>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum UserActionServerKind {
     Api,
 
     Staff,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateUserActionChallengeResponse {
     pub allow_credentials: CreateUserActionChallengeResponseAllowCredentials,
@@ -2067,7 +2102,7 @@ pub struct CreateUserActionChallengeResponse {
     pub user_verification: ResidentKey,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateUserActionChallengeResponseAllowCredentials {
     pub key: Vec<FluffyKey>,
@@ -2077,7 +2112,7 @@ pub struct CreateUserActionChallengeResponseAllowCredentials {
     pub webauthn: Vec<FluffyWebauthn>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyKey {
     pub id: String,
 
@@ -2085,7 +2120,7 @@ pub struct FluffyKey {
     pub key_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyPasswordProtectedKey {
     pub encrypted_private_key: String,
@@ -2096,7 +2131,7 @@ pub struct FluffyPasswordProtectedKey {
     pub password_protected_key_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FluffyWebauthn {
     pub id: String,
 
@@ -2104,14 +2139,14 @@ pub struct FluffyWebauthn {
     pub webauthn_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateUserActionChallengeResponseRp {
     pub id: String,
 
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateUserActionChallengeResponseSupportedCredentialKind {
     pub factor: Factor,
@@ -2121,12 +2156,12 @@ pub struct CreateUserActionChallengeResponseSupportedCredentialKind {
     pub requires_second_factor: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateUserActionChallengeRequest {
     pub body: CreateUserActionChallengeRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateUserActionChallengeRequestBody {
     pub user_action_http_method: String,
@@ -2138,7 +2173,7 @@ pub struct CreateUserActionChallengeRequestBody {
     pub user_action_server_kind: Option<UserActionServerKind>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateUserActionSignatureBody {
     pub challenge_identifier: String,
@@ -2148,7 +2183,7 @@ pub struct CreateUserActionSignatureBody {
     pub second_factor: Option<PurpleSecondFactor>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateUserActionSignatureBodyFirstFactor {
     pub credential_assertion: Option<PurpleCredentialAssertion>,
@@ -2158,7 +2193,7 @@ pub struct CreateUserActionSignatureBodyFirstFactor {
     pub password: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleCredentialAssertion {
     pub algorithm: Option<String>,
@@ -2174,7 +2209,7 @@ pub struct PurpleCredentialAssertion {
     pub user_handle: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum FirstFactorKind {
     Fido2,
 
@@ -2184,9 +2219,12 @@ pub enum FirstFactorKind {
 
     #[serde(rename = "PasswordProtectedKey")]
     PasswordProtectedKey,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleSecondFactor {
     pub credential_assertion: Option<FluffyCredentialAssertion>,
@@ -2196,7 +2234,7 @@ pub struct PurpleSecondFactor {
     pub otp_code: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyCredentialAssertion {
     pub algorithm: Option<String>,
@@ -2212,7 +2250,7 @@ pub struct FluffyCredentialAssertion {
     pub user_handle: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum SecondFactorKind {
     Fido2,
 
@@ -2222,20 +2260,23 @@ pub enum SecondFactorKind {
     PasswordProtectedKey,
 
     Totp,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateUserActionSignatureResponse {
     pub user_action: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateUserActionSignatureRequest {
     pub body: CreateUserActionSignatureRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateUserActionSignatureRequestBody {
     pub challenge_identifier: String,
@@ -2245,7 +2286,7 @@ pub struct CreateUserActionSignatureRequestBody {
     pub second_factor: Option<FluffySecondFactor>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleFirstFactor {
     pub credential_assertion: Option<TentacledCredentialAssertion>,
@@ -2255,7 +2296,7 @@ pub struct PurpleFirstFactor {
     pub password: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledCredentialAssertion {
     pub algorithm: Option<String>,
@@ -2271,7 +2312,7 @@ pub struct TentacledCredentialAssertion {
     pub user_handle: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffySecondFactor {
     pub credential_assertion: Option<StickyCredentialAssertion>,
@@ -2281,7 +2322,7 @@ pub struct FluffySecondFactor {
     pub otp_code: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyCredentialAssertion {
     pub algorithm: Option<String>,
@@ -2297,13 +2338,13 @@ pub struct StickyCredentialAssertion {
     pub user_handle: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateApplicationParams {
     pub app_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateApplicationResponse {
     pub access_tokens: Vec<DeactivateApplicationResponseAccessToken>,
@@ -2325,7 +2366,7 @@ pub struct DeactivateApplicationResponse {
     pub permission_assignments: Vec<DeactivateApplicationResponsePermissionAssignment>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateApplicationResponseAccessToken {
     pub access_token: Option<String>,
@@ -2353,7 +2394,7 @@ pub struct DeactivateApplicationResponseAccessToken {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MagentaPermissionAssignment {
     pub assignment_id: String,
@@ -2365,7 +2406,7 @@ pub struct MagentaPermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateApplicationResponsePermissionAssignment {
     pub assignment_id: String,
@@ -2377,41 +2418,41 @@ pub struct DeactivateApplicationResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateApplicationRequest {
     pub app_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateCredentialBody {
     pub credential_uuid: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct DeactivateCredentialResponse {
     pub message: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct DeactivateCredentialRequest {
     pub body: DeactivateCredentialRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateCredentialRequestBody {
     pub credential_uuid: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivatePersonalAccessTokenParams {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivatePersonalAccessTokenResponse {
     pub access_token: Option<String>,
@@ -2439,7 +2480,7 @@ pub struct DeactivatePersonalAccessTokenResponse {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivatePersonalAccessTokenResponsePermissionAssignment {
     pub assignment_id: String,
@@ -2451,19 +2492,19 @@ pub struct DeactivatePersonalAccessTokenResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivatePersonalAccessTokenRequest {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateServiceAccountParams {
     pub service_account_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateServiceAccountResponse {
     pub access_tokens: Vec<DeactivateServiceAccountResponseAccessToken>,
@@ -2471,7 +2512,7 @@ pub struct DeactivateServiceAccountResponse {
     pub user_info: DeactivateServiceAccountResponseUserInfo,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateServiceAccountResponseAccessToken {
     pub access_token: Option<String>,
@@ -2499,7 +2540,7 @@ pub struct DeactivateServiceAccountResponseAccessToken {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FriskyPermissionAssignment {
     pub assignment_id: String,
@@ -2511,7 +2552,7 @@ pub struct FriskyPermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateServiceAccountResponseUserInfo {
     pub credential_uuid: String,
@@ -2537,7 +2578,7 @@ pub struct DeactivateServiceAccountResponseUserInfo {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MischievousPermissionAssignment {
     pub assignment_id: String,
@@ -2549,19 +2590,19 @@ pub struct MischievousPermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateServiceAccountRequest {
     pub service_account_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateUserParams {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateUserResponse {
     pub credential_uuid: String,
@@ -2587,7 +2628,7 @@ pub struct DeactivateUserResponse {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateUserResponsePermissionAssignment {
     pub assignment_id: String,
@@ -2599,39 +2640,39 @@ pub struct DeactivateUserResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeactivateUserRequest {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct DelegatedLoginBody {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct DelegatedLoginResponse {
     pub token: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct DelegatedLoginRequest {
     pub body: DelegatedLoginRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct DelegatedLoginRequestBody {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetApplicationParams {
     pub app_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetApplicationResponse {
     pub access_tokens: Vec<GetApplicationResponseAccessToken>,
@@ -2653,7 +2694,7 @@ pub struct GetApplicationResponse {
     pub permission_assignments: Vec<GetApplicationResponsePermissionAssignment>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetApplicationResponseAccessToken {
     pub access_token: Option<String>,
@@ -2681,7 +2722,7 @@ pub struct GetApplicationResponseAccessToken {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BraggadociousPermissionAssignment {
     pub assignment_id: String,
@@ -2693,7 +2734,7 @@ pub struct BraggadociousPermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetApplicationResponsePermissionAssignment {
     pub assignment_id: String,
@@ -2705,19 +2746,19 @@ pub struct GetApplicationResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetApplicationRequest {
     pub app_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPersonalAccessTokenParams {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPersonalAccessTokenResponse {
     pub access_token: Option<String>,
@@ -2745,7 +2786,7 @@ pub struct GetPersonalAccessTokenResponse {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPersonalAccessTokenResponsePermissionAssignment {
     pub assignment_id: String,
@@ -2757,19 +2798,19 @@ pub struct GetPersonalAccessTokenResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPersonalAccessTokenRequest {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetServiceAccountParams {
     pub service_account_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetServiceAccountResponse {
     pub access_tokens: Vec<GetServiceAccountResponseAccessToken>,
@@ -2777,7 +2818,7 @@ pub struct GetServiceAccountResponse {
     pub user_info: GetServiceAccountResponseUserInfo,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetServiceAccountResponseAccessToken {
     pub access_token: Option<String>,
@@ -2805,7 +2846,7 @@ pub struct GetServiceAccountResponseAccessToken {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PermissionAssignment1 {
     pub assignment_id: String,
@@ -2817,7 +2858,7 @@ pub struct PermissionAssignment1 {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetServiceAccountResponseUserInfo {
     pub credential_uuid: String,
@@ -2843,7 +2884,7 @@ pub struct GetServiceAccountResponseUserInfo {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PermissionAssignment2 {
     pub assignment_id: String,
@@ -2855,19 +2896,19 @@ pub struct PermissionAssignment2 {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetServiceAccountRequest {
     pub service_account_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetUserParams {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetUserResponse {
     pub credential_uuid: String,
@@ -2893,7 +2934,7 @@ pub struct GetUserResponse {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetUserResponsePermissionAssignment {
     pub assignment_id: String,
@@ -2905,18 +2946,18 @@ pub struct GetUserResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetUserRequest {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ListApplicationsResponse {
     pub items: Vec<ListApplicationsResponseItem>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListApplicationsResponseItem {
     pub access_tokens: Vec<PurpleAccessToken>,
@@ -2938,7 +2979,7 @@ pub struct ListApplicationsResponseItem {
     pub permission_assignments: Vec<PermissionAssignment4>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleAccessToken {
     pub access_token: Option<String>,
@@ -2966,7 +3007,7 @@ pub struct PurpleAccessToken {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PermissionAssignment3 {
     pub assignment_id: String,
@@ -2978,7 +3019,7 @@ pub struct PermissionAssignment3 {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PermissionAssignment4 {
     pub assignment_id: String,
@@ -2990,12 +3031,12 @@ pub struct PermissionAssignment4 {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ListCredentialsResponse {
     pub items: Vec<ListCredentialsResponseItem>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListCredentialsResponseItem {
     pub credential_id: String,
@@ -3017,12 +3058,12 @@ pub struct ListCredentialsResponseItem {
     pub relying_party_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ListPersonalAccessTokensResponse {
     pub items: Vec<ListPersonalAccessTokensResponseItem>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListPersonalAccessTokensResponseItem {
     pub access_token: Option<String>,
@@ -3050,7 +3091,7 @@ pub struct ListPersonalAccessTokensResponseItem {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PermissionAssignment5 {
     pub assignment_id: String,
@@ -3062,12 +3103,12 @@ pub struct PermissionAssignment5 {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ListServiceAccountsResponse {
     pub items: Vec<ListServiceAccountsResponseItem>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListServiceAccountsResponseItem {
     pub access_tokens: Vec<FluffyAccessToken>,
@@ -3075,7 +3116,7 @@ pub struct ListServiceAccountsResponseItem {
     pub user_info: ItemUserInfo,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyAccessToken {
     pub access_token: Option<String>,
@@ -3103,7 +3144,7 @@ pub struct FluffyAccessToken {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PermissionAssignment6 {
     pub assignment_id: String,
@@ -3115,7 +3156,7 @@ pub struct PermissionAssignment6 {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ItemUserInfo {
     pub credential_uuid: String,
@@ -3141,7 +3182,7 @@ pub struct ItemUserInfo {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PermissionAssignment7 {
     pub assignment_id: String,
@@ -3153,7 +3194,7 @@ pub struct PermissionAssignment7 {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListUsersQuery {
     pub kind: Option<ListUsersQueryKind>,
@@ -3163,16 +3204,19 @@ pub struct ListUsersQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ListUsersQueryKind {
     #[serde(rename = "CustomerEmployee")]
     CustomerEmployee,
 
     #[serde(rename = "EndUser")]
     EndUser,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListUsersResponse {
     pub items: Vec<ListUsersResponseItem>,
@@ -3180,7 +3224,7 @@ pub struct ListUsersResponse {
     pub next_page_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListUsersResponseItem {
     pub credential_uuid: String,
@@ -3206,7 +3250,7 @@ pub struct ListUsersResponseItem {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PermissionAssignment8 {
     pub assignment_id: String,
@@ -3218,12 +3262,12 @@ pub struct PermissionAssignment8 {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ListUsersRequest {
     pub query: Option<Query>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Query {
     pub kind: Option<ListUsersQueryKind>,
@@ -3233,7 +3277,7 @@ pub struct Query {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LoginBody {
     pub challenge_identifier: String,
@@ -3243,7 +3287,7 @@ pub struct LoginBody {
     pub second_factor: Option<TentacledSecondFactor>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LoginBodyFirstFactor {
     pub credential_assertion: Option<IndigoCredentialAssertion>,
@@ -3253,7 +3297,7 @@ pub struct LoginBodyFirstFactor {
     pub password: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoCredentialAssertion {
     pub algorithm: Option<String>,
@@ -3269,7 +3313,7 @@ pub struct IndigoCredentialAssertion {
     pub user_handle: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledSecondFactor {
     pub credential_assertion: Option<IndecentCredentialAssertion>,
@@ -3279,7 +3323,7 @@ pub struct TentacledSecondFactor {
     pub otp_code: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndecentCredentialAssertion {
     pub algorithm: Option<String>,
@@ -3295,17 +3339,17 @@ pub struct IndecentCredentialAssertion {
     pub user_handle: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct LoginResponse {
     pub token: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct LoginRequest {
     pub body: LoginRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LoginRequestBody {
     pub challenge_identifier: String,
@@ -3315,7 +3359,7 @@ pub struct LoginRequestBody {
     pub second_factor: Option<StickySecondFactor>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyFirstFactor {
     pub credential_assertion: Option<HilariousCredentialAssertion>,
@@ -3325,7 +3369,7 @@ pub struct FluffyFirstFactor {
     pub password: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HilariousCredentialAssertion {
     pub algorithm: Option<String>,
@@ -3341,7 +3385,7 @@ pub struct HilariousCredentialAssertion {
     pub user_handle: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickySecondFactor {
     pub credential_assertion: Option<AmbitiousCredentialAssertion>,
@@ -3351,7 +3395,7 @@ pub struct StickySecondFactor {
     pub otp_code: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AmbitiousCredentialAssertion {
     pub algorithm: Option<String>,
@@ -3367,23 +3411,23 @@ pub struct AmbitiousCredentialAssertion {
     pub user_handle: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct LogoutResponse {
     pub message: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct LogoutRequest {
     pub body: LogoutBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LogoutBody {
     pub all_sessions: Option<bool>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecoverBody {
     pub new_credentials: RecoverBodyNewCredentials,
@@ -3391,7 +3435,7 @@ pub struct RecoverBody {
     pub recovery: RecoverBodyRecovery,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecoverBodyNewCredentials {
     pub first_factor_credential: PurpleFirstFactorCredential,
@@ -3401,7 +3445,7 @@ pub struct RecoverBodyNewCredentials {
     pub second_factor_credential: Option<PurpleSecondFactorCredential>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleFirstFactorCredential {
     pub credential_info: PurpleCredentialInfo,
@@ -3413,7 +3457,7 @@ pub struct PurpleFirstFactorCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleCredentialInfo {
     pub attestation_data: Option<String>,
@@ -3425,7 +3469,7 @@ pub struct PurpleCredentialInfo {
     pub password: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleRecoveryCredential {
     pub credential_info: FluffyCredentialInfo,
@@ -3437,7 +3481,7 @@ pub struct PurpleRecoveryCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyCredentialInfo {
     pub attestation_data: String,
@@ -3447,13 +3491,16 @@ pub struct FluffyCredentialInfo {
     pub cred_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum RecoveryCredentialKind {
     #[serde(rename = "RecoveryKey")]
     RecoveryKey,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleSecondFactorCredential {
     pub credential_info: TentacledCredentialInfo,
@@ -3465,7 +3512,7 @@ pub struct PurpleSecondFactorCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledCredentialInfo {
     pub attestation_data: Option<String>,
@@ -3477,7 +3524,7 @@ pub struct TentacledCredentialInfo {
     pub otp_code: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecoverBodyRecovery {
     pub credential_assertion: CunningCredentialAssertion,
@@ -3485,7 +3532,7 @@ pub struct RecoverBodyRecovery {
     pub kind: RecoveryCredentialKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CunningCredentialAssertion {
     pub algorithm: Option<String>,
@@ -3497,14 +3544,14 @@ pub struct CunningCredentialAssertion {
     pub signature: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RecoverResponse {
     pub credential: RecoverResponseCredential,
 
     pub user: RecoverResponseUser,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RecoverResponseCredential {
     pub kind: CredentialKindElement,
 
@@ -3513,7 +3560,7 @@ pub struct RecoverResponseCredential {
     pub uuid: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecoverResponseUser {
     pub id: String,
@@ -3523,12 +3570,12 @@ pub struct RecoverResponseUser {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RecoverRequest {
     pub body: RecoverRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecoverRequestBody {
     pub new_credentials: BodyNewCredentials,
@@ -3536,7 +3583,7 @@ pub struct RecoverRequestBody {
     pub recovery: BodyRecovery,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BodyNewCredentials {
     pub first_factor_credential: FluffyFirstFactorCredential,
@@ -3546,7 +3593,7 @@ pub struct BodyNewCredentials {
     pub second_factor_credential: Option<FluffySecondFactorCredential>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyFirstFactorCredential {
     pub credential_info: StickyCredentialInfo,
@@ -3558,7 +3605,7 @@ pub struct FluffyFirstFactorCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyCredentialInfo {
     pub attestation_data: Option<String>,
@@ -3570,7 +3617,7 @@ pub struct StickyCredentialInfo {
     pub password: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyRecoveryCredential {
     pub credential_info: IndigoCredentialInfo,
@@ -3582,7 +3629,7 @@ pub struct FluffyRecoveryCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoCredentialInfo {
     pub attestation_data: String,
@@ -3592,7 +3639,7 @@ pub struct IndigoCredentialInfo {
     pub cred_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffySecondFactorCredential {
     pub credential_info: IndecentCredentialInfo,
@@ -3604,7 +3651,7 @@ pub struct FluffySecondFactorCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndecentCredentialInfo {
     pub attestation_data: Option<String>,
@@ -3616,7 +3663,7 @@ pub struct IndecentCredentialInfo {
     pub otp_code: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BodyRecovery {
     pub credential_assertion: MagentaCredentialAssertion,
@@ -3624,7 +3671,7 @@ pub struct BodyRecovery {
     pub kind: RecoveryCredentialKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MagentaCredentialAssertion {
     pub algorithm: Option<String>,
@@ -3636,7 +3683,7 @@ pub struct MagentaCredentialAssertion {
     pub signature: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecreateDelegatedRegistrationChallengeBody {
     pub email: String,
@@ -3646,7 +3693,7 @@ pub struct RecreateDelegatedRegistrationChallengeBody {
     pub kind: UserInfoKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecreateDelegatedRegistrationChallengeResponse {
     pub attestation: Attestation,
@@ -3672,7 +3719,7 @@ pub struct RecreateDelegatedRegistrationChallengeResponse {
     pub user: RecreateDelegatedRegistrationChallengeResponseUser,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecreateDelegatedRegistrationChallengeResponseAuthenticatorSelection {
     pub authenticator_attachment: Option<AuthenticatorAttachment>,
@@ -3684,7 +3731,7 @@ pub struct RecreateDelegatedRegistrationChallengeResponseAuthenticatorSelection 
     pub user_verification: ResidentKey,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RecreateDelegatedRegistrationChallengeResponseExcludeCredential {
     pub id: String,
 
@@ -3692,7 +3739,7 @@ pub struct RecreateDelegatedRegistrationChallengeResponseExcludeCredential {
     pub exclude_credential_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RecreateDelegatedRegistrationChallengeResponsePubKeyCredParam {
     pub alg: f64,
 
@@ -3700,14 +3747,14 @@ pub struct RecreateDelegatedRegistrationChallengeResponsePubKeyCredParam {
     pub pub_key_cred_param_type: Type,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RecreateDelegatedRegistrationChallengeResponseRp {
     pub id: String,
 
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecreateDelegatedRegistrationChallengeResponseSupportedCredentialKinds {
     pub first_factor: Vec<CredentialKindElement>,
@@ -3715,7 +3762,7 @@ pub struct RecreateDelegatedRegistrationChallengeResponseSupportedCredentialKind
     pub second_factor: Vec<CredentialKindElement>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecreateDelegatedRegistrationChallengeResponseUser {
     pub display_name: String,
@@ -3725,12 +3772,12 @@ pub struct RecreateDelegatedRegistrationChallengeResponseUser {
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RecreateDelegatedRegistrationChallengeRequest {
     pub body: RecreateDelegatedRegistrationChallengeRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecreateDelegatedRegistrationChallengeRequestBody {
     pub email: String,
@@ -3740,7 +3787,7 @@ pub struct RecreateDelegatedRegistrationChallengeRequestBody {
     pub kind: UserInfoKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RegisterBody {
     pub first_factor_credential: RegisterBodyFirstFactorCredential,
@@ -3750,7 +3797,7 @@ pub struct RegisterBody {
     pub second_factor_credential: Option<TentacledSecondFactorCredential>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RegisterBodyFirstFactorCredential {
     pub credential_info: HilariousCredentialInfo,
@@ -3762,7 +3809,7 @@ pub struct RegisterBodyFirstFactorCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HilariousCredentialInfo {
     pub attestation_data: Option<String>,
@@ -3774,7 +3821,7 @@ pub struct HilariousCredentialInfo {
     pub password: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RegisterBodyRecoveryCredential {
     pub credential_info: AmbitiousCredentialInfo,
@@ -3786,7 +3833,7 @@ pub struct RegisterBodyRecoveryCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AmbitiousCredentialInfo {
     pub attestation_data: String,
@@ -3796,7 +3843,7 @@ pub struct AmbitiousCredentialInfo {
     pub cred_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledSecondFactorCredential {
     pub credential_info: CunningCredentialInfo,
@@ -3808,7 +3855,7 @@ pub struct TentacledSecondFactorCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CunningCredentialInfo {
     pub attestation_data: Option<String>,
@@ -3820,14 +3867,14 @@ pub struct CunningCredentialInfo {
     pub otp_code: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RegisterResponse {
     pub credential: RegisterResponseCredential,
 
     pub user: RegisterResponseUser,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RegisterResponseCredential {
     pub kind: CredentialKindElement,
 
@@ -3836,7 +3883,7 @@ pub struct RegisterResponseCredential {
     pub uuid: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RegisterResponseUser {
     pub id: String,
@@ -3846,12 +3893,12 @@ pub struct RegisterResponseUser {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RegisterRequest {
     pub body: RegisterRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RegisterRequestBody {
     pub first_factor_credential: TentacledFirstFactorCredential,
@@ -3861,7 +3908,7 @@ pub struct RegisterRequestBody {
     pub second_factor_credential: Option<StickySecondFactorCredential>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledFirstFactorCredential {
     pub credential_info: MagentaCredentialInfo,
@@ -3873,7 +3920,7 @@ pub struct TentacledFirstFactorCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MagentaCredentialInfo {
     pub attestation_data: Option<String>,
@@ -3885,7 +3932,7 @@ pub struct MagentaCredentialInfo {
     pub password: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledRecoveryCredential {
     pub credential_info: FriskyCredentialInfo,
@@ -3897,7 +3944,7 @@ pub struct TentacledRecoveryCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FriskyCredentialInfo {
     pub attestation_data: String,
@@ -3907,7 +3954,7 @@ pub struct FriskyCredentialInfo {
     pub cred_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickySecondFactorCredential {
     pub credential_info: MischievousCredentialInfo,
@@ -3919,7 +3966,7 @@ pub struct StickySecondFactorCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MischievousCredentialInfo {
     pub attestation_data: Option<String>,
@@ -3931,7 +3978,7 @@ pub struct MischievousCredentialInfo {
     pub otp_code: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RegisterEndUserBody {
     pub first_factor_credential: RegisterEndUserBodyFirstFactorCredential,
@@ -3943,7 +3990,7 @@ pub struct RegisterEndUserBody {
     pub wallets: Vec<RegisterEndUserBodyWallet>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RegisterEndUserBodyFirstFactorCredential {
     pub credential_info: BraggadociousCredentialInfo,
@@ -3955,7 +4002,7 @@ pub struct RegisterEndUserBodyFirstFactorCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BraggadociousCredentialInfo {
     pub attestation_data: Option<String>,
@@ -3967,7 +4014,7 @@ pub struct BraggadociousCredentialInfo {
     pub password: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RegisterEndUserBodyRecoveryCredential {
     pub credential_info: CredentialInfo1,
@@ -3979,7 +4026,7 @@ pub struct RegisterEndUserBodyRecoveryCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CredentialInfo1 {
     pub attestation_data: String,
@@ -3989,7 +4036,7 @@ pub struct CredentialInfo1 {
     pub cred_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndigoSecondFactorCredential {
     pub credential_info: CredentialInfo2,
@@ -4001,7 +4048,7 @@ pub struct IndigoSecondFactorCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CredentialInfo2 {
     pub attestation_data: Option<String>,
@@ -4013,14 +4060,14 @@ pub struct CredentialInfo2 {
     pub otp_code: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RegisterEndUserBodyWallet {
     pub name: Option<String>,
 
     pub network: Network,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Network {
     Algorand,
 
@@ -4202,9 +4249,12 @@ pub enum Network {
 
     #[serde(rename = "XrpLedgerTestnet")]
     XrpLedgerTestnet,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RegisterEndUserResponse {
     pub authentication: Authentication,
 
@@ -4215,12 +4265,12 @@ pub struct RegisterEndUserResponse {
     pub wallets: Vec<RegisterEndUserResponseWallet>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Authentication {
     pub token: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RegisterEndUserResponseCredential {
     pub kind: CredentialKindElement,
 
@@ -4229,7 +4279,7 @@ pub struct RegisterEndUserResponseCredential {
     pub uuid: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RegisterEndUserResponseUser {
     pub id: String,
@@ -4239,7 +4289,7 @@ pub struct RegisterEndUserResponseUser {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RegisterEndUserResponseWallet {
     pub address: Option<String>,
@@ -4269,7 +4319,7 @@ pub struct RegisterEndUserResponseWallet {
     pub tags: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SigningKey {
     pub curve: Curve,
@@ -4279,7 +4329,7 @@ pub struct SigningKey {
     pub scheme: Scheme,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Curve {
     Ed25519,
@@ -4287,9 +4337,12 @@ pub enum Curve {
     Secp256K1,
 
     Stark,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Scheme {
     #[serde(rename = "ECDSA")]
     Ecdsa,
@@ -4298,21 +4351,27 @@ pub enum Scheme {
     EdDsa,
 
     Schnorr,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Status {
     Active,
 
     Archived,
+
+    #[default]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RegisterEndUserRequest {
     pub body: RegisterEndUserRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RegisterEndUserRequestBody {
     pub first_factor_credential: StickyFirstFactorCredential,
@@ -4324,7 +4383,7 @@ pub struct RegisterEndUserRequestBody {
     pub wallets: Vec<BodyWallet>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyFirstFactorCredential {
     pub credential_info: CredentialInfo3,
@@ -4336,7 +4395,7 @@ pub struct StickyFirstFactorCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CredentialInfo3 {
     pub attestation_data: Option<String>,
@@ -4348,7 +4407,7 @@ pub struct CredentialInfo3 {
     pub password: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyRecoveryCredential {
     pub credential_info: CredentialInfo4,
@@ -4360,7 +4419,7 @@ pub struct StickyRecoveryCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CredentialInfo4 {
     pub attestation_data: String,
@@ -4370,7 +4429,7 @@ pub struct CredentialInfo4 {
     pub cred_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndecentSecondFactorCredential {
     pub credential_info: CredentialInfo5,
@@ -4382,7 +4441,7 @@ pub struct IndecentSecondFactorCredential {
     pub encrypted_private_key: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CredentialInfo5 {
     pub attestation_data: Option<String>,
@@ -4394,14 +4453,14 @@ pub struct CredentialInfo5 {
     pub otp_code: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct BodyWallet {
     pub name: Option<String>,
 
     pub network: Network,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ResendRegistrationCodeBody {
     pub org_id: String,
@@ -4409,17 +4468,17 @@ pub struct ResendRegistrationCodeBody {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ResendRegistrationCodeResponse {
     pub message: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ResendRegistrationCodeRequest {
     pub body: ResendRegistrationCodeRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ResendRegistrationCodeRequestBody {
     pub org_id: String,
@@ -4427,7 +4486,7 @@ pub struct ResendRegistrationCodeRequestBody {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SendLoginCodeBody {
     pub org_id: String,
@@ -4435,17 +4494,17 @@ pub struct SendLoginCodeBody {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct SendLoginCodeResponse {
     pub message: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct SendLoginCodeRequest {
     pub body: SendLoginCodeRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SendLoginCodeRequestBody {
     pub org_id: String,
@@ -4453,7 +4512,7 @@ pub struct SendLoginCodeRequestBody {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SendRecoveryCodeBody {
     pub org_id: String,
@@ -4461,17 +4520,17 @@ pub struct SendRecoveryCodeBody {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct SendRecoveryCodeResponse {
     pub message: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct SendRecoveryCodeRequest {
     pub body: SendRecoveryCodeRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SendRecoveryCodeRequestBody {
     pub org_id: String,
@@ -4479,7 +4538,7 @@ pub struct SendRecoveryCodeRequestBody {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SocialLoginBody {
     pub id_token: String,
@@ -4487,17 +4546,17 @@ pub struct SocialLoginBody {
     pub social_login_provider_kind: SocialLoginProviderKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct SocialLoginResponse {
     pub token: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct SocialLoginRequest {
     pub body: SocialLoginRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SocialLoginRequestBody {
     pub id_token: String,
@@ -4505,7 +4564,7 @@ pub struct SocialLoginRequestBody {
     pub social_login_provider_kind: SocialLoginProviderKind,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateApplicationBody {
     pub external_id: Option<String>,
@@ -4513,13 +4572,13 @@ pub struct UpdateApplicationBody {
     pub name: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateApplicationParams {
     pub app_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateApplicationResponse {
     pub access_tokens: Vec<UpdateApplicationResponseAccessToken>,
@@ -4541,7 +4600,7 @@ pub struct UpdateApplicationResponse {
     pub permission_assignments: Vec<UpdateApplicationResponsePermissionAssignment>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateApplicationResponseAccessToken {
     pub access_token: Option<String>,
@@ -4569,7 +4628,7 @@ pub struct UpdateApplicationResponseAccessToken {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PermissionAssignment9 {
     pub assignment_id: String,
@@ -4581,7 +4640,7 @@ pub struct PermissionAssignment9 {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateApplicationResponsePermissionAssignment {
     pub assignment_id: String,
@@ -4593,7 +4652,7 @@ pub struct UpdateApplicationResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateApplicationRequest {
     pub app_id: String,
@@ -4601,7 +4660,7 @@ pub struct UpdateApplicationRequest {
     pub body: UpdateApplicationRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateApplicationRequestBody {
     pub external_id: Option<String>,
@@ -4609,7 +4668,7 @@ pub struct UpdateApplicationRequestBody {
     pub name: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePersonalAccessTokenBody {
     pub external_id: Option<String>,
@@ -4617,13 +4676,13 @@ pub struct UpdatePersonalAccessTokenBody {
     pub name: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePersonalAccessTokenParams {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePersonalAccessTokenResponse {
     pub access_token: Option<String>,
@@ -4651,7 +4710,7 @@ pub struct UpdatePersonalAccessTokenResponse {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePersonalAccessTokenResponsePermissionAssignment {
     pub assignment_id: String,
@@ -4663,7 +4722,7 @@ pub struct UpdatePersonalAccessTokenResponsePermissionAssignment {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePersonalAccessTokenRequest {
     pub body: UpdatePersonalAccessTokenRequestBody,
@@ -4671,7 +4730,7 @@ pub struct UpdatePersonalAccessTokenRequest {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePersonalAccessTokenRequestBody {
     pub external_id: Option<String>,
@@ -4679,7 +4738,7 @@ pub struct UpdatePersonalAccessTokenRequestBody {
     pub name: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateServiceAccountBody {
     pub external_id: Option<String>,
@@ -4687,13 +4746,13 @@ pub struct UpdateServiceAccountBody {
     pub name: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateServiceAccountParams {
     pub service_account_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateServiceAccountResponse {
     pub access_tokens: Vec<UpdateServiceAccountResponseAccessToken>,
@@ -4701,7 +4760,7 @@ pub struct UpdateServiceAccountResponse {
     pub user_info: UpdateServiceAccountResponseUserInfo,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateServiceAccountResponseAccessToken {
     pub access_token: Option<String>,
@@ -4729,7 +4788,7 @@ pub struct UpdateServiceAccountResponseAccessToken {
     pub token_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PermissionAssignment10 {
     pub assignment_id: String,
@@ -4741,7 +4800,7 @@ pub struct PermissionAssignment10 {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateServiceAccountResponseUserInfo {
     pub credential_uuid: String,
@@ -4767,7 +4826,7 @@ pub struct UpdateServiceAccountResponseUserInfo {
     pub username: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PermissionAssignment11 {
     pub assignment_id: String,
@@ -4779,7 +4838,7 @@ pub struct PermissionAssignment11 {
     pub permission_name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateServiceAccountRequest {
     pub body: UpdateServiceAccountRequestBody,
@@ -4787,7 +4846,7 @@ pub struct UpdateServiceAccountRequest {
     pub service_account_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateServiceAccountRequestBody {
     pub external_id: Option<String>,
