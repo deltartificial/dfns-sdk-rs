@@ -1,6 +1,6 @@
+mod api;
 /// @dfns-sdk-rs/tests/unit/mod.rs
 mod client;
-mod api;
 mod models;
 mod utils;
 
