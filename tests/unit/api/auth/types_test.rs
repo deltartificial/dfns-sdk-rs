@@ -1,6 +1,6 @@
 /// @dfns-sdk-rs/tests/unit/api/auth/types_test.rs
 
-#[path = "../../../src/api/auth/types.rs"]
+#[path = "../../../../src/api/auth/types.rs"]
 mod parent;
 use parent::{
     AccessTokenKind, ActivateApplicationParams, ActivateApplicationRequest,

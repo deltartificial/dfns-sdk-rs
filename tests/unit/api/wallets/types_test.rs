@@ -1,7 +1,6 @@
-
 /// @dfns-sdk-rs/tests/unit/api/wallets/types_test.rs
 
-#[path = "../../../src/api/wallets/types.rs"]
+#[path = "../../../../src/api/wallets/types.rs"]
 mod parent;
 use parent::{
     AssetElement, AssetKind, BodyEncryptedKeyShare, BodySigningKey, BodySupportedScheme,

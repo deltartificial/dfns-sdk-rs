@@ -1,6 +1,6 @@
 /// @dfns-sdk-rs/tests/unit/api/exchanges/types_test.rs
 
-#[path = "../../../src/api/exchanges/types.rs"]
+#[path = "../../../../src/api/exchanges/types.rs"]
 mod parent;
 use parent::{
     Body, BodyReadConfiguration, BodyWriteConfiguration, CreateDepositBody, CreateDepositBodyKind,

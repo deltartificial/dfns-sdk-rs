@@ -1,6 +1,6 @@
 /// @dfns-sdk-rs/tests/unit/api/permissions/types_test.rs
 
-#[path = "../../../src/api/permissions/types.rs"]
+#[path = "../../../../src/api/permissions/types.rs"]
 mod parent;
 use parent::{
     ArchivePermissionBody, ArchivePermissionParams, ArchivePermissionRequest,

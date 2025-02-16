@@ -1,6 +1,6 @@
 /// @dfns-sdk-rs/tests/unit/api/signers/types_test.rs
 
-#[path = "../../../src/api/signers/types.rs"]
+#[path = "../../../../src/api/signers/types.rs"]
 mod parent;
 use parent::{Cluster, ListSignersResponse, Signer};
 use serde_json;

@@ -1,6 +1,6 @@
 /// @dfns-sdk-rs/tests/unit/api/policies/types_test.rs
 
-#[path = "../../../src/api/policies/types.rs"]
+#[path = "../../../../src/api/policies/types.rs"]
 mod parent;
 use parent::{
     ActionKind, ActivityKindEnum, Addresses1, Addresses10, Addresses11, Addresses2, Addresses3,

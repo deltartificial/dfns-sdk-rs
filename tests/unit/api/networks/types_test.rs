@@ -1,6 +1,6 @@
 /// @dfns-sdk-rs/tests/unit/api/networks/types_test.rs
 
-#[path = "../../../src/api/networks/types.rs"]
+#[path = "../../../../src/api/networks/types.rs"]
 mod parent;
 use parent::{
     Body, Fast, GetFeesQuery, GetFeesQueryNetwork, GetFeesRequest, GetFeesResponse,

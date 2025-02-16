@@ -1,6 +1,6 @@
 /// @dfns-sdk-rs/tests/unit/api/staking/types_test.rs
 
-#[path = "../../../src/api/staking/types.rs"]
+#[path = "../../../../src/api/staking/types.rs"]
 mod parent;
 use parent::{
     Body, CreateStakeActionBody, CreateStakeActionBodyKind, CreateStakeActionParams,

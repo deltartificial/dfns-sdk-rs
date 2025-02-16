@@ -1,6 +1,6 @@
 /// @dfns-sdk-rs/tests/unit/api/webhooks/types_test.rs
 
-#[path = "../../../src/api/webhooks/types.rs"]
+#[path = "../../../../src/api/webhooks/types.rs"]
 mod parent;
 use parent::{
     CreateWebhookBody, CreateWebhookRequest, CreateWebhookRequestBody, CreateWebhookResponse,
