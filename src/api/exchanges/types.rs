@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 pub type ListAssetWithdrawalNetworksResponse = Vec<ListAssetWithdrawalNetworksResponseElement>;
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDepositParams {
     pub account_id: String,
@@ -12,7 +12,7 @@ pub struct CreateDepositParams {
     pub exchange_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDepositResponse {
     pub account_id: String,
@@ -36,14 +36,18 @@ pub struct CreateDepositResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum CreateDepositResponseKind {
     Deposit,
 
     Withdrawal,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDepositResponseRequestBody {
     pub amount: String,
@@ -75,7 +79,7 @@ pub struct CreateDepositResponseRequestBody {
     pub master: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum CreateDepositBodyKind {
     Asa,
 
@@ -94,18 +98,26 @@ pub enum CreateDepositBodyKind {
     Trc10,
 
     Trc20,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Priority {
     Fast,
 
     Slow,
 
     Standard,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDepositResponseRequester {
     pub app_id: Option<String>,
@@ -115,7 +127,7 @@ pub struct CreateDepositResponseRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDepositRequest {
     pub account_id: String,
@@ -125,7 +137,7 @@ pub struct CreateDepositRequest {
     pub exchange_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateDepositBody {
     pub amount: String,
@@ -157,7 +169,7 @@ pub struct CreateDepositBody {
     pub master: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateExchangeBody {
     pub kind: CreateExchangeBodyKind,
@@ -169,7 +181,7 @@ pub struct CreateExchangeBody {
     pub write_configuration: CreateExchangeBodyWriteConfiguration,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum CreateExchangeBodyKind {
     Binance,
 
@@ -180,9 +192,13 @@ pub enum CreateExchangeBodyKind {
     CoinbasePrime,
 
     Kraken,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateExchangeBodyReadConfiguration {
     pub otp: Option<String>,
@@ -194,7 +210,7 @@ pub struct CreateExchangeBodyReadConfiguration {
     pub public_api_key: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateExchangeBodyWriteConfiguration {
     pub otp: Option<String>,
@@ -206,7 +222,7 @@ pub struct CreateExchangeBodyWriteConfiguration {
     pub public_api_key: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateExchangeResponse {
     pub date_created: String,
@@ -218,12 +234,12 @@ pub struct CreateExchangeResponse {
     pub name: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateExchangeRequest {
     pub body: Body,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Body {
     pub kind: CreateExchangeBodyKind,
@@ -235,7 +251,7 @@ pub struct Body {
     pub write_configuration: BodyWriteConfiguration,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BodyReadConfiguration {
     pub otp: Option<String>,
@@ -247,7 +263,7 @@ pub struct BodyReadConfiguration {
     pub public_api_key: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BodyWriteConfiguration {
     pub otp: Option<String>,
@@ -259,7 +275,7 @@ pub struct BodyWriteConfiguration {
     pub public_api_key: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateWithdrawalParams {
     pub account_id: String,
@@ -267,7 +283,7 @@ pub struct CreateWithdrawalParams {
     pub exchange_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateWithdrawalResponse {
     pub account_id: String,
@@ -291,7 +307,7 @@ pub struct CreateWithdrawalResponse {
     pub wallet_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateWithdrawalResponseRequestBody {
     pub amount: String,
@@ -323,7 +339,7 @@ pub struct CreateWithdrawalResponseRequestBody {
     pub master: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateWithdrawalResponseRequester {
     pub app_id: Option<String>,
@@ -333,7 +349,7 @@ pub struct CreateWithdrawalResponseRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateWithdrawalRequest {
     pub account_id: String,
@@ -343,7 +359,7 @@ pub struct CreateWithdrawalRequest {
     pub exchange_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateWithdrawalBody {
     pub amount: String,
@@ -375,30 +391,30 @@ pub struct CreateWithdrawalBody {
     pub master: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeleteExchangeParams {
     pub exchange_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct DeleteExchangeResponse {
     pub deleted: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeleteExchangeRequest {
     pub exchange_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetExchangeParams {
     pub exchange_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetExchangeResponse {
     pub date_created: String,
@@ -410,13 +426,13 @@ pub struct GetExchangeResponse {
     pub name: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetExchangeRequest {
     pub exchange_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAccountAssetsParams {
     pub account_id: String,
@@ -424,7 +440,7 @@ pub struct ListAccountAssetsParams {
     pub exchange_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAccountAssetsQuery {
     pub limit: Option<f64>,
@@ -432,7 +448,7 @@ pub struct ListAccountAssetsQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAccountAssetsResponse {
     pub items: Vec<ListAccountAssetsResponseItem>,
@@ -440,14 +456,14 @@ pub struct ListAccountAssetsResponse {
     pub next_page_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ListAccountAssetsResponseItem {
     pub balance: String,
 
     pub symbol: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAccountAssetsRequest {
     pub account_id: String,
@@ -457,7 +473,7 @@ pub struct ListAccountAssetsRequest {
     pub query: Option<ListAccountAssetsRequestQuery>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAccountAssetsRequestQuery {
     pub limit: Option<f64>,
@@ -465,13 +481,13 @@ pub struct ListAccountAssetsRequestQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAccountsParams {
     pub exchange_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAccountsQuery {
     pub limit: Option<f64>,
@@ -479,7 +495,7 @@ pub struct ListAccountsQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAccountsResponse {
     pub items: Vec<ListAccountsResponseItem>,
@@ -487,7 +503,7 @@ pub struct ListAccountsResponse {
     pub next_page_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAccountsResponseItem {
     pub exchange_id: String,
@@ -499,7 +515,7 @@ pub struct ListAccountsResponseItem {
     pub name: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAccountsRequest {
     pub exchange_id: String,
@@ -507,7 +523,7 @@ pub struct ListAccountsRequest {
     pub query: Option<ListAccountsRequestQuery>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAccountsRequestQuery {
     pub limit: Option<f64>,
@@ -515,7 +531,7 @@ pub struct ListAccountsRequestQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAssetWithdrawalNetworksParams {
     pub account_id: String,
@@ -525,7 +541,7 @@ pub struct ListAssetWithdrawalNetworksParams {
     pub exchange_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAssetWithdrawalNetworksResponseElement {
     pub decimals: f64,
@@ -551,7 +567,7 @@ pub struct ListAssetWithdrawalNetworksResponseElement {
     pub master: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ListAssetWithdrawalNetworksResponseKind {
     Aip21,
 
@@ -572,9 +588,13 @@ pub enum ListAssetWithdrawalNetworksResponseKind {
     Trc10,
 
     Trc20,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Network {
     Algorand,
 
@@ -747,9 +767,13 @@ pub enum Network {
 
     #[serde(rename = "XrpLedgerTestnet")]
     XrpLedgerTestnet,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAssetWithdrawalNetworksRequest {
     pub account_id: String,
@@ -759,7 +783,7 @@ pub struct ListAssetWithdrawalNetworksRequest {
     pub exchange_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListExchangesQuery {
     pub limit: Option<f64>,
@@ -767,7 +791,7 @@ pub struct ListExchangesQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListExchangesResponse {
     pub items: Vec<ListExchangesResponseItem>,
@@ -775,7 +799,7 @@ pub struct ListExchangesResponse {
     pub next_page_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListExchangesResponseItem {
     pub date_created: String,
@@ -787,12 +811,12 @@ pub struct ListExchangesResponseItem {
     pub name: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ListExchangesRequest {
     pub query: Option<ListExchangesRequestQuery>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListExchangesRequestQuery {
     pub limit: Option<f64>,
