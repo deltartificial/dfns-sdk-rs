@@ -4,19 +4,19 @@ use serde::{Deserialize, Serialize};
 
 pub type DeleteAssignmentResponse = Option<serde_json::Value>;
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePermissionBody {
     pub is_archived: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePermissionParams {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePermissionResponse {
     pub date_created: String,
@@ -36,12 +36,16 @@ pub struct ArchivePermissionResponse {
     pub status: ArchivePermissionResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum ArchivePermissionResponseStatus {
+    #[default]
+    #[serde(rename = "*")]
+    None,
+
     Active,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePermissionRequest {
     pub body: ArchivePermissionRequestBody,
@@ -49,25 +53,25 @@ pub struct ArchivePermissionRequest {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArchivePermissionRequestBody {
     pub is_archived: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateAssignmentBody {
     pub identity_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateAssignmentParams {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateAssignmentResponse {
     pub date_created: String,
@@ -83,7 +87,7 @@ pub struct CreateAssignmentResponse {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateAssignmentRequest {
     pub body: CreateAssignmentRequestBody,
@@ -91,20 +95,20 @@ pub struct CreateAssignmentRequest {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateAssignmentRequestBody {
     pub identity_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreatePermissionBody {
     pub name: String,
 
     pub operations: Vec<Operation>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Operation {
     #[serde(rename = "Auth:Action:Sign")]
     AuthActionSign,
@@ -306,9 +310,13 @@ pub enum Operation {
 
     #[serde(rename = "Webhooks:Update")]
     WebhooksUpdate,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreatePermissionResponse {
     pub date_created: String,
@@ -328,19 +336,19 @@ pub struct CreatePermissionResponse {
     pub status: ArchivePermissionResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreatePermissionRequest {
     pub body: CreatePermissionRequestBody,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreatePermissionRequestBody {
     pub name: String,
 
     pub operations: Vec<Operation>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeleteAssignmentParams {
     pub assignment_id: String,
@@ -348,7 +356,7 @@ pub struct DeleteAssignmentParams {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DeleteAssignmentRequest {
     pub assignment_id: String,
@@ -356,13 +364,13 @@ pub struct DeleteAssignmentRequest {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPermissionParams {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPermissionResponse {
     pub date_created: String,
@@ -384,7 +392,7 @@ pub struct GetPermissionResponse {
     pub status: ArchivePermissionResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPermissionResponsePendingChangeRequest {
     pub approval_id: Option<String>,
@@ -408,7 +416,7 @@ pub struct GetPermissionResponsePendingChangeRequest {
     pub status: PendingChangeRequestStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleBody {
     pub id: String,
@@ -424,17 +432,25 @@ pub struct PurpleBody {
     pub status: ArchivePermissionResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum PurpleKind {
     Permission,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum PurpleOperationKind {
     Update,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleRequester {
     pub app_id: Option<String>,
@@ -444,7 +460,7 @@ pub struct PurpleRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum PendingChangeRequestStatus {
     Applied,
 
@@ -453,21 +469,25 @@ pub enum PendingChangeRequestStatus {
     Pending,
 
     Rejected,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPermissionRequest {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAssignmentsParams {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAssignmentsResponse {
     pub items: Vec<ListAssignmentsResponseItem>,
@@ -475,7 +495,7 @@ pub struct ListAssignmentsResponse {
     pub next_page_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAssignmentsResponseItem {
     pub date_created: String,
@@ -493,7 +513,7 @@ pub struct ListAssignmentsResponseItem {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurplePendingChangeRequest {
     pub approval_id: Option<String>,
@@ -517,7 +537,7 @@ pub struct PurplePendingChangeRequest {
     pub status: PendingChangeRequestStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyBody {
     pub id: String,
@@ -529,19 +549,27 @@ pub struct FluffyBody {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum FluffyKind {
     Assignment,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum FluffyOperationKind {
     Create,
 
     Delete,
+
+    #[default]
+    #[serde(rename = "*")]
+    None,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyRequester {
     pub app_id: Option<String>,
@@ -551,13 +579,13 @@ pub struct FluffyRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListAssignmentsRequest {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListPermissionsQuery {
     pub limit: Option<String>,
@@ -565,7 +593,7 @@ pub struct ListPermissionsQuery {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListPermissionsResponse {
     pub items: Vec<ListPermissionsResponseItem>,
@@ -573,7 +601,7 @@ pub struct ListPermissionsResponse {
     pub next_page_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListPermissionsResponseItem {
     pub date_created: String,
@@ -595,7 +623,7 @@ pub struct ListPermissionsResponseItem {
     pub status: ArchivePermissionResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyPendingChangeRequest {
     pub approval_id: Option<String>,
@@ -619,7 +647,7 @@ pub struct FluffyPendingChangeRequest {
     pub status: PendingChangeRequestStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledBody {
     pub id: String,
@@ -635,7 +663,7 @@ pub struct TentacledBody {
     pub status: ArchivePermissionResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledRequester {
     pub app_id: Option<String>,
@@ -645,12 +673,12 @@ pub struct TentacledRequester {
     pub user_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ListPermissionsRequest {
     pub query: Option<Query>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Query {
     pub limit: Option<String>,
@@ -658,20 +686,20 @@ pub struct Query {
     pub pagination_token: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct UpdatePermissionBody {
     pub name: Option<String>,
 
     pub operations: Option<Vec<Operation>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePermissionParams {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePermissionResponse {
     pub date_created: String,
@@ -691,7 +719,7 @@ pub struct UpdatePermissionResponse {
     pub status: ArchivePermissionResponseStatus,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatePermissionRequest {
     pub body: UpdatePermissionRequestBody,
@@ -699,7 +727,7 @@ pub struct UpdatePermissionRequest {
     pub permission_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct UpdatePermissionRequestBody {
     pub name: Option<String>,
 
