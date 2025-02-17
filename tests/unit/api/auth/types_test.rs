@@ -176,6 +176,7 @@ use parent::{
     UpdateServiceAccountResponseUserInfo, UserActionServerKind, UserInfoKind,
 };
 use serde_json;
+use std::collections::HashMap;
 use std::mem;
 #[cfg(test)]
 mod test_activateapplicationparams {

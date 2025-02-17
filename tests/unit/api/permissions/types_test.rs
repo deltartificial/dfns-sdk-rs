@@ -19,6 +19,7 @@ use parent::{
     UpdatePermissionRequestBody, UpdatePermissionResponse,
 };
 use serde_json;
+use std::collections::HashMap;
 use std::mem;
 #[cfg(test)]
 mod test_archivepermissionbody {

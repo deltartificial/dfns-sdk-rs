@@ -17,6 +17,7 @@ use parent::{
     TentacledRequester,
 };
 use serde_json;
+use std::collections::HashMap;
 use std::mem;
 #[cfg(test)]
 mod test_createstakebody {
