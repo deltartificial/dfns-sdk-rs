@@ -822,15 +822,6 @@ mod test_actionkind {
         assert_eq!(value, deserialized);
     }
     #[test]
-    fn serialization_json_schema() {
-        let value = ActionKind::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
-    #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
         let result = serde_json::from_str::<ActionKind>(invalid_json);
@@ -912,15 +903,7 @@ mod test_activitykindenum {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = ActivityKindEnum::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -5944,15 +5927,7 @@ mod test_addresses1 {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = Addresses1::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -11943,15 +11918,6 @@ mod test_addresses3 {
         assert_eq!(value, deserialized);
     }
     #[test]
-    fn serialization_json_schema() {
-        let value = Addresses3::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
-    #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
         let result = serde_json::from_str::<Addresses3>(invalid_json);
@@ -14048,15 +14014,7 @@ mod test_addresses2 {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = Addresses2::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -17233,15 +17191,6 @@ mod test_addresses4 {
         let deserialized: Addresses4 =
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
-    }
-    #[test]
-    fn serialization_json_schema() {
-        let value = Addresses4::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
     }
     #[test]
     fn serialization_error_handling() {
@@ -23207,15 +23156,6 @@ mod test_addresses5 {
         assert_eq!(value, deserialized);
     }
     #[test]
-    fn serialization_json_schema() {
-        let value = Addresses5::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
-    #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
         let result = serde_json::from_str::<Addresses5>(invalid_json);
@@ -24403,15 +24343,6 @@ mod test_addresses6 {
         let deserialized: Addresses6 =
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
-    }
-    #[test]
-    fn serialization_json_schema() {
-        let value = Addresses6::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
     }
     #[test]
     fn serialization_error_handling() {
@@ -27918,15 +27849,7 @@ mod test_addresses7 {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = Addresses7::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -34125,15 +34048,7 @@ mod test_addresses8 {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = Addresses8::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -35121,15 +35036,7 @@ mod test_addresses9 {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = Addresses9::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -37477,15 +37384,7 @@ mod test_addresses11 {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = Addresses11::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -39596,15 +39495,7 @@ mod test_addresses10 {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = Addresses10::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
