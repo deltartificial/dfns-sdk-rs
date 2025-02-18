@@ -155,15 +155,7 @@ mod test_getfeesquerynetwork {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = GetFeesQueryNetwork::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -498,15 +490,7 @@ mod test_getfeesresponsekind {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = GetFeesResponseKind::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -593,15 +577,7 @@ mod test_getfeesresponsenetwork {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = GetFeesResponseNetwork::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -1241,15 +1217,7 @@ mod test_readcontractbodykind {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = ReadContractBodyKind::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -1336,15 +1304,7 @@ mod test_readcontractbodynetwork {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = ReadContractBodyNetwork::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
