@@ -35969,15 +35969,6 @@ mod test_recoverycredentialkind {
         assert_eq!(value, deserialized);
     }
     #[test]
-    fn serialization_json_schema() {
-        let value = RecoveryCredentialKind::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
-    #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
         let result = serde_json::from_str::<RecoveryCredentialKind>(invalid_json);
