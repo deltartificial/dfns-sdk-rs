@@ -1,6 +1,7 @@
 # Dfns SDK Rust
 
-![Build status](https://img.shields.io/badge/build-passing-brightgreen?style=flat) ![License](https://img.shields.io/badge/license-MIT-blue?style=flat) ![Implementation](https://img.shields.io/badge/implemented-100%25-green?style=flat) [![Crates.io](https://img.shields.io/badge/crates.io-FF6C2C?style=flat&logo=rust&logoColor=white)](https://crates.io/crates/dfns-sdk-rs) [![Downloads](https://img.shields.io/crates/d/dfns-sdk-rs?style=flat&color=FF6C2C)](https://crates.io/crates/dfns-sdk-rs)
+![Build status](https://img.shields.io/badge/build-passing-brightgreen?style=flat) ![License](https://img.shields.io/badge/license-MIT-blue?style=flat) ![Coverage](https://codecov.io/gh/deltartificial/dfns-sdk-rs/branch/main/graph/badge.svg) [![Crates.io](https://img.shields.io/badge/crates.io-FF6C2C?style=flat&logo=rust&logoColor=white)](https://crates.io/crates/dfns-sdk-rs) [![Downloads](https://img.shields.io/crates/d/dfns-sdk-rs?style=flat&color=FF6C2C)](https://crates.io/crates/dfns-sdk-rs)
+
 
 
 
@@ -9,7 +10,7 @@
 
 ![](./assets/sdk-rs.png)
 
-> **Warning**: This SDK is currently under development and not ready for production use. The API is subject to change. This SDK is missing tests, but we are working on it. Please feel free to contribute.
+> **Warning**: This SDK is currently under development and not ready for production use. The API is subject to change. Consider contributing to the project if you're interested in helping out.
 
 - [Dfns Website](https://www.dfns.co)
 - [Dfns API Docs](https://docs.dfns.co)
