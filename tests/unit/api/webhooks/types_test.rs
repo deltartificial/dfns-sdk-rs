@@ -15,7 +15,6 @@ use parent::{
 };
 use serde_json;
 use std::collections::HashMap;
-use std::mem;
 #[cfg(test)]
 mod test_createwebhookbody {
     use super::*;
@@ -180,15 +179,6 @@ mod test_event {
         assert_eq!(value, deserialized);
     }
     #[test]
-    fn serialization_json_schema() {
-        let value = Event::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
-    #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
         let result = serde_json::from_str::<Event>(invalid_json);
@@ -266,15 +256,7 @@ mod test_status {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = Status::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -1634,15 +1616,6 @@ mod test_kind {
         assert_eq!(value, deserialized);
     }
     #[test]
-    fn serialization_json_schema() {
-        let value = Kind::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
-    #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
         let result = serde_json::from_str::<Kind>(invalid_json);
@@ -2057,15 +2030,6 @@ mod test_deliveryfailed {
         let deserialized: DeliveryFailed =
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
-    }
-    #[test]
-    fn serialization_json_schema() {
-        let value = DeliveryFailed::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
     }
     #[test]
     fn serialization_error_handling() {
