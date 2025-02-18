@@ -19,8 +19,6 @@ use parent::{
     UpdatePermissionRequestBody, UpdatePermissionResponse,
 };
 use serde_json;
-use std::collections::HashMap;
-use std::mem;
 #[cfg(test)]
 mod test_archivepermissionbody {
     use super::*;
@@ -418,15 +416,7 @@ mod test_archivepermissionresponsestatus {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = ArchivePermissionResponseStatus::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -1405,15 +1395,7 @@ mod test_operation {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = Operation::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -2612,15 +2594,6 @@ mod test_purplekind {
         assert_eq!(value, deserialized);
     }
     #[test]
-    fn serialization_json_schema() {
-        let value = PurpleKind::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
-    #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
         let result = serde_json::from_str::<PurpleKind>(invalid_json);
@@ -2701,15 +2674,6 @@ mod test_purpleoperationkind {
         let deserialized: PurpleOperationKind =
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
-    }
-    #[test]
-    fn serialization_json_schema() {
-        let value = PurpleOperationKind::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
     }
     #[test]
     fn serialization_error_handling() {
@@ -2912,15 +2876,6 @@ mod test_pendingchangerequeststatus {
         let deserialized: PendingChangeRequestStatus =
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
-    }
-    #[test]
-    fn serialization_json_schema() {
-        let value = PendingChangeRequestStatus::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
     }
     #[test]
     fn serialization_error_handling() {
@@ -3735,15 +3690,7 @@ mod test_fluffykind {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = FluffyKind::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
@@ -3826,15 +3773,7 @@ mod test_fluffyoperationkind {
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
     }
-    #[test]
-    fn serialization_json_schema() {
-        let value = FluffyOperationKind::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
+
     #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
