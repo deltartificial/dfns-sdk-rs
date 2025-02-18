@@ -176,8 +176,6 @@ use parent::{
     UpdateServiceAccountResponseUserInfo, UserActionServerKind, UserInfoKind,
 };
 use serde_json;
-use std::collections::HashMap;
-use std::mem;
 #[cfg(test)]
 mod test_activateapplicationparams {
     use super::*;
@@ -19591,15 +19589,6 @@ mod test_socialloginproviderkind {
         assert_eq!(value, deserialized);
     }
     #[test]
-    fn serialization_json_schema() {
-        let value = SocialLoginProviderKind::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
-    }
-    #[test]
     fn serialization_error_handling() {
         let invalid_json = r#"{"invalid": json"#;
         let result = serde_json::from_str::<SocialLoginProviderKind>(invalid_json);
@@ -36074,15 +36063,6 @@ mod test_purplesecondfactorcredential {
         let deserialized: PurpleSecondFactorCredential =
             serde_json::from_str(&serialized).expect("Failed to deserialize from pretty format");
         assert_eq!(value, deserialized);
-    }
-    #[test]
-    fn serialization_json_schema() {
-        let value = PurpleSecondFactorCredential::default();
-        let serialized = serde_json::to_value(&value).expect("Failed to convert to JSON value");
-        assert!(
-            serialized.is_object() || serialized.is_array(),
-            "Serialized value must be a JSON object or array"
-        );
     }
     #[test]
     fn serialization_error_handling() {

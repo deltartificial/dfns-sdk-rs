@@ -21,8 +21,6 @@ use parent::{
     ListExchangesRequestQuery, ListExchangesResponse, ListExchangesResponseItem, Network, Priority,
 };
 use serde_json;
-use std::collections::HashMap;
-use std::mem;
 #[cfg(test)]
 mod test_createdepositparams {
     use super::*;
