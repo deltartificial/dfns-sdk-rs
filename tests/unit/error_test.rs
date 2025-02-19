@@ -35,6 +35,36 @@ mod tests {
         assert_eq!(dfns_error.http_status, 202);
     }
 
+    #[test]
+    fn test_policy_pending_error_display() {
+        let error = PolicyPendingError::new(Some(json!({"status": "pending"})));
+        let display = format!("{}", error);
+        assert!(display.contains("202"));
+        assert!(display.contains("policy pending"));
+        assert!(display.contains("status"));
+    }
+
+    #[test]
+    fn test_invalid_header_conversion() {
+        let header_error = reqwest::header::HeaderValue::from_str("invalid\nheader").unwrap_err();
+        let dfns_error: DfnsError = header_error.into();
+        assert_eq!(dfns_error.http_status, 400);
+        assert!(dfns_error.message.contains("Invalid header value"));
+    }
+
+    #[test]
+    fn test_error_json_formatting() {
+        let error = DfnsError::new(
+            500,
+            "Internal Error",
+            Some(json!({"details": "test error"})),
+        );
+        let display = format!("{}", error);
+        assert!(display.contains("\"httpStatus\": 500"));
+        assert!(display.contains("\"message\": \"Internal Error\""));
+        assert!(display.contains("\"details\": \"test error\""));
+    }
+
     #[tokio::test]
     async fn test_reqwest_error_conversion() {
         let url = Url::parse("http://invalid").unwrap();
