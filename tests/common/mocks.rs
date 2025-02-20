@@ -1,13 +1,10 @@
 /// @dfns-sdk-rs/tests/common/mocks.rs
+use mockito::{Mock, ServerGuard};
 
-use mockito::{Mock, Server, ServerGuard};
-
-pub fn create_mock(method: &str, path: &str) -> Mock {
-    let mut server = Server::new();
-    server.mock(method, path)
+pub fn create_mock_server() -> ServerGuard {
+    mockito::Server::new()
 }
 
-#[allow(dead_code)]
-pub fn setup_mock_server() -> ServerGuard {
-    Server::new()
+pub fn create_mock_with_server(server: &mut ServerGuard, method: &str, path: &str) -> Mock {
+    server.mock(method, path)
 }

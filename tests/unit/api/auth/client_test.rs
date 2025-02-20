@@ -1,29 +1,27 @@
 /// @dfns-sdk-rs/tests/unit/api/auth/client_test.rs
-
 use dfns_sdk_rs::{
     api::auth::{client::AuthClient, types::*},
-    models::generic::{DfnsApiClientOptions, DfnsBaseApiOptions},
-    utils::{fetch::simple_fetch, url::build_path_and_query, user_action_fetch::user_action_fetch},
     error::DfnsError,
+    models::generic::{DfnsApiClientOptions, DfnsBaseApiOptions},
     signer::CredentialSigner,
+    utils::{fetch::simple_fetch, url::build_path_and_query, user_action_fetch::user_action_fetch},
 };
 use mockito;
 use serde_json::json;
 use std::collections::HashMap;
 #[path = "../../../common/mocks.rs"]
 mod mocks;
-use mocks::create_mock;
+use mocks::{create_mock_server, create_mock_with_server};
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    fn setup_test_client() -> AuthClient {
-        let base = mockito::Server::new();
+    fn setup_test_client(server: &mut mockito::ServerGuard) -> AuthClient {
         let base_options = DfnsBaseApiOptions {
             app_id: "test-app".to_string(),
             auth_token: None,
-            base_url: Some(base.url()),
+            base_url: Some(server.url()),
             app_secret: None,
         };
         let api_options = DfnsApiClientOptions::new(base_options);
@@ -32,10 +30,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_activate_application() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let app_id = "test-app-id";
 
-        let _m = create_mock("PUT", "/auth/apps/test-app-id/activate")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/apps/test-app-id/activate")
             .with_status(200)
             .with_body(
                 json!({
@@ -56,9 +55,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_activate_credential() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("PUT", "/auth/credentials/activate")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/credentials/activate")
             .with_status(200)
             .with_body(
                 json!({
@@ -81,10 +81,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_activate_personal_access_token() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let token_id = "test-token-id";
 
-        let _m = create_mock("PUT", "/auth/pats/test-token-id/activate")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/pats/test-token-id/activate")
             .with_status(200)
             .with_body(
                 json!({
@@ -105,18 +106,23 @@ mod tests {
 
     #[tokio::test]
     async fn test_activate_service_account() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let service_account_id = "test-sa-id";
 
-        let _m = create_mock("PUT", "/auth/service-accounts/test-sa-id/activate")
-            .with_status(200)
-            .with_body(
-                json!({
-                    "status": "success"
-                })
-                .to_string(),
-            )
-            .create();
+        let _m = create_mock_with_server(
+            &mut server,
+            "PUT",
+            "/auth/service-accounts/test-sa-id/activate",
+        )
+        .with_status(200)
+        .with_body(
+            json!({
+                "status": "success"
+            })
+            .to_string(),
+        )
+        .create();
 
         let result = client
             .activate_service_account(ActivateServiceAccountRequest {
@@ -129,10 +135,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_activate_user() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let user_id = "test-user-id";
 
-        let _m = create_mock("PUT", "/auth/users/test-user-id/activate")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/users/test-user-id/activate")
             .with_status(200)
             .with_body(
                 json!({
@@ -153,10 +160,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_archive_application() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let app_id = "test-app-id";
 
-        let _m = create_mock("PUT", "/auth/apps/test-app-id/archive")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/apps/test-app-id/archive")
             .with_status(200)
             .with_body(
                 json!({
@@ -177,10 +185,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_archive_personal_access_token() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let token_id = "test-token-id";
 
-        let _m = create_mock("PUT", "/auth/pats/test-token-id/archive")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/pats/test-token-id/archive")
             .with_status(200)
             .with_body(
                 json!({
@@ -201,18 +210,23 @@ mod tests {
 
     #[tokio::test]
     async fn test_archive_service_account() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let service_account_id = "test-sa-id";
 
-        let _m = create_mock("PUT", "/auth/service-accounts/test-sa-id/archive")
-            .with_status(200)
-            .with_body(
-                json!({
-                    "status": "success"
-                })
-                .to_string(),
-            )
-            .create();
+        let _m = create_mock_with_server(
+            &mut server,
+            "PUT",
+            "/auth/service-accounts/test-sa-id/archive",
+        )
+        .with_status(200)
+        .with_body(
+            json!({
+                "status": "success"
+            })
+            .to_string(),
+        )
+        .create();
 
         let result = client
             .archive_service_account(ArchiveServiceAccountRequest {
@@ -225,10 +239,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_archive_user() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let user_id = "test-user-id";
 
-        let _m = create_mock("PUT", "/auth/users/test-user-id/archive")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/users/test-user-id/archive")
             .with_status(200)
             .with_body(
                 json!({
@@ -249,9 +264,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_application() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/apps")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/apps")
             .with_status(200)
             .with_body(
                 json!({
@@ -282,9 +298,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_credential() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/credentials")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/credentials")
             .with_status(200)
             .with_body(
                 json!({
@@ -317,9 +334,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_credential_challenge() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/credentials/init")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/credentials/init")
             .with_status(200)
             .with_body(
                 json!({
@@ -342,9 +360,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_credential_challenge_with_code() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/credentials/code/init")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/credentials/code/init")
             .with_status(200)
             .with_body(
                 json!({
@@ -369,9 +388,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_credential_code() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/credentials/code")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/credentials/code")
             .with_status(200)
             .with_body(
                 json!({
@@ -394,9 +414,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_credential_with_code() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/credentials/code/verify")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/credentials/code/verify")
             .with_status(200)
             .with_body(
                 json!({
@@ -429,9 +450,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_delegated_recovery_challenge() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/recover/user/delegated")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/recover/user/delegated")
             .with_status(200)
             .with_body(
                 json!({
@@ -455,26 +477,30 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_delegated_registration_challenge() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/registration/delegated")
-            .with_status(200)
-            .with_body(
-                json!({
-                    "challenge": "test-challenge"
-                })
-                .to_string(),
-            )
-            .create();
+        let _m =
+            create_mock_with_server(&mut server, "POST", "/auth/registration/delegated/restart")
+                .with_status(200)
+                .with_body(
+                    json!({
+                        "challenge": "test-challenge"
+                    })
+                    .to_string(),
+                )
+                .create();
 
         let result = client
-            .create_delegated_registration_challenge(CreateDelegatedRegistrationChallengeRequest {
-                body: CreateDelegatedRegistrationChallengeRequestBody {
-                    email: "test@example.com".to_string(),
-                    external_id: Some("test-external-id".to_string()),
-                    kind: UserInfoKind::CustomerEmployee,
+            .recreate_delegated_registration_challenge(
+                RecreateDelegatedRegistrationChallengeRequest {
+                    body: RecreateDelegatedRegistrationChallengeRequestBody {
+                        email: "test@example.com".to_string(),
+                        external_id: Some("test-external-id".to_string()),
+                        kind: UserInfoKind::CustomerEmployee,
+                    },
                 },
-            })
+            )
             .await;
 
         assert!(result.is_ok());
@@ -482,9 +508,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_login_challenge() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/login/init")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/login/init")
             .with_status(200)
             .with_body(
                 json!({
@@ -509,9 +536,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_personal_access_token() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/pats")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/pats")
             .with_status(200)
             .with_body(
                 json!({
@@ -540,9 +568,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_recovery_challenge() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/recover/user/init")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/recover/user/init")
             .with_status(200)
             .with_body(
                 json!({
@@ -568,9 +597,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_registration_challenge() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/registration/init")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/registration/init")
             .with_status(200)
             .with_body(
                 json!({
@@ -595,9 +625,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_service_account() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/service-accounts")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/service-accounts")
             .with_status(200)
             .with_body(
                 json!({
@@ -625,9 +656,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_social_registration_challenge() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/registration/social")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/registration/social")
             .with_status(200)
             .with_body(
                 json!({
@@ -651,9 +683,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_user() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/users")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/users")
             .with_status(200)
             .with_body(
                 json!({
@@ -680,9 +713,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_user_action_challenge() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/action/init")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/action/init")
             .with_status(200)
             .with_body(
                 json!({
@@ -708,9 +742,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_create_user_action_signature() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/action")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/action")
             .with_status(200)
             .with_body(
                 json!({
@@ -757,10 +792,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_deactivate_application() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let app_id = "test-app-id";
 
-        let _m = create_mock("PUT", "/auth/apps/test-app-id/deactivate")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/apps/test-app-id/deactivate")
             .with_status(200)
             .with_body(
                 json!({
@@ -781,9 +817,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_deactivate_credential() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("PUT", "/auth/credentials/deactivate")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/credentials/deactivate")
             .with_status(200)
             .with_body(
                 json!({
@@ -806,10 +843,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_deactivate_personal_access_token() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let token_id = "test-token-id";
 
-        let _m = create_mock("PUT", "/auth/pats/test-token-id/deactivate")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/pats/test-token-id/deactivate")
             .with_status(200)
             .with_body(
                 json!({
@@ -830,18 +868,23 @@ mod tests {
 
     #[tokio::test]
     async fn test_deactivate_service_account() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let service_account_id = "test-sa-id";
 
-        let _m = create_mock("PUT", "/auth/service-accounts/test-sa-id/deactivate")
-            .with_status(200)
-            .with_body(
-                json!({
-                    "status": "success"
-                })
-                .to_string(),
-            )
-            .create();
+        let _m = create_mock_with_server(
+            &mut server,
+            "PUT",
+            "/auth/service-accounts/test-sa-id/deactivate",
+        )
+        .with_status(200)
+        .with_body(
+            json!({
+                "status": "success"
+            })
+            .to_string(),
+        )
+        .create();
 
         let result = client
             .deactivate_service_account(DeactivateServiceAccountRequest {
@@ -854,10 +897,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_deactivate_user() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let user_id = "test-user-id";
 
-        let _m = create_mock("PUT", "/auth/users/test-user-id/deactivate")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/users/test-user-id/deactivate")
             .with_status(200)
             .with_body(
                 json!({
@@ -878,9 +922,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_delegated_login() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/login/delegated")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/login/delegated")
             .with_status(200)
             .with_body(
                 json!({
@@ -903,10 +948,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_application() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let app_id = "test-app-id";
 
-        let _m = create_mock("GET", "/auth/apps/test-app-id")
+        let _m = create_mock_with_server(&mut server, "GET", "/auth/apps/test-app-id")
             .with_status(200)
             .with_body(
                 json!({
@@ -928,10 +974,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_personal_access_token() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let token_id = "test-token-id";
 
-        let _m = create_mock("GET", "/auth/pats/test-token-id")
+        let _m = create_mock_with_server(&mut server, "GET", "/auth/pats/test-token-id")
             .with_status(200)
             .with_body(
                 json!({
@@ -953,10 +1000,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_service_account() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let service_account_id = "test-sa-id";
 
-        let _m = create_mock("GET", "/auth/service-accounts/test-sa-id")
+        let _m = create_mock_with_server(&mut server, "GET", "/auth/service-accounts/test-sa-id")
             .with_status(200)
             .with_body(
                 json!({
@@ -978,10 +1026,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_user() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let user_id = "test-user-id";
 
-        let _m = create_mock("GET", "/auth/users/test-user-id")
+        let _m = create_mock_with_server(&mut server, "GET", "/auth/users/test-user-id")
             .with_status(200)
             .with_body(
                 json!({
@@ -1003,9 +1052,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_list_applications() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("GET", "/auth/apps")
+        let _m = create_mock_with_server(&mut server, "GET", "/auth/apps")
             .with_status(200)
             .with_body(
                 json!({
@@ -1022,9 +1072,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_list_credentials() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("GET", "/auth/credentials")
+        let _m = create_mock_with_server(&mut server, "GET", "/auth/credentials")
             .with_status(200)
             .with_body(
                 json!({
@@ -1041,9 +1092,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_list_personal_access_tokens() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("GET", "/auth/pats")
+        let _m = create_mock_with_server(&mut server, "GET", "/auth/pats")
             .with_status(200)
             .with_body(
                 json!({
@@ -1060,9 +1112,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_list_service_accounts() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("GET", "/auth/service-accounts")
+        let _m = create_mock_with_server(&mut server, "GET", "/auth/service-accounts")
             .with_status(200)
             .with_body(
                 json!({
@@ -1079,9 +1132,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_list_users() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("GET", "/auth/users")
+        let _m = create_mock_with_server(&mut server, "GET", "/auth/users")
             .with_status(200)
             .with_body(
                 json!({
@@ -1098,9 +1152,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_login() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/login")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/login")
             .with_status(200)
             .with_body(
                 json!({
@@ -1147,9 +1202,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_logout() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("PUT", "/auth/logout")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/logout")
             .with_status(200)
             .with_body(
                 json!({
@@ -1166,9 +1222,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_recover() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/recover/user")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/recover/user")
             .with_status(200)
             .with_body(
                 json!({
@@ -1233,17 +1290,19 @@ mod tests {
 
     #[tokio::test]
     async fn test_recreate_delegated_registration_challenge() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/registration/delegated/restart")
-            .with_status(200)
-            .with_body(
-                json!({
-                    "challenge": "test-challenge"
-                })
-                .to_string(),
-            )
-            .create();
+        let _m =
+            create_mock_with_server(&mut server, "POST", "/auth/registration/delegated/restart")
+                .with_status(200)
+                .with_body(
+                    json!({
+                        "challenge": "test-challenge"
+                    })
+                    .to_string(),
+                )
+                .create();
 
         let result = client
             .recreate_delegated_registration_challenge(
@@ -1262,9 +1321,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_register() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/registration")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/registration")
             .with_status(200)
             .with_body(
                 json!({
@@ -1318,9 +1378,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_register_end_user() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/registration/enduser")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/registration/enduser")
             .with_status(200)
             .with_body(
                 json!({
@@ -1359,9 +1420,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_resend_registration_code() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("PUT", "/auth/registration/code")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/registration/code")
             .with_status(200)
             .with_body(
                 json!({
@@ -1385,9 +1447,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_send_login_code() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/login/code")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/login/code")
             .with_status(200)
             .with_body(
                 json!({
@@ -1411,9 +1474,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_send_recovery_code() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/recover/user/code")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/recover/user/code")
             .with_status(200)
             .with_body(
                 json!({
@@ -1437,9 +1501,10 @@ mod tests {
 
     #[tokio::test]
     async fn test_social_login() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
 
-        let _m = create_mock("POST", "/auth/login/social")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/login/social")
             .with_status(200)
             .with_body(
                 json!({
@@ -1463,10 +1528,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_update_application() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let app_id = "test-app-id";
 
-        let _m = create_mock("POST", "/auth/apps/test-app-id")
+        let _m = create_mock_with_server(&mut server, "POST", "/auth/apps/test-app-id")
             .with_status(200)
             .with_body(
                 json!({
@@ -1492,10 +1558,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_update_personal_access_token() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let token_id = "test-token-id";
 
-        let _m = create_mock("PUT", "/auth/pats/test-token-id")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/pats/test-token-id")
             .with_status(200)
             .with_body(
                 json!({
@@ -1521,10 +1588,11 @@ mod tests {
 
     #[tokio::test]
     async fn test_update_service_account() {
-        let client = setup_test_client();
+        let mut server = create_mock_server();
+        let client = setup_test_client(&mut server);
         let service_account_id = "test-sa-id";
 
-        let _m = create_mock("PUT", "/auth/service-accounts/test-sa-id")
+        let _m = create_mock_with_server(&mut server, "PUT", "/auth/service-accounts/test-sa-id")
             .with_status(200)
             .with_body(
                 json!({
