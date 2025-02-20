@@ -49,6 +49,31 @@ pub async fn user_action_fetch<T>(
 where
     T: serde::de::DeserializeOwned,
 {
+    // First check for base URL
+    let base_url = options
+        .api_options
+        .base
+        .base_url
+        .as_deref()
+        .ok_or_else(|| DfnsError::new(400, "Base URL is required in options", None))?;
+
+    // Validate base URL
+    let base = Url::parse(base_url)
+        .map_err(|e| DfnsError::new(400, format!("Invalid base URL: {}", e), None))?;
+
+    // Try to join with resource path, but handle invalid resource paths
+    if resource.contains("://") {
+        return Err(DfnsError::new(
+            400,
+            "Invalid resource path: must be a relative path",
+            None,
+        ));
+    }
+
+    let url = base
+        .join(resource)
+        .map_err(|e| DfnsError::new(400, format!("Invalid resource path: {}", e), None))?;
+
     let fetch = UserActionFetch::new();
 
     if options.method != HttpMethod::GET {
@@ -61,7 +86,6 @@ where
             }))
         ))?;
 
-        let url = Url::parse(resource)?;
         let challenge = BaseAuthApi::create_user_action_challenge(
             CreateUserActionChallengeRequest {
                 user_action_payload: options
@@ -103,8 +127,12 @@ where
         );
         base_options.headers = Some(headers);
 
-        let response = fetch.execute(resource, base_options).await?;
-        response.json::<T>().await.map_err(Into::into)
+        let response = fetch.execute(url.as_str(), base_options).await?;
+        let status = response.status().as_u16();
+        response
+            .json::<T>()
+            .await
+            .map_err(|e| DfnsError::new(status, format!("Failed to decode response: {}", e), None))
     } else {
         let base_options = FetchOptions {
             method: options.method,
@@ -112,7 +140,11 @@ where
             body: options.body,
             api_options: options.api_options.base,
         };
-        let response = fetch.execute(resource, base_options).await?;
-        response.json::<T>().await.map_err(Into::into)
+        let response = fetch.execute(url.as_str(), base_options).await?;
+        let status = response.status().as_u16();
+        response
+            .json::<T>()
+            .await
+            .map_err(|e| DfnsError::new(status, format!("Failed to decode response: {}", e), None))
     }
 }
