@@ -15,12 +15,13 @@ mod tests {
         store::{
             Challenge, CredentialAttestation, CredentialAttestationCredentialInfo,
             CredentialAttestationCredentialKind, CredentialAttestationTrait, CredentialStore,
+            FirstFactorAttestation, FirstFactorAttestationCredentialInfo,
+            FirstFactorAttestationCredentialKind,
         },
     };
     use std::future::Future;
     use std::pin::Pin;
 
-    // Create a newtype wrapper for CredentialAttestation
     #[derive(Debug)]
     struct TestCredentialAttestation(CredentialAttestation);
 
@@ -206,5 +207,48 @@ mod tests {
 
         assert!(matches!(reg_challenge, Challenge::Registration(_)));
         assert!(matches!(cred_challenge, Challenge::Credential(_)));
+    }
+
+    #[test]
+    fn test_get_kind_all_credential_kinds() {
+        let test_cases = vec![
+            (CredentialAttestationCredentialKind::Key, "Key"),
+            (CredentialAttestationCredentialKind::Fido2, "Fido2"),
+            (CredentialAttestationCredentialKind::Password, "Password"),
+            (
+                CredentialAttestationCredentialKind::RecoveryKey,
+                "RecoveryKey",
+            ),
+            (CredentialAttestationCredentialKind::Totp, "Totp"),
+        ];
+
+        for (kind, expected) in test_cases {
+            let attestation = TestCredentialAttestation(CredentialAttestation {
+                credential_info: CredentialAttestationCredentialInfo {
+                    attestation_data: None,
+                    client_data: None,
+                    cred_id: None,
+                    password: None,
+                    otp_code: None,
+                },
+                credential_kind: kind,
+                encrypted_private_key: None,
+            });
+            assert_eq!(attestation.get_kind(), expected);
+        }
+    }
+
+    #[test]
+    fn test_first_factor_attestation_get_kind() {
+        let first_factor = FirstFactorAttestation {
+            credential_info: FirstFactorAttestationCredentialInfo {
+                attestation_data: None,
+                client_data: None,
+                cred_id: None,
+                password: None,
+            },
+            credential_kind: FirstFactorAttestationCredentialKind::Key,
+        };
+        assert_eq!(first_factor.get_kind(), "FirstFactor");
     }
 }
