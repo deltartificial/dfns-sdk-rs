@@ -100,7 +100,10 @@ pub enum GetFeesQueryNetwork {
 
 impl std::fmt::Display for GetFeesQueryNetwork {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:?}", self)
+        match self {
+            GetFeesQueryNetwork::None => write!(f, "*"),
+            _ => write!(f, "{:?}", self),
+        }
     }
 }
 
