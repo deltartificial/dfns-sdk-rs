@@ -99,6 +99,14 @@ pub enum BroadcastTransactionResponseNetwork {
     #[serde(rename = "BscTestnet")]
     BscTestnet,
 
+    Canton,
+
+    #[serde(rename = "CantonDevnet")]
+    CantonDevnet,
+
+    #[serde(rename = "CantonTestnet")]
+    CantonTestnet,
+
     Cardano,
 
     #[serde(rename = "CardanoPreprod")]
@@ -175,6 +183,11 @@ pub enum BroadcastTransactionResponseNetwork {
 
     #[serde(rename = "PolygonMumbai")]
     PolygonMumbai,
+
+    Polymesh,
+
+    #[serde(rename = "PolymeshTestnet")]
+    PolymeshTestnet,
 
     Race,
 
@@ -419,6 +432,14 @@ pub enum CreateWalletBodyNetwork {
     #[serde(rename = "BscTestnet")]
     BscTestnet,
 
+    Canton,
+
+    #[serde(rename = "CantonDevnet")]
+    CantonDevnet,
+
+    #[serde(rename = "CantonTestnet")]
+    CantonTestnet,
+
     Cardano,
 
     #[serde(rename = "CardanoPreprod")]
@@ -504,6 +525,11 @@ pub enum CreateWalletBodyNetwork {
 
     #[serde(rename = "PolygonMumbai")]
     PolygonMumbai,
+
+    Polymesh,
+
+    #[serde(rename = "PolymeshTestnet")]
+    PolymeshTestnet,
 
     Race,
 
@@ -624,6 +650,10 @@ pub struct CreateWalletResponse {
 #[serde(rename_all = "camelCase")]
 pub struct CreateWalletResponseSigningKey {
     pub curve: Curve,
+
+    pub delegated_to: Option<String>,
+
+    pub id: Option<String>,
 
     pub public_key: String,
 
@@ -857,6 +887,8 @@ pub struct GenerateSignatureResponseRequestBody {
 
     pub sign_doc: Option<String>,
 
+    pub payload: Option<String>,
+
     pub hash: Option<String>,
 
     pub taproot_merkle_root: Option<String>,
@@ -915,6 +947,9 @@ pub enum GenerateSignatureBodyKind {
     SignDocDirect,
 
     Transaction,
+
+    #[serde(rename = "SignerPayload")]
+    SignerPayload,
 
     #[default]
     #[serde(rename = "*")]
@@ -1008,6 +1043,8 @@ pub struct GenerateSignatureBody {
     pub kind: GenerateSignatureBodyKind,
 
     pub sign_doc: Option<String>,
+
+    pub payload: Option<String>,
 
     pub hash: Option<String>,
 
@@ -1104,6 +1141,8 @@ pub struct GetSignatureResponseRequestBody {
     pub kind: GenerateSignatureBodyKind,
 
     pub sign_doc: Option<String>,
+
+    pub payload: Option<String>,
 
     pub hash: Option<String>,
 
@@ -1468,6 +1507,10 @@ pub struct GetWalletResponse {
 #[serde(rename_all = "camelCase")]
 pub struct GetWalletResponseSigningKey {
     pub curve: Curve,
+
+    pub delegated_to: Option<String>,
+
+    pub id: Option<String>,
 
     pub public_key: String,
 
@@ -1947,6 +1990,10 @@ pub struct ImportWalletResponse {
 pub struct ImportWalletResponseSigningKey {
     pub curve: Curve,
 
+    pub delegated_to: Option<String>,
+
+    pub id: Option<String>,
+
     pub public_key: String,
 
     pub scheme: Scheme,
@@ -2055,6 +2102,8 @@ pub struct PurpleRequestBody {
     pub kind: GenerateSignatureBodyKind,
 
     pub sign_doc: Option<String>,
+
+    pub payload: Option<String>,
 
     pub hash: Option<String>,
 
@@ -2446,6 +2495,10 @@ pub struct ListWalletsResponseItem {
 pub struct ItemSigningKey {
     pub curve: Curve,
 
+    pub delegated_to: Option<String>,
+
+    pub id: Option<String>,
+
     pub public_key: String,
 
     pub scheme: Scheme,
@@ -2708,6 +2761,10 @@ pub struct UpdateWalletResponse {
 #[serde(rename_all = "camelCase")]
 pub struct UpdateWalletResponseSigningKey {
     pub curve: Curve,
+
+    pub delegated_to: Option<String>,
+
+    pub id: Option<String>,
 
     pub public_key: String,
 
