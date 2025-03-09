@@ -647,6 +647,14 @@ pub enum Network {
     #[serde(rename = "BscTestnet")]
     BscTestnet,
 
+    Canton,
+
+    #[serde(rename = "CantonDevnet")]
+    CantonDevnet,
+
+    #[serde(rename = "CantonTestnet")]
+    CantonTestnet,
+
     Cardano,
 
     #[serde(rename = "CardanoPreprod")]
@@ -723,6 +731,11 @@ pub enum Network {
 
     #[serde(rename = "PolygonMumbai")]
     PolygonMumbai,
+
+    Polymesh,
+
+    #[serde(rename = "PolymeshTestnet")]
+    PolymeshTestnet,
 
     Race,
 
