@@ -2071,58 +2071,23 @@ impl DelegatedAuthClient {
         .await
     }
 
-    pub async fn resend_registration_code_init(
+    pub async fn resend_registration_code(
         &self,
         request: ResendRegistrationCodeRequest,
-    ) -> Result<UserActionChallenge, DfnsError> {
-        let path = build_path_and_query(
-            "/auth/registration/code/resend",
-            &PathAndQueryParams {
-                path: HashMap::new(),
-                query: HashMap::new(),
-            },
-        );
-
-        BaseAuthApi::create_user_action_challenge(
-            CreateUserActionChallengeRequest {
-                user_action_http_method: HttpMethod::POST,
-                user_action_http_path: path,
-                user_action_payload: serde_json::to_string(&request.body)?,
-                user_action_server_kind: "Api".to_string(),
-            },
-            self.api_options.base.clone(),
-        )
-        .await
-    }
-
-    pub async fn resend_registration_code_complete(
-        &self,
-        request: ResendRegistrationCodeRequest,
-        signed_challenge: SignUserActionChallengeRequest,
     ) -> Result<ResendRegistrationCodeResponse, DfnsError> {
         let path = build_path_and_query(
-            "/auth/registration/code/resend",
+            "/auth/registration/code",
             &PathAndQueryParams {
                 path: HashMap::new(),
                 query: HashMap::new(),
             },
         );
-
-        let user_action = BaseAuthApi::sign_user_action_challenge(
-            signed_challenge,
-            self.api_options.base.clone(),
-        )
-        .await?
-        .user_action;
-
-        let mut headers = HashMap::new();
-        headers.insert("x-dfns-useraction".to_string(), user_action);
 
         simple_fetch(
             &path,
             FetchOptions {
-                method: HttpMethod::POST,
-                headers: Some(headers),
+                method: HttpMethod::PUT,
+                headers: None,
                 body: Some(json!(request.body)),
                 api_options: self.api_options.base.clone(),
             },

@@ -1048,9 +1048,11 @@ pub struct CreateCredentialChallengeWithCodeRequestBody {
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreateCredentialCodeBody {
+    /// Code expiration, as an ISO-8601 datetime string or a unix timestamp
     pub expiration: Expiration,
 }
 
+/// Code expiration, as an ISO-8601 datetime string or a unix timestamp
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Expiration {
@@ -4120,6 +4122,14 @@ pub enum Network {
     #[serde(rename = "BscTestnet")]
     BscTestnet,
 
+    Canton,
+
+    #[serde(rename = "CantonDevnet")]
+    CantonDevnet,
+
+    #[serde(rename = "CantonTestnet")]
+    CantonTestnet,
+
     Cardano,
 
     #[serde(rename = "CardanoPreprod")]
@@ -4205,6 +4215,11 @@ pub enum Network {
 
     #[serde(rename = "PolygonMumbai")]
     PolygonMumbai,
+
+    Polymesh,
+
+    #[serde(rename = "PolymeshTestnet")]
+    PolymeshTestnet,
 
     Race,
 
@@ -4323,6 +4338,10 @@ pub struct RegisterEndUserResponseWallet {
 #[serde(rename_all = "camelCase")]
 pub struct SigningKey {
     pub curve: Curve,
+
+    pub delegated_to: Option<String>,
+
+    pub id: Option<String>,
 
     pub public_key: String,
 
