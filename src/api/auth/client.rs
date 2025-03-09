@@ -1214,13 +1214,13 @@ impl AuthClient {
             },
         );
 
-        user_action_fetch(
+        simple_fetch(
             &path,
             crate::utils::fetch::FetchOptions {
                 method: crate::utils::fetch::HttpMethod::PUT,
                 headers: None,
                 body: Some(serde_json::to_value(&request.body)?),
-                api_options: self.api_options.clone(),
+                api_options: self.api_options.base.clone(),
             },
         )
         .await
