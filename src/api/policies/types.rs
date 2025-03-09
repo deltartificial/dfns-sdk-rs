@@ -562,6 +562,14 @@ pub enum BlockchainEventNetwork {
     #[serde(rename = "BscTestnet")]
     BscTestnet,
 
+    Canton,
+
+    #[serde(rename = "CantonDevnet")]
+    CantonDevnet,
+
+    #[serde(rename = "CantonTestnet")]
+    CantonTestnet,
+
     Cardano,
 
     #[serde(rename = "CardanoPreprod")]
@@ -638,6 +646,11 @@ pub enum BlockchainEventNetwork {
 
     #[serde(rename = "PolygonMumbai")]
     PolygonMumbai,
+
+    Polymesh,
+
+    #[serde(rename = "PolymeshTestnet")]
+    PolymeshTestnet,
 
     Race,
 
@@ -1031,6 +1044,14 @@ pub enum SignatureRequestNetwork {
     #[serde(rename = "BscTestnet")]
     BscTestnet,
 
+    Canton,
+
+    #[serde(rename = "CantonDevnet")]
+    CantonDevnet,
+
+    #[serde(rename = "CantonTestnet")]
+    CantonTestnet,
+
     Cardano,
 
     #[serde(rename = "CardanoPreprod")]
@@ -1117,6 +1138,11 @@ pub enum SignatureRequestNetwork {
     #[serde(rename = "PolygonMumbai")]
     PolygonMumbai,
 
+    Polymesh,
+
+    #[serde(rename = "PolymeshTestnet")]
+    PolymeshTestnet,
+
     Race,
 
     #[serde(rename = "RaceSepolia")]
@@ -1174,6 +1200,8 @@ pub struct PurpleRequestBody {
     pub kind: PurpleKind,
 
     pub sign_doc: Option<String>,
+
+    pub payload: Option<String>,
 
     pub hash: Option<String>,
 
@@ -1243,6 +1271,9 @@ pub enum PurpleKind {
 
     #[serde(rename = "SignDocDirect")]
     SignDocDirect,
+
+    #[serde(rename = "SignerPayload")]
+    SignerPayload,
 
     Transaction,
 
@@ -2350,6 +2381,8 @@ pub struct StickyRequestBody {
     pub kind: PurpleKind,
 
     pub sign_doc: Option<String>,
+
+    pub payload: Option<String>,
 
     pub hash: Option<String>,
 
@@ -3465,6 +3498,8 @@ pub struct HilariousRequestBody {
     pub kind: PurpleKind,
 
     pub sign_doc: Option<String>,
+
+    pub payload: Option<String>,
 
     pub hash: Option<String>,
 
