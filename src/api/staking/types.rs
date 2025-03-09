@@ -109,6 +109,10 @@ pub enum Status {
 
     Creating,
 
+    Unbond,
+
+    Unbonding,
+
     Withdrawing,
 
     Withdrawn,
@@ -140,13 +144,9 @@ pub struct CreateStakeResponseStakeAction {
 pub enum StakeActionKind {
     Stake,
 
-    #[serde(rename = "StakeWithdrawal")]
-    StakeWithdrawal,
-
     Unbond,
 
-    #[serde(rename = "UnbondWithdrawal")]
-    UnbondWithdrawal,
+    Withdraw,
 
     #[default]
     #[serde(rename = "*")]
@@ -173,8 +173,9 @@ pub struct PurpleRequestBody {
 pub enum PurpleKind {
     Native,
 
-    #[serde(rename = "StakeWithdrawal")]
-    StakeWithdrawal,
+    Unbond,
+
+    Withdraw,
 
     #[default]
     #[serde(rename = "*")]
@@ -335,8 +336,9 @@ pub struct CreateStakeActionBody {
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum CreateStakeActionBodyKind {
-    #[serde(rename = "StakeWithdrawal")]
-    StakeWithdrawal,
+    Unbond,
+
+    Withdraw,
 
     #[default]
     #[serde(rename = "*")]
