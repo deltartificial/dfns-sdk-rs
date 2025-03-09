@@ -122,7 +122,7 @@ pub struct GetFeesResponse {
 
     pub standard: Standard,
 
-    pub estimated_base_fee: Option<f64>,
+    pub base_fee_per_gas: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]

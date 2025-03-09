@@ -324,7 +324,7 @@ mod test_getfeesresponse {
     #[test]
     fn test_field_estimated_base_fee() {
         let instance = GetFeesResponse::default();
-        let _: Option<f64> = instance.estimated_base_fee;
+        let _: Option<String> = instance.base_fee_per_gas;
     }
     #[test]
     fn check_field_attributes() {
